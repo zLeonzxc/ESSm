@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ess_prototype.EmployeePage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Employee Page"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level2"/>
+        <Label
+            Text="TBA"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Style="{StaticResource SubHeadline}"
+            SemanticProperties.HeadingLevel="Level3"/>
+    </VerticalStackLayout>
+</ContentPage>

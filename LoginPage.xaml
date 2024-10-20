@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ess_prototype.LoginPage"
+             Title="Login">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <HorizontalStackLayout WidthRequest="110">
+
+                <Label
+                    Text="OS "
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1"
+                    TextColor="DarkBlue"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+                    
+                <Label
+                    Text="HRS"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" 
+                    FontAttributes="Bold"
+                    TextColor="DarkBlue"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+                 
+            </HorizontalStackLayout>
+            
+            <Label
+                Text="Welcome to ESS Mobile"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            <Entry
+                x:Name="EmailEntry"
+                Placeholder="Email"
+                ReturnType="Next"/>
+
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True"
+                ReturnType="Done" />
+
+            <Button
+                x:Name="LoginBtn"
+                Text="Login"
+                HorizontalOptions="Fill" 
+                BackgroundColor="DarkBlue"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>
