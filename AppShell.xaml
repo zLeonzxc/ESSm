@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ess_prototype">
 
-    <TabBar>
+    <!--<TabBar>
         <Tab Title="Home Page"
              Icon="home.png">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
@@ -22,5 +22,40 @@
              Icon="user.png">
             <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
         </Tab>
-    </TabBar>
+    </TabBar>-->
+
+    <FlyoutItem Title="Home Page"
+                FlyoutDisplayOptions="AsSingleItem"
+                Icon="home.png">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Employee"
+             Icon="employee.png">
+            <ShellContent Title="Employee"
+                          Icon="employee.png"
+                          ContentTemplate="{DataTemplate local:EmployeePage}"/>
+            <ShellContent Title="Request Leave"
+                          Icon="form.png"
+                          ContentTemplate="{DataTemplate local:ReqLeavePage}"/>
+            <ShellContent Title="Pending Leave"
+                          Icon="pending.png"/>
+                          <!--ContentTemplate="{DataTemplate local:PendingLeavePage}"/>-->
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Request Leave"
+                FlyoutDisplayOptions="AsSingleItem"
+                Icon="form.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ReqLeavePage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Profile"
+                FlyoutDisplayOptions="AsSingleItem"
+                Icon="profile.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
+    </FlyoutItem>
+    
+
 </Shell>

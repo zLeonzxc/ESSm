@@ -3,18 +3,18 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net8.0-android</ActiveDebugFramework>
-    <ActiveDebugProfile>Pixel 4 - API 34 (Android 14.0 - API 34)</ActiveDebugProfile>
-    <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
+    <ActiveDebugProfile>pixel_4_-_api_34 (Android 14.0 - API 34)</ActiveDebugProfile>
+    <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
     <DefaultDevice>pixel_4_-_api_34</DefaultDevice>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="EmployeePage.xaml">
+    <MauiXaml Update="Pages\EmployeePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="ProfilePage.xaml">
+    <MauiXaml Update="Pages\ProfilePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="ReqLeavePage.xaml">
+    <MauiXaml Update="Pages\ReqLeavePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>
