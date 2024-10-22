@@ -44,3 +44,6 @@ build/
 
 # ignore debug files
 bin/
+
+# ignore user generated files
+.user
