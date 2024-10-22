@@ -46,6 +46,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.MainPa
 build_metadata.AdditionalFiles.TargetPath = Pages\MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages\MainPage.xaml
 
+[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Pages/PendingLeavePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.PendingLeavePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\PendingLeavePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\PendingLeavePage.xaml
+
 [C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Pages/ProfilePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.ProfilePage.xaml

@@ -40,15 +40,9 @@
                           Icon="form.png"
                           ContentTemplate="{DataTemplate local:ReqLeavePage}"/>
             <ShellContent Title="Pending Leave"
-                          Icon="pending.png"/>
-                          <!--ContentTemplate="{DataTemplate local:PendingLeavePage}"/>-->
+                          Icon="pending.png"
+                          ContentTemplate="{DataTemplate local:PendingLeavePage}"/>
         </Tab>
-    </FlyoutItem>
-
-    <FlyoutItem Title="Request Leave"
-                FlyoutDisplayOptions="AsSingleItem"
-                Icon="form.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ReqLeavePage}"/>
     </FlyoutItem>
 
     <FlyoutItem Title="Profile"

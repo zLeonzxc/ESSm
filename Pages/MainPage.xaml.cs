@@ -1,10 +1,8 @@
 ﻿namespace ess_prototype;
-    public partial class MainPage : ContentPage
+public partial class MainPage : ContentPage
+{
+    public MainPage()
     {
-        int count = 0;
-
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
+}

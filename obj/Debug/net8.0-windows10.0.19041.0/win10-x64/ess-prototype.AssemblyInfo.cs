@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ess-prototype")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+044a2468e98129bb373d3a81f6a9836b98ac7131")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+61f89484326ee65c2645e0a2f4b38684bd530649")]
 [assembly: System.Reflection.AssemblyProductAttribute("ess-prototype")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ess-prototype")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

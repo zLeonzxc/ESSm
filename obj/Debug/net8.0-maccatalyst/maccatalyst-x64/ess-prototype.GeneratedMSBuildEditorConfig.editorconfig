@@ -1,8 +1,4 @@
 is_global = true
-build_property.EnableAotAnalyzer = 
-build_property.EnableSingleFileAnalyzer = 
-build_property.EnableTrimAnalyzer = false
-build_property.IncludeAllContentForSelfExtract = 
 build_property.TargetFramework = net8.0-maccatalyst
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
@@ -15,57 +11,3 @@ build_property.RootNamespace = ess_prototype
 build_property.ProjectDir = C:\Users\OoiKarJunn\Desktop\dump\codeDump\New folder\maui-prototype\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/App.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.App.xaml
-build_metadata.AdditionalFiles.TargetPath = App.xaml
-build_metadata.AdditionalFiles.RelativePath = App.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/AppShell.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.AppShell.xaml
-build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
-build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Pages/EmployeePage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.EmployeePage.xaml
-build_metadata.AdditionalFiles.TargetPath = Pages\EmployeePage.xaml
-build_metadata.AdditionalFiles.RelativePath = Pages\EmployeePage.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Pages/LoginPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.LoginPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Pages\LoginPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Pages\LoginPage.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Pages/MainPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Pages\MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Pages\MainPage.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Pages/ProfilePage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.ProfilePage.xaml
-build_metadata.AdditionalFiles.TargetPath = Pages\ProfilePage.xaml
-build_metadata.AdditionalFiles.RelativePath = Pages\ProfilePage.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Pages/ReqLeavePage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Pages.ReqLeavePage.xaml
-build_metadata.AdditionalFiles.TargetPath = Pages\ReqLeavePage.xaml
-build_metadata.AdditionalFiles.RelativePath = Pages\ReqLeavePage.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Resources/Styles/Colors.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Resources.Styles.Colors.xaml
-build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
-build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
-
-[C:/Users/OoiKarJunn/Desktop/dump/codeDump/New folder/maui-prototype/Resources/Styles/Styles.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ess_prototype.Resources.Styles.Styles.xaml
-build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
-build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
