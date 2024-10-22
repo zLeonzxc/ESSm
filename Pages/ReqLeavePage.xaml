@@ -4,18 +4,12 @@
              x:Class="ess_prototype.ReqLeavePage">
 
     <VerticalStackLayout>
-        <Label 
-            Text="ReqLeave Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            Style="{StaticResource Headline}"
-            SemanticProperties.HeadingLevel="Level2"/>
-
         <Label
-            Text="TBA"
+            Text="[Insert form to be filled here]"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             Style="{StaticResource SubHeadline}"
+            Margin="0, 50, 0, 0"
             SemanticProperties.HeadingLevel="Level3"/>
     </VerticalStackLayout>
 </ContentPage>
