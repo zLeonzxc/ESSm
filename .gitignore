@@ -42,8 +42,10 @@ build/
 # ignore vs files
 .vs
 
-# ignore debug files
-bin/
+# ignore debug files n packages
+bin
+obj
+packages
 
 # ignore user generated files
 .user
