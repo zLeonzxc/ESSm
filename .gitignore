@@ -48,4 +48,4 @@ obj
 packages
 
 # ignore user generated files
-.user
+*.user
