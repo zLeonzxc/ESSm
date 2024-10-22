@@ -8,7 +8,7 @@
             Padding="30,0"
             Spacing="25">
 
-            <HorizontalStackLayout WidthRequest="110">
+            <!--<HorizontalStackLayout WidthRequest="110">
 
                 <Label
                     Text="OS "
@@ -27,13 +27,17 @@
                     VerticalTextAlignment="Center"
                     HorizontalTextAlignment="Center"/>
                  
-            </HorizontalStackLayout>
-            
+            </HorizontalStackLayout>-->
+            <Image
+                Source="oshrs.png"
+                WidthRequest="100"
+                HeightRequest="100" />
+
             <Label
                 Text="Welcome to ESS Mobile"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                Margin="0,-30,0,0"/>
 
             <Entry
                 x:Name="EmailEntry"
@@ -50,7 +54,8 @@
                 x:Name="LoginBtn"
                 Text="Login"
                 HorizontalOptions="Fill" 
-                BackgroundColor="DarkBlue"/>
+                BackgroundColor="DarkBlue"
+                Clicked="OnLoginButtonClicked"/>
 
         </VerticalStackLayout>
     </ScrollView>

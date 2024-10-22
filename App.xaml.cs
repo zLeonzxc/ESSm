@@ -6,7 +6,9 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            bool isLoggedIn = false;
+
+            MainPage = isLoggedIn ? new AppShell() : new LoginPage();
         }
     }
 }

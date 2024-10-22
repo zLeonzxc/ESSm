@@ -104,4 +104,6 @@
 	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionessprototypeHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>
