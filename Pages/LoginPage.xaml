@@ -30,8 +30,8 @@
             </HorizontalStackLayout>-->
             <Image
                 Source="oshrs.png"
-                WidthRequest="100"
-                HeightRequest="100" />
+                WidthRequest="200"
+                HeightRequest="200" />
 
             <Label
                 Text="Welcome to ESS Mobile"
