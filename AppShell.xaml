@@ -3,53 +3,34 @@
     x:Class="ess_prototype.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ess_prototype">
+    xmlns:Pages="clr-namespace:ess_prototype.Pages">
 
-    <!--<TabBar>
-        <Tab Title="Home Page"
-             Icon="home.png">
-            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
-        </Tab>
-        <Tab Title="Employees"
-             Icon="employee.png">
-            <ShellContent ContentTemplate="{DataTemplate local:EmployeePage}"/>
-        </Tab>
-        <Tab Title="Request Leave"
-             Icon="form.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ReqLeavePage}"/>
-        </Tab>
-        <Tab Title="Profile"
-             Icon="user.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
-        </Tab>
-    </TabBar>-->
-
-    <FlyoutItem Title="Home Page"
-                FlyoutDisplayOptions="AsSingleItem"
-                Icon="home.png">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
-    </FlyoutItem>
-
+    <!--Side Bar + Footer Navigation-->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Home Page"
+                      Icon="home.png"
+                      ContentTemplate="{DataTemplate Pages:MainPage}"/>
         <Tab Title="Employee"
              Icon="employee.png">
             <ShellContent Title="Employee"
                           Icon="employee.png"
-                          ContentTemplate="{DataTemplate local:EmployeePage}"/>
-            <ShellContent Title="Request Leave"
-                          Icon="form.png"
-                          ContentTemplate="{DataTemplate local:ReqLeavePage}"/>
+                          ContentTemplate="{DataTemplate Pages:EmployeePage}"/>
             <ShellContent Title="Pending Leave"
                           Icon="pending.png"
-                          ContentTemplate="{DataTemplate local:PendingLeavePage}"/>
+                          ContentTemplate="{DataTemplate Pages:PendingLeavePage}"/>
         </Tab>
+
+        <ShellContent Title="Request Leave"
+                      Icon="form.png"
+                      ContentTemplate="{DataTemplate Pages:ReqLeavePage}"/>
+
+        <ShellContent Title="Profile"
+                      Icon="user.png"
+                      ContentTemplate="{DataTemplate Pages:ProfilePage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Profile"
-                FlyoutDisplayOptions="AsSingleItem"
-                Icon="profile.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
-    </FlyoutItem>
-    
-
+    <!--Content Page to simulate logging out-->
+    <ShellContent Title="Logout"
+                  Icon="logout.png"
+                  ContentTemplate="{DataTemplate Pages:LoginPage}"/>
 </Shell>

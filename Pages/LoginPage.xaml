@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ess_prototype.LoginPage"
-             Title="Login">
+             x:Class="ess_prototype.Pages.LoginPage"
+             Shell.NavBarIsVisible="False">
+    
+    <!--<ContentPage.BindingContext>
+        <local:LoginViewModel/>
+    </ContentPage.BindingContext>-->
+      
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
@@ -30,8 +35,9 @@
             </HorizontalStackLayout>-->
             <Image
                 Source="oshrs.png"
-                WidthRequest="100"
-                HeightRequest="100" />
+                WidthRequest="200"
+                HeightRequest="200">
+            </Image>
 
             <Label
                 Text="Welcome to ESS Mobile"
