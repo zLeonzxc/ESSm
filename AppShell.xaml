@@ -3,34 +3,34 @@
     x:Class="ess_prototype.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:Pages="clr-namespace:ess_prototype.Pages">
+    xmlns:Views="clr-namespace:ess_prototype.Views">
 
     <!--Side Bar + Footer Navigation-->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Home Page"
                       Icon="home.png"
-                      ContentTemplate="{DataTemplate Pages:MainPage}"/>
+                      ContentTemplate="{DataTemplate Views:MainPage}"/>
         <Tab Title="Employee"
              Icon="employee.png">
             <ShellContent Title="Employee"
                           Icon="employee.png"
-                          ContentTemplate="{DataTemplate Pages:EmployeePage}"/>
+                          ContentTemplate="{DataTemplate Views:EmployeePage}"/>
             <ShellContent Title="Pending Leave"
                           Icon="pending.png"
-                          ContentTemplate="{DataTemplate Pages:PendingLeavePage}"/>
+                          ContentTemplate="{DataTemplate Views:PendingLeavePage}"/>
         </Tab>
 
         <ShellContent Title="Request Leave"
                       Icon="form.png"
-                      ContentTemplate="{DataTemplate Pages:ReqLeavePage}"/>
+                      ContentTemplate="{DataTemplate Views:ReqLeavePage}"/>
 
         <ShellContent Title="Profile"
                       Icon="user.png"
-                      ContentTemplate="{DataTemplate Pages:ProfilePage}"/>
+                      ContentTemplate="{DataTemplate Views:ProfilePage}"/>
     </FlyoutItem>
 
     <!--Content Page to simulate logging out-->
     <ShellContent Title="Logout"
                   Icon="logout.png"
-                  ContentTemplate="{DataTemplate Pages:LoginPage}"/>
+                  ContentTemplate="{DataTemplate Views:LoginPage}"/>
 </Shell>

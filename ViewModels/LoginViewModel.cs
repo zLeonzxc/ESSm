@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using ess_prototype.Models;
-using ess_prototype.Pages;
+using ess_prototype.Views;
 
 
 namespace ess_prototype.ViewModels
@@ -10,7 +10,7 @@ namespace ess_prototype.ViewModels
     {
         private string _username = string.Empty;
         private string _password = string.Empty;
-        private bool _rememberMe = false;
+        private bool _rememberMe = false; // To Be Added
         private string _message = string.Empty;
 
         public string Username
@@ -64,16 +64,16 @@ namespace ess_prototype.ViewModels
             {
                 if (Application.Current != null)
                 {
-                    Application.Current.MainPage = new MainPage();
+                    Application.Current.MainPage = new AppShell();
                 }
                 else
                 {
-                    Message = "Application.Current is null.";
+                    Message = "Uh oh... An unknown error has occured. Error Code: ESSM1001";
                 }
             }
             else
             {
-                Message = "Invalid username or password.";
+                Message = "Invalid username or password. Error Code: ESSM1002";
             }
         }
 
