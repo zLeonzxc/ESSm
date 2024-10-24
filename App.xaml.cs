@@ -1,6 +1,6 @@
 ﻿using ess_prototype.ViewModels;
 using ess_prototype.Models;
-using ess_prototype.Views;
+using ess_prototype.Pages;
 
 namespace ess_prototype
 {

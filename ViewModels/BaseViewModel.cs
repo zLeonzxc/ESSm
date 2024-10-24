@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using ess_prototype.Views;
+using ess_prototype.Pages;
 
 namespace ess_prototype.ViewModels
 {

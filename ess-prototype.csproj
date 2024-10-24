@@ -59,26 +59,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\LoginPage.xaml.cs">
+	  <Compile Update="Pages\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\EmployeePage.xaml.cs">
+	  <Compile Update="Pages\EmployeePage.xaml.cs">
 	    <DependentUpon>EmployeePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ProfilePage.xaml.cs">
+	  <Compile Update="Pages\ProfilePage.xaml.cs">
 	    <DependentUpon>ProfilePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ReqLeavePage.xaml.cs">
+	  <Compile Update="Pages\ReqLeavePage.xaml.cs">
 	    <DependentUpon>ReqLeavePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\PendingLeavePage.xaml.cs">
+	  <Compile Update="Pages\PendingLeavePage.xaml.cs">
 		<DependentUpon>PendingLeavePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Popups\PopupView.xaml.cs">
@@ -87,22 +86,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\LoginPage.xaml">
+	  <MauiXaml Update="Pages\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\EmployeePage.xaml">
+	  <MauiXaml Update="Pages\EmployeePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PendingLeavePage.xaml">
+	  <MauiXaml Update="Pages\PendingLeavePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Popups\PopupView.xaml">
+	  <MauiXaml Update="Pages\ProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ReqLeavePage.xaml">
+	  <MauiXaml Update="Pages\ReqLeavePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Popups\PopupView.xaml">
