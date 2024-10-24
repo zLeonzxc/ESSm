@@ -1,9 +1,11 @@
-﻿namespace ess_prototype.Views;
-public partial class MainPage : ContentPage
+﻿namespace ESSmPrototype.Views
 {
-    public MainPage()
+    public partial class MainPage : ContentPage
     {
-        InitializeComponent();
-    }
+        public MainPage()
+        {
+            InitializeComponent();
+        }
 
+    }
 }

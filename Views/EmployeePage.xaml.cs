@@ -1,4 +1,4 @@
-namespace ess_prototype.Views;
+namespace ESSmPrototype.Views;
 
 public partial class EmployeePage : ContentPage
 {

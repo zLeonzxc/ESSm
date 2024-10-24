@@ -1,4 +1,4 @@
-﻿namespace ess_prototype
+﻿namespace ESSmPrototype
 {
     public partial class AppShell : Shell
     {

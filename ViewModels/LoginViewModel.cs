@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using ess_prototype.Models;
-using ess_prototype.Views;
+using ESSmPrototype.Views;
 
 
-namespace ess_prototype.ViewModels
+namespace ESSmPrototype.ViewModels
 {
     public partial class LoginViewModel : INotifyPropertyChanged
     {
@@ -22,7 +21,6 @@ namespace ess_prototype.ViewModels
                 OnPropertyChanged(nameof(Username));
             }
         }
-
         public string Password
         {
             get => _password;
@@ -32,7 +30,6 @@ namespace ess_prototype.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-
         public bool RememberMe
         {
             get => _rememberMe;
@@ -51,11 +48,6 @@ namespace ess_prototype.ViewModels
                 OnPropertyChanged(nameof(Message));
             }
         }
-        public ICommand LoginCommand { get; }
-        public LoginViewModel()
-        {
-            LoginCommand = new Command(OnLogin);
-        }
 
         private void OnLogin()
         {
@@ -63,18 +55,17 @@ namespace ess_prototype.ViewModels
             if (Username == "admin" && Password == "password")
             {
                 if (Application.Current != null)
-                {
-                    Application.Current.MainPage = new MainPage();
-                }
+                    Application.Current.MainPage = new AppShell();
                 else
-                {
-                    Message = "Application.Current is null.";
-                }
+                    Message = "Uh oh... An unknown error has occured. [Error Code: ESSM1001]";
             }
             else
-            {
-                Message = "Invalid username or password.";
-            }
+                Message = "Invalid username or password. [Error Code: ESSM1002]";
+        }
+        public ICommand LoginCommand { get; }
+        public LoginViewModel()
+        {
+            LoginCommand = new Command(OnLogin);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

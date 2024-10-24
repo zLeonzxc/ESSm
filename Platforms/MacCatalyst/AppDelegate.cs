@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace ess_prototype
+namespace ESSmPrototype.Platforms.MacCatalyst
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

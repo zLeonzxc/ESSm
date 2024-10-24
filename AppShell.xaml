@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="ess_prototype.AppShell"
+    x:Class="ESSmPrototype.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:Views="clr-namespace:ess_prototype.Views">
+    xmlns:Views="clr-namespace:ESSmPrototype.Views">
 
-    <!--Side Bar + Footer Navigation-->
+    <!--Side Bar User Name + Image-->
+    <Shell.FlyoutHeader>
+        <Grid ColumnDefinitions="Auto, *"
+              Padding="25">
+            <Image Source="profile.png"
+                   Aspect="AspectFill"
+                   HeightRequest="50"
+                   WidthRequest="50"/>
+            <Label Grid.Column="1"
+                   Text="Username"
+                   VerticalTextAlignment="Center"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#333333"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+    
+    <!--Side Bar + Footer Navigation (working)-->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Home Page"
                       Icon="home.png"
@@ -29,8 +46,11 @@
                       ContentTemplate="{DataTemplate Views:ProfilePage}"/>
     </FlyoutItem>
 
-    <!--Content Page to simulate logging out-->
+    <!-- Content Page to simulate logging out-->
     <ShellContent Title="Logout"
                   Icon="logout.png"
                   ContentTemplate="{DataTemplate Views:LoginPage}"/>
+   
+
+
 </Shell>

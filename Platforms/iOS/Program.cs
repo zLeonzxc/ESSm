@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace ess_prototype
+namespace ESSmPrototype.Platforms.iOS
 {
     public class Program
     {

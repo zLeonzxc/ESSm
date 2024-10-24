@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace ess_prototype
+namespace ESSmPrototype
 {
     public static class MauiProgram
     {
