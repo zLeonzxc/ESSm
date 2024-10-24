@@ -47,14 +47,16 @@
                 Margin="0,-30,0,0"/>
 
             <Entry
-                x:Name="EmailEntry"
-                Placeholder="Email"
+                x:Name="UsernameEntry"
+                Placeholder="Username"
+                Text="{Binding Username}"
                 ReturnType="Next"/>
 
             <Entry
                 x:Name="PasswordEntry"
                 Placeholder="Password"
                 IsPassword="True"
+                Text="{Binding Password}"
                 ReturnType="Done" />
             <Label
                 x:Name="ErrorLabel"

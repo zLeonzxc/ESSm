@@ -17,8 +17,12 @@ namespace ESSmPrototype.ViewModels
             get => _username;
             set
             {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
+                if (_username != value)
+                {
+                    _username = value;
+                    OnPropertyChanged(nameof(Username));
+
+                }
             }
         }
         public string Password
@@ -57,10 +61,10 @@ namespace ESSmPrototype.ViewModels
                 if (Application.Current != null)
                     Application.Current.MainPage = new AppShell();
                 else
-                    Message = "Uh oh... An unknown error has occured. [Error Code: ESSM1001]";
+                    Message = "Uh oh... An unknown error has occured. \n[Error Code: ESSM1001]";
             }
             else
-                Message = "Invalid username or password. [Error Code: ESSM1002]";
+                Message = "Invalid username or password.\n[Error Code: ESSM1002]";
         }
         public ICommand LoginCommand { get; }
         public LoginViewModel()

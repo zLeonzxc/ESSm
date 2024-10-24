@@ -3,7 +3,12 @@
     x:Class="ESSmPrototype.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:Views="clr-namespace:ESSmPrototype.Views">
+    xmlns:Views="clr-namespace:ESSmPrototype.Views"
+    xmlns:local="clr-namespace:ESSmPrototype.ViewModels">
+
+    <Shell.Resources>
+        <local:LoginViewModel x:Key="Username"/>
+    </Shell.Resources>
 
     <!--Side Bar User Name + Image-->
     <Shell.FlyoutHeader>
@@ -14,7 +19,8 @@
                    HeightRequest="50"
                    WidthRequest="50"/>
             <Label Grid.Column="1"
-                   Text="Username"
+                   Margin="20, 0, 0, 0"
+                   Text="{Binding Username}"
                    VerticalTextAlignment="Center"
                    FontSize="28"
                    FontAttributes="Bold"
@@ -54,3 +60,4 @@
 
 
 </Shell>
+
