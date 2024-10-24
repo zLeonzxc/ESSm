@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using ess_prototype.Models;
-using ess_prototype.Pages;
+using ess_prototype.Views;
 
 
 namespace ess_prototype.ViewModels

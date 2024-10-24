@@ -1,4 +1,4 @@
-namespace ess_prototype.Pages;
+namespace ess_prototype.Views;
 
 public partial class ProfilePage : ContentPage
 {
