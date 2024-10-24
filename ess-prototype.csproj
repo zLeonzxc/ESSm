@@ -59,52 +59,51 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="ViewsViews\LoginPage.xaml.cs">
+	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ViewsViews\EmployeePage.xaml.cs">
+	  <Compile Update="Views\EmployeePage.xaml.cs">
 	    <DependentUpon>EmployeePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ViewsViews\ProfilePage.xaml.cs">
+	  <Compile Update="Views\ProfilePage.xaml.cs">
 	    <DependentUpon>ProfilePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ViewsViews\ReqLeavePage.xaml.cs">
+	  <Compile Update="Views\ReqLeavePage.xaml.cs">
 	    <DependentUpon>ReqLeavePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ViewsViews\PendingLeavePage.xaml.cs">
+	  <Compile Update="Views\PendingLeavePage.xaml.cs">
 		<DependentUpon>PendingLeavePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Popups\PopupView.xaml.cs">
+	  <!--<Compile Update="Views\Popups\PopupView.xaml.cs">
 		<DependentUpon>PopupView.xaml</DependentUpon>
-	  </Compile>
+	  </Compile>-->
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="ViewsViews\LoginPage.xaml">
+	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ViewsViews\EmployeePage.xaml">
+	  <MauiXaml Update="Views\EmployeePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ViewsViews\PendingLeavePage.xaml">
+	  <MauiXaml Update="Views\PendingLeavePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ViewsViews\ProfilePage.xaml">
+	  <MauiXaml Update="Views\ProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ViewsViews\ReqLeavePage.xaml">
+	  <MauiXaml Update="Views\ReqLeavePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Popups\PopupView.xaml">
+	  <!--<MauiXaml Update="Views\Popups\PopupView.xaml">
 		<Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  </MauiXaml>-->
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionessprototypeHideInfoBar="True" /></VisualStudio></ProjectExtensions>
