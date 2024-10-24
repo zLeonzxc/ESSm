@@ -81,6 +81,9 @@
 	  <Compile Update="Views\PendingLeavePage.xaml.cs">
 		<DependentUpon>PendingLeavePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Popups\PopupView.xaml.cs">
+		<DependentUpon>PopupView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -101,6 +104,9 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ReqLeavePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Popups\PopupView.xaml">
+		<Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
