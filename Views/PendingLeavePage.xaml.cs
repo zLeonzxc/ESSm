@@ -1,4 +1,4 @@
-namespace ess_prototype;
+namespace ESSmPrototype.Views;
 
 public partial class PendingLeavePage : ContentPage
 {

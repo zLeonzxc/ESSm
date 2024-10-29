@@ -1,4 +1,8 @@
-﻿namespace ess_prototype
+﻿using ESSmPrototype.ViewModels;
+using ESSmPrototype.Views;
+using Microsoft.Maui.Controls;
+
+namespace ESSmPrototype
 {
     public partial class App : Application
     {

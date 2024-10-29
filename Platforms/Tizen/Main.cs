@@ -1,8 +1,8 @@
-using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
+using System;
 
-namespace ess_prototype
+namespace ESSmPrototype
 {
     internal class Program : MauiApplication
     {

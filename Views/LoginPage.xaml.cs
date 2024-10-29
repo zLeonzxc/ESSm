@@ -1,4 +1,4 @@
-namespace ess_prototype;
+namespace ESSmPrototype.Views;
 
 public partial class LoginPage : ContentPage
 {
@@ -6,10 +6,13 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
     }
-    
+
 
     private void OnLoginButtonClicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new NavigationPage(new AppShell());
+        if (Application.Current != null)
+        {
+            Application.Current.MainPage = new NavigationPage(new AppShell());
+        }
     }
 }
