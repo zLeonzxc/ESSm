@@ -28,12 +28,5 @@ namespace ESSmPrototype.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        private User _username;
-        public User Username
-        {
-            get => _username;
-
-        }
     }
 }

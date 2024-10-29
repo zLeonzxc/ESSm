@@ -4,7 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Views="clr-namespace:ESSmPrototype.Views"
-    xmlns:local="clr-namespace:ESSmPrototype.ViewModels">
+    xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
+    Shell.TabBarForegroundColor="DarkBlue"
+    Shell.TabBarTitleColor="DarkBlue">
 
     <Shell.Resources>
         <local:LoginViewModel x:Key="Username"/>
@@ -29,7 +31,7 @@
     </Shell.FlyoutHeader>
     
     <!--Side Bar + Footer Navigation (working)-->
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    <!--<FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Home Page"
                       Icon="home.png"
                       ContentTemplate="{DataTemplate Views:MainPage}"/>
@@ -50,7 +52,20 @@
         <ShellContent Title="Profile"
                       Icon="user.png"
                       ContentTemplate="{DataTemplate Views:ProfilePage}"/>
-    </FlyoutItem>
+    </FlyoutItem>-->
+
+        <ShellContent Title="Home"
+                      Icon="home.png"
+                      ContentTemplate="{DataTemplate Views:MainPage}"/>
+        <ShellContent Title="Employee"
+                      Icon="employee.png"
+                      ContentTemplate="{DataTemplate Views:EmployeePage}"/>
+        <ShellContent Title="Request Leave"
+                      Icon="form.png"
+                      ContentTemplate="{DataTemplate Views:ReqLeavePage}"/>
+        <ShellContent Title="Profile"
+                      Icon="user.png"
+                      ContentTemplate="{DataTemplate Views:ProfilePage}"/>
 
     <!-- Content Page to simulate logging out-->
     <ShellContent Title="Logout"
