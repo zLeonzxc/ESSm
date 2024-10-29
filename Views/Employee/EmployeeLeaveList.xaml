@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ESSmPrototype.Views.EmployeePage">
+             x:Class="ESSmPrototype.Views.Employee.EmployeeLeaveList">
+
     <ScrollView>
         <VerticalStackLayout>
             <StackLayout>
                 <ListView x:Name="EmployeeMenu" ItemTapped="OnItemTapped">
                     <ListView.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
-                            <x:String>Pending Leave</x:String>
-                            <x:String>Leave List</x:String>
-                            <x:String>Employee Page 3</x:String>
-                            <x:String>Employee Page 4</x:String>
-                            <x:String>Employee Page 5</x:String>
-                            <x:String>Employee Page 6</x:String>
-                            <x:String>Employee Page 7</x:String>
-                            <x:String>Employee Page 8</x:String>
-                            <x:String>Employee Page 9</x:String>
-                            <x:String>Employee Page 10</x:String>
-                            <x:String>Employee Page 11</x:String>
-                            <x:String>Employee Page 12</x:String>
+                            <x:String>Employee 1</x:String>
+                            <x:String>Employee 2</x:String>
+                            <x:String>Employee 3</x:String>
+                            <x:String>Employee 4</x:String>
+                            <x:String>Employee 5</x:String>
+                            <x:String>Employee 6</x:String>
+                            <x:String>Employee 7</x:String>
+                            <x:String>Employee 8</x:String>
+                            <x:String>Employee 9</x:String>
+                            <x:String>Employee 10</x:String>
+                            <x:String>Employee 11</x:String>
+                            <x:String>Employee 12</x:String>
                         </x:Array>
                     </ListView.ItemsSource>
                     <ListView.ItemTemplate>
@@ -27,15 +28,15 @@
                             <ViewCell>
                                 <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                                     <Label Text="{Binding}" 
-                                   HorizontalOptions="Center" 
-                                   VerticalOptions="Center"/>
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

@@ -36,9 +36,10 @@ namespace ESSmPrototype
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             
             // Employee menu items
-            Routing.RegisterRoute(nameof(EmployeeMenuItem1), typeof(EmployeeMenuItem1));
+            Routing.RegisterRoute(nameof(EmployeeLeaveList), typeof(EmployeeLeaveList));
             Routing.RegisterRoute(nameof(EmployeeMenuItem2), typeof(EmployeeMenuItem2));
             Routing.RegisterRoute(nameof(EmployeeMenuItem3), typeof(EmployeeMenuItem3));
+            Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPage), typeof(EmployeeLeaveDetailsPage));
         }
     }
 }

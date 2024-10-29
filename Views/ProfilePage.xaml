@@ -19,7 +19,7 @@
             HorizontalOptions="Center" />
         
         <Label
-            Text="TBA"
+            Text="admin"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             Style="{StaticResource SubHeadline}"

@@ -44,7 +44,7 @@
                 Text="Welcome to ESS Mobile"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
-                Margin="0,-30,0,0"/>
+                Margin="0,-40,0,0"/>
 
             <Entry
                 x:Name="UsernameEntry"

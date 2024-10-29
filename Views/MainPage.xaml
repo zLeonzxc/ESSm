@@ -13,10 +13,15 @@
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level2" />-->
 
+            <Image Source="oshrs.png"
+                   WidthRequest="200"
+                   HeightRequest="200"/>
+
             <Label
                 Text="Welcome to ESS Mobile"
                 Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level3" />
+                SemanticProperties.HeadingLevel="Level3"
+                Margin="0,-60,0,0"/>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -67,7 +67,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\Employee\EmployeeMenuItem1.xaml">
+	  <Compile Update="Views\Employee\EmployeeLeaveList.xaml.cs">
+	    <DependentUpon>EmployeeLeaveList.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Employee\EmployeeLeaveDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Employee\EmployeeLeaveList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Employee\EmployeeMenuItem2.xaml">
