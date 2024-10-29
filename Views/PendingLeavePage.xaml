@@ -8,21 +8,28 @@
             <TableRoot>
                 <TableSection Title="No.    |                                Title                             |    Status     |">
                     <ViewCell>
-                        <Grid RowDefinitions="Auto,Auto"
-                        ColumnDefinitions="0.5*,0.5*">
-                            <Label Text="1"
-                               Margin="20,10,0,0"/>
-                            <Label Text="Medical Leave"
-                               Margin="-60,10,0,0"
-                               Grid.Column="1"/>
-                            <Image Source="pendingleave.png"
-                               WidthRequest="20"
-                               HeightRequest="20"
-                               Grid.Row="1"
-                               Grid.Column="5"
-                               Margin="0,-20,-100,0"/>
+                        <ContentView>
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnViewCellTapped" CommandParameter="1"/>
+                            </ContentView.GestureRecognizers>
+                        
+                        
+                            <Grid RowDefinitions="Auto,Auto"
+                                  ColumnDefinitions="0.5*,0.5*">
+                                <Label Text="1"
+                                   Margin="20,10,0,0"/>
+                                <Label Text="Medical Leave"
+                                   Margin="-60,10,0,0"
+                                   Grid.Column="1"/>
+                                <Image Source="pendingleave.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Grid.Row="1"
+                                   Grid.Column="5"
+                                   Margin="0,-20,-100,0"/>
 
-                        </Grid>
+                            </Grid>
+                        </ContentView>
                     </ViewCell>
                 </TableSection>
             </TableRoot>

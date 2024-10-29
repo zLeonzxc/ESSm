@@ -14,18 +14,13 @@ public partial class EmployeePage : ContentPage
 
         string? selectedItem = e.Item.ToString();
 
-        if (selectedItem == "Pending Leave")
+        if (selectedItem == "Employee Info")
         {
-            // Navigate to EmployeeMenuItem1
-            await Shell.Current.GoToAsync(nameof(PendingLeavePage));
+            await Shell.Current.GoToAsync(nameof(EmployeeDetailsPage));
         }
         else if (selectedItem == "Leave List")
         {
             await Shell.Current.GoToAsync(nameof(EmployeeLeaveList));
-        }
-        else if (selectedItem == "Employee Page 3")
-        {
-            await Shell.Current.GoToAsync(nameof(EmployeeMenuItem3));
         }
             // Deselect the item
             ((ListView)sender).SelectedItem = null;

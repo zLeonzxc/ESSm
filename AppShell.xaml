@@ -61,12 +61,12 @@
         <ShellContent Title="Employee"
                       Icon="employee.png"
                       ContentTemplate="{DataTemplate Views:EmployeePage}"/>
-        <ShellContent Title="Request Leave"
-                      Icon="form.png"
-                      ContentTemplate="{DataTemplate Views:ReqLeavePage}"/>
-        <ShellContent Title="Profile"
-                      Icon="user.png"
-                      ContentTemplate="{DataTemplate Views:ProfilePage}"/>
+        <ShellContent Title="Approver"
+                      Icon="approval.png"
+                      ContentTemplate="{DataTemplate Views:ApproverPage}"/>
+        <ShellContent Title="HR Admin"
+                      Icon="hradmin.png"
+                      ContentTemplate="{DataTemplate Views:HRAdminPage}"/>
 
     <!-- Content Page to simulate logging out-->
     <ShellContent Title="Logout"

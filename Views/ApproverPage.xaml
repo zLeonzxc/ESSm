@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ESSmPrototype.Views.EmployeePage">
+             x:Class="ESSmPrototype.Views.ApproverPage">
     <ScrollView>
         <VerticalStackLayout>
             <StackLayout>
                 <ListView x:Name="EmployeeMenu" ItemTapped="OnItemTapped">
                     <ListView.ItemsSource >
                         <x:Array Type="{x:Type x:String}">
-                            <x:String>Employee Info</x:String>
-                            <x:String>Leave List</x:String>
-                            <!--insert if needed-->
+                            <x:String>Pending Approval</x:String>
+                            <!--insert if more are needed-->
                         </x:Array>
                     </ListView.ItemsSource>
                     <ListView.ItemTemplate>
@@ -18,29 +17,16 @@
                             <ViewCell>
                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
                                     <Label Text="{Binding}" 
-                                           HorizontalOptions="Center" 
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="Center"
-                                           VerticalTextAlignment="Center"/>
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
-    
-    <!-- [ if needed ]
-    <x:String>Employee Page 3</x:String>
-    <x:String>Employee Page 4</x:String>
-    <x:String>Employee Page 5</x:String>
-    <x:String>Employee Page 6</x:String>
-    <x:String>Employee Page 7</x:String>
-    <x:String>Employee Page 8</x:String>
-    <x:String>Employee Page 9</x:String>
-    <x:String>Employee Page 10</x:String>
-    <x:String>Employee Page 11</x:String>
-    <x:String>Employee Page 12</x:String> -->

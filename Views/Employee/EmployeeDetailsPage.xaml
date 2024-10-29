@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ESSmPrototype.Views.Employee.EmployeeDetailsPage">
+
+    <ScrollView>
+        <StackLayout>
+            <SearchBar Placeholder="Name"/>
+            <SearchBar Placeholder="Legal Name"/>
+            <SearchBar Placeholder="Login ID"/>
+            <SearchBar Placeholder="Employee ID"/>
+            <Picker x:Name="Country"
+                    Title="Select country">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Malaysia</x:String>
+                        <x:String>Japan</x:String>
+                        <x:String>Australia</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            
+            
+        </StackLayout>
+    </ScrollView>
+        
+        
+</ContentPage>
