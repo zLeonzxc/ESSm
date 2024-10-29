@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using ESSmPrototype.Views;
-
 
 namespace ESSmPrototype.ViewModels
 {
@@ -59,17 +57,29 @@ namespace ESSmPrototype.ViewModels
             if (Username == "admin" && Password == "password")
             {
                 if (Application.Current != null)
+                {
+                    Username = _username;
                     Application.Current.MainPage = new AppShell();
+                }
                 else
                     Message = "Uh oh... An unknown error has occured. \n[Error Code: ESSM1001]";
             }
             else
                 Message = "Invalid username or password.\n[Error Code: ESSM1002]";
         }
+        private void GetName()
+        {
+            var LoginViewModel = new LoginViewModel();
+            Username = LoginViewModel.Username;
+        }
         public ICommand LoginCommand { get; }
+
+        public ICommand RetrieveName { get; }
         public LoginViewModel()
         {
             LoginCommand = new Command(OnLogin);
+
+            RetrieveName = new Command(GetName);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

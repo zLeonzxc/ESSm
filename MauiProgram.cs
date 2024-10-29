@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ESSmPrototype.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace ESSmPrototype
 {
@@ -14,6 +15,10 @@ namespace ESSmPrototype
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            // register viewmodels
+            builder.Services.AddSingleton<LoginViewModel>();
+            builder.Services.AddSingleton<BaseViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using ESSmPrototype.Views;
-using ESSmPrototype.Models;
 
 namespace ESSmPrototype.ViewModels
 {
@@ -28,5 +27,15 @@ namespace ESSmPrototype.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+<<<<<<< HEAD
+=======
+
+        private string _username = string.Empty;
+        public string Username
+        {
+            get => _username;
+
+        }
+>>>>>>> 39924d3f28b447a3a206549cb0b8d200e319d4ca
     }
 }
