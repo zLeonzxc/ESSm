@@ -4,23 +4,27 @@
              x:Class="ESSmPrototype.Views.Employee.EmployeeDetailsPage">
 
     <ScrollView>
-        <StackLayout>
+        <StackLayout Spacing="10">
             <SearchBar Placeholder="Name"/>
             <SearchBar Placeholder="Legal Name"/>
             <SearchBar Placeholder="Login ID"/>
             <SearchBar Placeholder="Employee ID"/>
-            <Picker x:Name="Country"
-                    Title="Select country">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Malaysia</x:String>
-                        <x:String>Japan</x:String>
-                        <x:String>Australia</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-            
-            
+
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="10">
+                <Picker x:Name="Country"
+                        Title="Select Country"
+                        Margin="30,0,40,0">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Malaysia</x:String>
+                            <x:String>Japan</x:String>
+                            <x:String>Australia</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Frame>
+
+
         </StackLayout>
     </ScrollView>
         

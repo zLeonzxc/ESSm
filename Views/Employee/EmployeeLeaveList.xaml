@@ -6,7 +6,8 @@
     <ScrollView>
         <VerticalStackLayout>
             <StackLayout>
-                <ListView x:Name="EmployeeMenu" ItemTapped="OnItemTapped">
+                <ListView x:Name="EmployeeMenu" 
+                          ItemTapped="OnItemTapped">
                     <ListView.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Employee 1</x:String>

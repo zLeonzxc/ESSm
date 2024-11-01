@@ -1,23 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              x:Class="ESSmPrototype.Views.Employee.EmployeeLeaveDetailsPage">
+
+<ContentPage.BindingContext>
+    <local:EmployeeLeaveDetailsViewModel/>
+</ContentPage.BindingContext>
     
     <ScrollView>
-        <VerticalStackLayout Spacing="10" Margin="10,0,0,0">
-            <Label Text="Employee Details"
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center"
-                   Style="{StaticResource Headline}"
-                   SemanticProperties.HeadingLevel="Level4"/>
-            <Label Text="Employee ID: "/>
-            <Label Text="Employee Name: "/>
-            <Label Text="Employee Position: "/>
+        <VerticalStackLayout Spacing="20" Margin="10,0,0,0">
+            <Label Text="Leave Details"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center"
+               Style="{StaticResource Headline}"
+               SemanticProperties.HeadingLevel="Level4"/>
+            <Label Text="{Binding EmployeeID, StringFormat='Employee ID: {0}'}"/>
+            <Label Text="{Binding EmployeeName, StringFormat='Employee Name: {0}'}"/>
+            <Label Text="{Binding EmployeePosition, StringFormat='Employee Position: {0}'}"/>
             <Label Text="------------------------------------------------------------------------------------"/>
-            <Label Text="Leave Approval Status: "/>
-            <Label Text="Leave Reason: "/>
-            <Label Text="Attachments (optional): "/>
+            <Label Text="{Binding LeaveApprovalStatus, StringFormat='Leave Approval Status: {0}'}"/>
+            <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0}'}"/>
+            <Label Text="Attachments (optional):"/>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  VerticalOptions="End">
+                <Button x:Name="AcceptButton"
+                        Text="Accept"
+                        BackgroundColor="Green"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding AcceptCommand}"/>
+
+                <Button x:Name="RejectButton"
+                        Text="Reject"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding RejectCommand}"/>
+            </StackLayout>
+            
         </VerticalStackLayout>
     </ScrollView>
-    
+
 </ContentPage>
