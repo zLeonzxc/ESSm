@@ -1,5 +1,4 @@
-﻿using ESSmPrototype.ViewModels;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace ESSmPrototype
 {

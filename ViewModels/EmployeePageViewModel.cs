@@ -1,8 +1,3 @@
-using System.ComponentModel;
-using System.Windows.Input;
-using ESSmPrototype.Views.Employee;
-using System.Collections.ObjectModel;
-
 namespace ESSmPrototype.ViewModels
 {
     public partial class EmployeePageViewModel : INotifyPropertyChanged

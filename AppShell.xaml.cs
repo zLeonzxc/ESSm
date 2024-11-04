@@ -1,11 +1,4 @@
-﻿using ESSmPrototype.ViewModels;
-using System.Windows.Input;
-using ESSmPrototype.Views.Employee;
-using Microsoft.Maui.Controls;
-using ESSmPrototype.Views;
-
-
-namespace ESSmPrototype
+﻿namespace ESSmPrototype
 {
     public partial class AppShell : Shell
     {

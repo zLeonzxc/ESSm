@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Input;
-using ESSmPrototype.Views;
-
-namespace ESSmPrototype.ViewModels
+﻿namespace ESSmPrototype.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

@@ -16,8 +16,7 @@ public partial class HRAdminPage : ContentPage
 
         if (selectedItem == "Employees")
         {
-            // Navigate to EmployeeMenuItem1
-            await Shell.Current.GoToAsync(nameof(PendingLeavePage));
+            await Shell.Current.GoToAsync(nameof(EmployeeDetailsPage));
         }
         else if (selectedItem == "Leave")
         {

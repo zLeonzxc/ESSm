@@ -23,9 +23,9 @@
             <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0}'}"/>
             <Label Text="Attachments (optional):"/>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  VerticalOptions="End">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
                 <Button x:Name="AcceptButton"
-                        Text="Accept"
+                        Text="Approve"
                         BackgroundColor="Green"
                         TextColor="White"
                         HorizontalOptions="FillAndExpand"
