@@ -3,20 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ESSmPrototype.Views.PendingApprovalPage">
 
-    <StackLayout Padding="20">
-        <Label Text="Approval Type:" 
+    <VerticalStackLayout>
+        <StackLayout Padding="20">
+            <Label Text="Approval Type:" 
                FontSize="Medium" 
                HorizontalOptions="Center" />
 
-        <!-- Dropdown -->
-        <Picker Title="Select type of approval"
+            <!-- Dropdown -->
+            <Picker Title="Select type of approval"
                 HorizontalOptions="Center" 
                 WidthRequest="200">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Leave</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-    </StackLayout>
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Leave</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>
