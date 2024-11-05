@@ -19,18 +19,20 @@ public partial class EmployeeLeaveDetailsPage : ContentPage
 														   "Medical Leave"); // Leave Reason
 	}
 
-    private void OnAcceptCommand()
+    private async void OnAcceptCommand()
     {
         var viewModel = (EmployeeLeaveDetailsViewModel)BindingContext;
         viewModel.LeaveApprovalStatus = "Approved";
         viewModel.OnPropertyChanged(nameof(viewModel.LeaveApprovalStatus));
+        await Task.Delay(1000);
     }
 
-    private void OnRejectCommand()
+    private async void OnRejectCommand()
     {
         var viewModel = (EmployeeLeaveDetailsViewModel)BindingContext;
         viewModel.LeaveApprovalStatus = "Rejected";
         viewModel.OnPropertyChanged(nameof(viewModel.LeaveApprovalStatus));
+        await Task.Delay(1000);
     }
 
 }

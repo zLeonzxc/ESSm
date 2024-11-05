@@ -16,17 +16,9 @@ public partial class ApproverPage : ContentPage
 
         if (selectedItem == "Pending Approval")
         {
-            // Navigate to EmployeeMenuItem1
             await Shell.Current.GoToAsync(nameof(PendingApprovalPage));
         }
-        //else if (selectedItem == "Leave")
-        //{
-        //    await Shell.Current.GoToAsync(nameof(EmployeeLeaveList));
-        //}
-        //else if (selectedItem == "Pending Approval")
-        //{
-        //    await Shell.Current.GoToAsync(nameof(PendingApprovalPage));
-        //}
+
           // Deselect the item
           ((ListView)sender).SelectedItem = null;
 
