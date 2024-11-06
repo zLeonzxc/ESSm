@@ -26,7 +26,11 @@
                 <Label Text="{Binding EmployeeName, StringFormat='Employee Name: {0}'}"/>
                 <Label Text="{Binding EmployeePosition, StringFormat='Employee Position: {0}'}"/>
                 <Label Text="------------------------------------------------------------------------------------"/>
-                <Label Text="{Binding LeaveApprovalStatus, StringFormat='Leave Approval Status: {0}'}"/>
+                <HorizontalStackLayout>
+                    <Label Text="Leave Approval Status: "/>
+                    <Label Text="{Binding LeaveApprovalStatus}"/>
+                </HorizontalStackLayout>
+                <!--<Label Text="{Binding LeaveApprovalStatus, StringFormat='Leave Approval Status: {0}'}"/>-->
                 <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0}'}"/>
                 <Label Text="Attachments (optional):"/>
             </VerticalStackLayout>
@@ -37,6 +41,7 @@
                  Text="Approve"
                  BackgroundColor="Green"
                  TextColor="White"
+                 CornerRadius="0"
                  HorizontalOptions="FillAndExpand"
                  Command="{Binding AcceptCommand}"/>
 
@@ -44,6 +49,7 @@
                  Text="Reject"
                  BackgroundColor="Red"
                  TextColor="White"
+                 CornerRadius="0"
                  HorizontalOptions="FillAndExpand"
                  Command="{Binding RejectCommand}"/>
         </StackLayout>

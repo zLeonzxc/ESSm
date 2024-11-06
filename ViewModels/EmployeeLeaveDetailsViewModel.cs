@@ -1,104 +1,31 @@
+using System.Collections.ObjectModel;
+
 namespace ESSmPrototype.ViewModels;
 
 public class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
 {
-    private string? employeeID;
-    private string? employeeName;
-    private string? employeePosition;
-    private string? leaveApprovalStatus;
-    private string? leaveReason;
+    public ObservableCollection<LeaveRequest> LeaveRequests { get; set; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-	public EmployeeLeaveDetailsViewModel(string employeeID = "", 
-                                         string employeeName = "", 
-                                         string employeePosition = "",
-                                         string leaveApprovalStatus = "", 
-                                         string leaveReason = "")
+	public EmployeeLeaveDetailsViewModel()
 	{
-        EmployeeID = employeeID;
-        EmployeeName = employeeName;
-        EmployeePosition = employeePosition;
-        LeaveApprovalStatus = leaveApprovalStatus;
-        LeaveReason = leaveReason;
+        LeaveRequests = new ObservableCollection<LeaveRequest>
+        {
+            new LeaveRequest ( "MY001", "John", "Software Engineer", "Pending", "Medical Leave" ),
+            new LeaveRequest ( "MY002", "Jane", "Software Engineer", "Pending", "Annual Leave" ),
+            new LeaveRequest ( "MY003", "Leon", "Software Engineer", "Pending", "Maternity Leave" ),
+            new LeaveRequest ( "MY004", "Daus", "Software Engineer", "Pending", "Paternity Leave" ),
+            new LeaveRequest ( "MY005", "Amin", "Software Engineer", "Pending", "Sick Leave" ),
+        };
         AcceptCommand = new Command(OnAcceptCommand);
         RejectCommand = new Command(OnRejectCommand);
     }
 
-    public EmployeeLeaveDetailsViewModel() : this("", "", "", "", "") { }
+    //public EmployeeLeaveDetailsViewModel() : this("", "", "", "", "") { }
 
     public void OnPropertyChanged(string propertyName)
 	{
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-	public string? EmployeeID
-    {
-        get => employeeID;
-        set
-        {
-            if (employeeID != value)
-            {
-                employeeID = value;
-                OnPropertyChanged(nameof(EmployeeID));
-            }
-        }
-    }
-
-    public string? EmployeeName
-    {
-        get => employeeName;
-        set
-        {
-            if(employeeName != value)
-            {
-                employeeName = value;
-                OnPropertyChanged(nameof(EmployeeName));
-            }
-        }
-    }
-    
-    public string? EmployeePosition
-    {
-        get => employeePosition;
-        set
-        {
-            if (employeePosition != value)
-            {
-                employeePosition = value;
-                OnPropertyChanged(nameof(EmployeePosition));
-            }
-        }
-    }
-
-    public string? LeaveApprovalStatus
-    {
-        get => leaveApprovalStatus;
-        set
-        {
-            if (leaveApprovalStatus != value)
-            {
-                leaveApprovalStatus = value;
-                OnPropertyChanged(nameof(LeaveApprovalStatus));
-            }
-        }
-    }
-
-    public string? LeaveReason
-    {
-        get => leaveReason;
-        set
-        {
-            if (leaveReason != value)
-            {
-                leaveReason = value;
-                OnPropertyChanged(nameof(LeaveReason));
-            }
-        }
-    }
-
-    private void ChangeLeaveStatus()
-    {
-        LeaveApprovalStatus = LeaveApprovalStatus == "Pending" ? "Approved" : "Pending";
     }
 
     public ICommand AcceptCommand { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace ESSmPrototype.Models
 {
-    class LeaveRequest 
+    public class LeaveRequest 
     {
         private LeaveRequest[]? leaveRequests;
         private string? employeeID;
