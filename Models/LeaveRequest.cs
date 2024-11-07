@@ -1,82 +1,62 @@
 ﻿namespace ESSmPrototype.Models
 {
-    public class LeaveRequest 
+    public class LeaveRequest : INotifyPropertyChanged
     {
-        private LeaveRequest[]? leaveRequests;
-        private string? employeeID;
-        private string? employeeName;
-        private string? employeePosition;
-        private string? leaveApprovalStatus;
-        private string? leaveReason;
-
-        public string? EmployeeID
-        {
-            get => employeeID;
-            set
-            {
-                if (employeeID != value)
-                {
-                    employeeID = value;
-                }
-            }
-        }
-
-        public string? EmployeeName
-        {
-            get => employeeName;
-            set
-            {
-                if(employeeName != value)
-                {
-                    employeeName = value;
-                }
-            }
-        }
-        public string? EmployeePosition
-        {
-            get => employeePosition;
-            set
-            {
-                if (employeePosition != value)
-                {
-                    employeePosition = value;
-                }
-            }
-        }
-
+        public LeaveRequest[]? LeaveRequests { get; set; }
+        public string? EmployeeID { get; set; }
+        public string? EmployeeName { get; set; }
+        public string? EmployeePosition { get; set; }
         public string? LeaveApprovalStatus
         {
-            get => leaveApprovalStatus;
+            get => _leaveApprovalStatus;
             set
             {
-                if (leaveApprovalStatus != value)
+                if (_leaveApprovalStatus != value)
                 {
-                    leaveApprovalStatus = value;
+                    _leaveApprovalStatus = value;
+                    OnPropertyChanged(nameof(LeaveApprovalStatus));
+                    OnPropertyChanged(nameof(StatusImage));
                 }
             }
         }
+        public string? LeaveReason { get; set; }
+        public DateTime AppliedDate { get; set; }
+        public DateTime LeaveStartDate { get; set; }
+        public DateTime LeaveEndDate { get; set; }
 
-        public string? LeaveReason
+        public LeaveRequest(string employeeID, string employeeName, string employeePosition, string leaveApprovalStatus, string leaveReason, DateTime appliedDate, DateTime leaveStartDate, DateTime leaveEndDate)
         {
-            get => leaveReason;
-            set
+            EmployeeID = employeeID;
+            EmployeeName = employeeName;
+            EmployeePosition = employeePosition;
+            LeaveApprovalStatus = leaveApprovalStatus;
+            LeaveReason = leaveReason;
+            AppliedDate = appliedDate;
+            LeaveStartDate = leaveStartDate;
+            LeaveEndDate = leaveEndDate;
+        }
+
+        private string? _leaveApprovalStatus;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public string? StatusImage
+        {
+            get
             {
-                if (leaveReason != value)
+                return LeaveApprovalStatus switch
                 {
-                    leaveReason = value;
-                }
+                    "Approved" => "approvedleave.png",
+                    "Rejected" => "rejectedleave.png",
+                    "Pending" => "pendingleave.png",
+                    _ => "form.png"
+                };
             }
         }
 
-        public LeaveRequest(string employeeID, string employeeName, string employeePosition, string leaveApprovalStatus, string leaveReason)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            {
-                EmployeeID = employeeID;
-                EmployeeName = employeeName;
-                EmployeePosition = employeePosition;
-                LeaveApprovalStatus = leaveApprovalStatus;
-                LeaveReason = leaveReason;
-            };
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

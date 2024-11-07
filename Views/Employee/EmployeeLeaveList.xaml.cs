@@ -11,16 +11,9 @@ public partial class EmployeeLeaveList : ContentPage
 
     private async void OnItemTapped(object sender, ItemTappedEventArgs e)
     {
-        if (e.Item == null)
-            return;
-
-        string? selectedItem = e.Item.ToString();
-
-        if (selectedItem != null)
+        if (e.Item is LeaveRequest selectedLeaveRequest)
         {
-            await Shell.Current.GoToAsync(nameof(EmployeeLeaveDetailsPage));
+            await Navigation.PushAsync(new EmployeeLeaveDetailsPage(selectedLeaveRequest));
         }
-            // Deselect the item
-            ((ListView)sender).SelectedItem = null;
     }
 }

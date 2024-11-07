@@ -2,6 +2,8 @@
 global using System;
 global using System.ComponentModel;
 global using System.Windows.Input;
+global using System.Globalization;
+global using System.Collections.ObjectModel;
 
 // microsoft imports
 global using Microsoft.Maui.Controls;

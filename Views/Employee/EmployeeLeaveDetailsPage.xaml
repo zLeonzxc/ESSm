@@ -22,15 +22,38 @@
                     HorizontalOptions="Center"
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level4"/>
-                <Label Text="{Binding EmployeeID, StringFormat='Employee ID: {0}'}"/>
-                <Label Text="{Binding EmployeeName, StringFormat='Employee Name: {0}'}"/>
-                <Label Text="{Binding EmployeePosition, StringFormat='Employee Position: {0}'}"/>
+                <HorizontalStackLayout>
+                    <Label Text="Employee ID: "/>
+                    <Label Text="{Binding EmployeeID}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Employee Name: "/>
+                    <Label Text="{Binding EmployeeName}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Employee Position: "/>
+                    <Label Text="{Binding EmployeePosition}"/>
+                </HorizontalStackLayout>
                 <Label Text="------------------------------------------------------------------------------------"/>
                 <HorizontalStackLayout>
                     <Label Text="Leave Approval Status: "/>
-                    <Label Text="{Binding LeaveApprovalStatus}"/>
+                    <Label Text="{Binding LeaveApprovalStatus}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Approved">
+                                <Setter Property="TextColor" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Rejected">
+                                <Setter Property="TextColor" Value="Red" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Pending">
+                                <Setter Property="TextColor" Value="DarkOrange" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </HorizontalStackLayout>
-                <!--<Label Text="{Binding LeaveApprovalStatus, StringFormat='Leave Approval Status: {0}'}"/>-->
+                <Label Text="{Binding AppliedDate, StringFormat='Applied at {0:dd MMMM yyyy}, {0:t}'}"/>
+                <Label Text="{Binding LeaveStartDate, StringFormat='Leave Starts at {0:dd MMMM yyyy}, {0:t}'}"/>
+                <Label Text="{Binding LeaveEndDate, StringFormat='Leave Ends at {0:dd MMMM yyyy}, {0:t}'}"/>
                 <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0}'}"/>
                 <Label Text="Attachments (optional):"/>
             </VerticalStackLayout>

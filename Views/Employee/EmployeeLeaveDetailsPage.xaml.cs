@@ -2,39 +2,39 @@ namespace ESSmPrototype.Views.Employee;
 
 public partial class EmployeeLeaveDetailsPage : ContentPage
 {
-	public EmployeeLeaveDetailsPage()
-	{
-		InitializeComponent();
+    public EmployeeLeaveDetailsPage(LeaveRequest leaveRequest)
+    {
+        InitializeComponent();
 
-        var viewModel = new EmployeeLeaveDetailsViewModel();
+        var viewModel = new EmployeeLeaveDetailsViewModel
+        {
+            AcceptCommand = new Command(OnAcceptCommand),
+            RejectCommand = new Command(OnRejectCommand),
+            SelectedLeaveRequest = leaveRequest
+        };
 
-        viewModel.AcceptCommand = new Command(OnAcceptCommand);
-
-        viewModel.RejectCommand = new Command(OnRejectCommand);
-														
-		//BindingContext = new EmployeeLeaveDetailsViewModel("MY001", // Employee ID
-		//												   "John",  // Employee Name
-		//												   "Software Engineer", // Employee Position
-		//												   "Pending", // Leave Approval Status
-		//												   "Medical Leave"); // Leave Reason
-	}
+        BindingContext = viewModel;
+    }
 
     private async void OnAcceptCommand()
     {
-        var leaveRequest = (LeaveRequest)BindingContext;
         var viewModel = (EmployeeLeaveDetailsViewModel)BindingContext;
-        leaveRequest.LeaveApprovalStatus = "Approved";
-        viewModel.OnPropertyChanged(nameof(leaveRequest.LeaveApprovalStatus));
+        if (viewModel.SelectedLeaveRequest != null)
+        {
+            viewModel.SelectedLeaveRequest.LeaveApprovalStatus = "Approved";
+            viewModel.OnPropertyChanged(nameof(viewModel.SelectedLeaveRequest.LeaveApprovalStatus));
+        }
         await Task.Delay(1000);
     }
 
     private async void OnRejectCommand()
     {
-        var leaveRequest = (LeaveRequest)BindingContext;
         var viewModel = (EmployeeLeaveDetailsViewModel)BindingContext;
-        leaveRequest.LeaveApprovalStatus = "Rejected";
-        viewModel.OnPropertyChanged(nameof(leaveRequest.LeaveApprovalStatus));
+        if (viewModel.SelectedLeaveRequest != null)
+        {
+            viewModel.SelectedLeaveRequest.LeaveApprovalStatus = "Rejected";
+            viewModel.OnPropertyChanged(nameof(viewModel.SelectedLeaveRequest.LeaveApprovalStatus));
+        }
         await Task.Delay(1000);
     }
-
 }
