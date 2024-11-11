@@ -6,4 +6,12 @@ public partial class EmployeeDetailsPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+	private void OnSearchEntryChanged(object sender, TextChangedEventArgs e)
+    {
+        var vm = BindingContext as EmployeeDetailsPageViewModel;
+		vm?.OnSearchTextChanged(sender, e);
+    }
+
+    
 }

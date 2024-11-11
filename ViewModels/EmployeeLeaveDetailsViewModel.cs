@@ -19,7 +19,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
             new("MY006", "Ali", "Software Engineer", "Pending", "Unpaid Leave", new DateTime(2023, 6, 1), new DateTime(2023, 6, 10), new DateTime(2023, 6, 15)),
             new("MY007", "Ahmad", "Software Engineer", "Pending", "Emergency Leave", new DateTime(2023, 7, 1), new DateTime(2023, 7, 10), new DateTime(2023, 7, 15)),
             new("MY008", "Siti", "Software Engineer", "Pending", "Marriage Leave", new DateTime(2023, 8, 1), new DateTime(2023, 8, 10), new DateTime(2023, 8, 15)),
-            new("MY009", "Muthu", "Software Engineer", "Pending", "Compassionate Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 10), new DateTime(2023, 9, 15)),
+            new("MY009", "Tamil", "Software Engineer", "Pending", "Compassionate Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 10), new DateTime(2023, 9, 15)),
             new("MY010", "Raj", "Software Engineer", "Pending", "Study Leave", new DateTime(2023, 10, 1), new DateTime(2023, 10, 10), new DateTime(2023, 10, 15))
         ];
 
