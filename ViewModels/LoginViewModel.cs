@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Input;
-
-namespace ESSmPrototype.ViewModels
+﻿namespace ESSmPrototype.ViewModels
 {
     public partial class LoginViewModel : INotifyPropertyChanged
     {

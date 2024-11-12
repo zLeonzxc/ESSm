@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ESSmPrototype.Views.EmployeePage">
+             x:Class="ESSmPrototype.Views.ApproverPage">
     <ScrollView>
         <VerticalStackLayout>
             <StackLayout>
                 <ListView x:Name="EmployeeMenu" ItemTapped="OnItemTapped">
                     <ListView.ItemsSource >
                         <x:Array Type="{x:Type x:String}">
-                            <x:String>Employees</x:String>
-                            <x:String>Leave</x:String>
-                            <!--insert if needed-->
+                            <x:String>Pending Approval</x:String>
+                            <!--insert if more are needed-->
                         </x:Array>
                     </ListView.ItemsSource>
                     <ListView.ItemTemplate>
@@ -18,17 +17,16 @@
                             <ViewCell>
                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
                                     <Label Text="{Binding}" 
-                                           HorizontalOptions="Center" 
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="Center"
-                                           VerticalTextAlignment="Center"/>
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

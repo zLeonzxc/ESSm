@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
+             xmlns:converters="clr-namespace:ESSmPrototype.Converters"
+             x:Class="ESSmPrototype.Views.PendingApprovalPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToBooleanConverter x:Key="StringToBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <local:EmployeeLeaveDetailsViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <StackLayout Padding="20">
+            <Label Text="Approval Type:" 
+                   FontSize="Medium" 
+                   HorizontalOptions="Center" />
+
+            <!-- Dropdown -->
+            <Picker Title="Select type of approval"
+                    HorizontalOptions="Center" 
+                    HorizontalTextAlignment="Center"
+                    WidthRequest="200"
+                    SelectedItem="{Binding SelectedApprovalType}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Leave</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <ScrollView VerticalOptions="FillAndExpand">
+                <ListView x:Name="EmployeeMenu" 
+                              ItemTapped="OnItemTapped"
+                              RowHeight="110"
+                              ItemsSource="{Binding LeaveRequests}"
+                              IsVisible="{Binding SelectedApprovalType, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Leave}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FlexLayout AlignContent="Start" Direction="Column" Grid.Column="0">
+                                        <Label Text="{Binding EmployeeName, StringFormat='Employee Name: {0} '}"/>
+                                        <Label Text="{Binding AppliedDate, StringFormat='Applied at {0:dd/MM/yy}, {0:t}'}"/>
+                                        <Label Text="{Binding LeaveStartDate, StringFormat='Leave Start: {0:dd/MM/yy}, {0:t}'}"/>
+                                        <Label Text="{Binding LeaveEndDate, StringFormat='Leave End: {0:dd/MM/yy}, {0:t} '}"/>
+                                        <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0} '}"/>
+                                    </FlexLayout>
+                                    <Image Grid.Column="1" WidthRequest="40" HeightRequest="40" Source="{Binding StatusImage}">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image" Binding="{Binding LeaveApprovalStatus}" Value="Approved">
+                                                <Setter Property="Source" Value="approvedleave.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image" Binding="{Binding LeaveApprovalStatus}" Value="Pending">
+                                                <Setter Property="Source" Value="pendingleave.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image" Binding="{Binding LeaveApprovalStatus}" Value="Rejected">
+                                                <Setter Property="Source" Value="rejectedleave.png"/>
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+
+        </StackLayout>
+    </Grid>
+</ContentPage>

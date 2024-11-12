@@ -1,8 +1,8 @@
 namespace ESSmPrototype.Views;
 
-public partial class EmployeePage : ContentPage
+public partial class HRAdminPage : ContentPage
 {
-	public EmployeePage()
+	public HRAdminPage()
 	{
 		InitializeComponent();
 	}
@@ -22,7 +22,12 @@ public partial class EmployeePage : ContentPage
         {
             await Shell.Current.GoToAsync(nameof(EmployeeLeaveList));
         }
-            // Deselect the item
-            ((ListView)sender).SelectedItem = null;
+        else if (selectedItem == "Pending Approval")
+        {
+            await Shell.Current.GoToAsync(nameof(PendingApprovalPage));
+        }
+           // Deselect the item
+           ((ListView)sender).SelectedItem = null;
+        
     }
 }

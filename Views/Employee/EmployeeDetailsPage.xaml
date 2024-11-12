@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
+             x:Class="ESSmPrototype.Views.Employee.EmployeeDetailsPage">
+
+<ContentPage.BindingContext>
+    <local:EmployeeDetailsPageViewModel/>
+</ContentPage.BindingContext>
+
+    <ScrollView>
+        <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="10">
+            <StackLayout Spacing="10">
+
+                <Entry x:Name="NameSearchBar" Placeholder="Name" TextChanged="OnSearchEntryChanged" Text="{Binding EmployeeName}"/>
+                <Entry x:Name="LNameSearchBar" Placeholder="Legal Name" TextChanged="OnSearchEntryChanged" Text="{Binding EmployeeLegalName}"/>
+                <Entry x:Name="LoginIDSearchBar" Placeholder="Login ID" TextChanged="OnSearchEntryChanged" Text="{Binding EmployeeLoginID}"/>
+                <Entry x:Name="EmpIDSearchBar" Placeholder="Employee ID" TextChanged="OnSearchEntryChanged" Text="{Binding EmployeeID}"/>
+
+                <Picker x:Name="Country"
+                        Title="Select Country"
+                        TitleColor="#cecece"
+                        Margin="0"
+                        SelectedItem="{Binding Country}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Malaysia</x:String>
+                            <x:String>Japan</x:String>
+                            <x:String>Australia</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Image Source="{Binding Image}"/>
+
+                <Label Text="{Binding Message}"/>
+
+            </StackLayout>
+        </Frame>
+    </ScrollView>
+        
+        
+</ContentPage>

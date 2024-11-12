@@ -1,11 +1,4 @@
-﻿using ESSmPrototype.ViewModels;
-using System.Windows.Input;
-using ESSmPrototype.Views.Employee;
-using Microsoft.Maui.Controls;
-using ESSmPrototype.Views;
-
-
-namespace ESSmPrototype
+﻿namespace ESSmPrototype
 {
     public partial class AppShell : Shell
     {
@@ -29,16 +22,18 @@ namespace ESSmPrototype
         {
             // Main pages
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-            Routing.RegisterRoute(nameof(EmployeePage), typeof(EmployeePage));
-            Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
-            Routing.RegisterRoute(nameof(ReqLeavePage), typeof(ReqLeavePage));
-            Routing.RegisterRoute(nameof(PendingLeavePage), typeof(PendingLeavePage));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-            
-            // Employee menu items
-            Routing.RegisterRoute(nameof(EmployeeMenuItem1), typeof(EmployeeMenuItem1));
-            Routing.RegisterRoute(nameof(EmployeeMenuItem2), typeof(EmployeeMenuItem2));
-            Routing.RegisterRoute(nameof(EmployeeMenuItem3), typeof(EmployeeMenuItem3));
+            Routing.RegisterRoute(nameof(EmployeePage), typeof(EmployeePage));
+            Routing.RegisterRoute(nameof(HRAdminPage), typeof(HRAdminPage));
+            Routing.RegisterRoute(nameof(ApproverPage), typeof(ApproverPage));
+
+            // Menu pages
+            Routing.RegisterRoute(nameof(EmployeeLeaveList), typeof(EmployeeLeaveList));
+            Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPage), typeof(EmployeeLeaveDetailsPage));
+            Routing.RegisterRoute(nameof(EmployeeDetailsPage), typeof(EmployeeDetailsPage));
+
+            // Operations pages
+            Routing.RegisterRoute(nameof(PendingApprovalPage), typeof(PendingApprovalPage));
         }
     }
 }
