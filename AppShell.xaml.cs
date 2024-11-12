@@ -34,7 +34,6 @@
 
             // Operations pages
             Routing.RegisterRoute(nameof(PendingApprovalPage), typeof(PendingApprovalPage));
-            Routing.RegisterRoute(nameof(PendingLeavePage), typeof(PendingLeavePage));
         }
     }
 }

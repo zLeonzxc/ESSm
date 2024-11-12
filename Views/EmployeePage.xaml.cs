@@ -14,11 +14,11 @@ public partial class EmployeePage : ContentPage
 
         string? selectedItem = e.Item.ToString();
 
-        if (selectedItem == "Employee Info")
+        if (selectedItem == "Employees")
         {
             await Shell.Current.GoToAsync(nameof(EmployeeDetailsPage));
         }
-        else if (selectedItem == "Leave List")
+        else if (selectedItem == "Leave")
         {
             await Shell.Current.GoToAsync(nameof(EmployeeLeaveList));
         }

@@ -8,6 +8,7 @@ global using System.Threading;
 global using System.Threading.Tasks;
 global using System.Linq;
 global using System.Runtime.CompilerServices;
+global using System.Timers;
 
 // microsoft imports
 global using Microsoft.Maui.Controls;

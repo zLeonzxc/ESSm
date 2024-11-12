@@ -8,8 +8,8 @@
                 <ListView x:Name="EmployeeMenu" ItemTapped="OnItemTapped">
                     <ListView.ItemsSource >
                         <x:Array Type="{x:Type x:String}">
-                            <x:String>Employee Info</x:String>
-                            <x:String>Leave List</x:String>
+                            <x:String>Employees</x:String>
+                            <x:String>Leave</x:String>
                             <!--insert if needed-->
                         </x:Array>
                     </ListView.ItemsSource>

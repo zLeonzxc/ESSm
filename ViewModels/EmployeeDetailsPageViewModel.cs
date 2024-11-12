@@ -5,6 +5,7 @@ namespace ESSmPrototype.ViewModels
         public ObservableCollection<Employee> Employees { get; set; }
 
         private Employee? _selectedEmployee;
+        private string? _message;
         public EmployeeDetailsPageViewModel()
         {
             Employees =
@@ -48,12 +49,27 @@ namespace ESSmPrototype.ViewModels
         public string? EmployeeLoginID => SelectedEmployee?.EmployeeLoginID;
         public string? Country => SelectedEmployee?.Country;
         public static string? Image => "profile.png";
-        public string? Message { get; set;}
+        public string? Message
+        {
+            get => _message;
+            set
+            {
+                if (_message != value)
+                {
+                    _message = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        public async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = e.NewTextValue;
+            Message = "Searching...";
+
             int index = -1;
+
+            await Task.Delay(2000);
 
             for (int i = 0; i < Employees.Count; i++)
             {
@@ -63,23 +79,28 @@ namespace ESSmPrototype.ViewModels
                     break;
                 }
             }
-
+            
             if (index != -1)
             {
                 // bind the selected employee to the view
+                Message = "Employee Record found";
                 SelectedEmployee = Employees[index];
-                Message = "";
+                
             }
-            else
+            else if (index == -1)
             {
                 // bind message to display error message
                 Message = "Employee not found";
+            }
+            else
+            {
+                Message = "Searching...";
             }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
