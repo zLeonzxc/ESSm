@@ -6,6 +6,11 @@
         {
             InitializeComponent();
 
+            if (App.Current != null)
+            {
+                App.Current.UserAppTheme = AppTheme.Light;
+            }
+
             bool isLoggedIn = false;
 
             MainPage = isLoggedIn ? new AppShell() : new LoginPage();
