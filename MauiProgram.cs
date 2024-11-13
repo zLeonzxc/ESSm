@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace ESSmPrototype
+﻿namespace ESSmPrototype
 {
     public static class MauiProgram
     {
@@ -9,6 +7,7 @@ namespace ESSmPrototype
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
