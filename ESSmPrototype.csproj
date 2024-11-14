@@ -75,6 +75,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Custom\BottomNavBar.xaml.cs">
+	    <DependentUpon>BottomNavBar.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Employee\EmployeeLeaveDetailsPageView.xaml.cs">
 	    <DependentUpon>EmployeeLeaveDetailsPageView.xaml</DependentUpon>
 	  </Compile>
@@ -96,7 +99,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Custom\BottomNavBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ApproverPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BasePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Employee\EmployeeLeaveDetailsPageView.xaml">

@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              x:Class="ESSmPrototype.Views.MainPage">
+
+    <Grid>
+        
 
     <ScrollView>
         <VerticalStackLayout
@@ -25,5 +29,9 @@
 
         </VerticalStackLayout>
     </ScrollView>
+    
+    <custom:BottomNavBar/>
+    
+    </Grid>
 
 </ContentPage>

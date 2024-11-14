@@ -18,7 +18,7 @@
     </ContentPage.BindingContext>
 
     <Grid>
-        <StackLayout Padding="20">
+        <StackLayout Padding="15" MaximumHeightRequest="600" Margin="0,-70,0,0">
             <Label Text="Approval Type:" 
                    FontSize="Medium" 
                    HorizontalOptions="Center" />
@@ -95,5 +95,6 @@
             </ScrollView>
 
         </StackLayout>
+        <custom:BottomNavBar/>
     </Grid>
 </ContentPage>

@@ -11,7 +11,7 @@
 
     <!--Side Bar User Name + Image-->
     <Shell.FlyoutHeader>
-        
+
         <Grid ColumnDefinitions="Auto, *"
               Padding="25">
             <Image Source="profile.png"
@@ -30,36 +30,15 @@
                    TextColor="#333333"/>
         </Grid>
     </Shell.FlyoutHeader>
-    
-    <!--Side Bar + Footer Navigation (working)-->
-    <!--<FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Home Page"
-                      Icon="home.png"
-                      ContentTemplate="{DataTemplate Views:MainPage}"/>
-        <Tab Title="Employee"
-             Icon="employee.png">
-            <ShellContent Title="Employee"
-                          Icon="employee.png"
-                          ContentTemplate="{DataTemplate Views:EmployeePage}"/>
-            <ShellContent Title="Pending Leave"
-                          Icon="pending.png"
-                          ContentTemplate="{DataTemplate Views:PendingLeavePage}"/>
-        </Tab>
 
-        <ShellContent Title="Request Leave"
-                      Icon="form.png"
-                      ContentTemplate="{DataTemplate Views:ReqLeavePage}"/>
-
-        <ShellContent Title="Profile"
-                      Icon="user.png"
-                      ContentTemplate="{DataTemplate Views:ProfilePage}"/>
-    </FlyoutItem>-->
-
+    <!--Flyout Menu Options-->
         <ShellContent Title="Home"
                       Icon="home.png"
+                      Route="MainPage"
                       ContentTemplate="{DataTemplate Views:MainPage}"/>
         <ShellContent Title="Employee"
                       Icon="employee.png"
+                      Route="Employee"
                       ContentTemplate="{DataTemplate Views:EmployeePage}"/>
         <ShellContent Title="Approver"
                       Icon="approval.png"
@@ -68,12 +47,9 @@
                       Icon="hradmin.png"
                       ContentTemplate="{DataTemplate Views:HRAdminPage}"/>
 
-    <!-- Content Page to simulate logging out-->
+    <!--Content Page to simulate logging out-->
     <ShellContent Title="Logout"
                   Icon="logout.png"
                   ContentTemplate="{DataTemplate Views:LoginPage}"/>
-   
-
-
 </Shell>
 

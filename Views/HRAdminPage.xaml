@@ -3,36 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              x:Class="ESSmPrototype.Views.HRAdminPage">
-    <ScrollView>
-        <VerticalStackLayout>
-            <StackLayout>
-                <ListView x:Name="EmployeeMenu" ItemTapped="OnItemTapped">
-                    <ListView.ItemsSource >
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Employees</x:String>
-                            <x:String>Leave</x:String>
-                            <x:String>Pending Approval</x:String>
-                            <!--insert if needed-->
-                        </x:Array>
-                    </ListView.ItemsSource>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <custom:CViewCell>
-                                <Border WidthRequest="200" StrokeShape="RoundRectangle 5, 5, 5, 5" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                        <Label Text="{Binding}" 
-                                       HorizontalOptions="Center" 
-                                       VerticalOptions="Center"
-                                       HorizontalTextAlignment="Center"
-                                       VerticalTextAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                            </custom:CViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
 
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <StackLayout>
+                    <ListView x:Name="EmployeeMenu" ItemTapped="OnItemTapped">
+                        <ListView.ItemsSource >
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Employees</x:String>
+                                <x:String>Leave</x:String>
+                                <x:String>Pending Approval</x:String>
+                                <!--insert if needed-->
+                            </x:Array>
+                        </ListView.ItemsSource>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <custom:CViewCell>
+                                    <Border HeightRequest="30" WidthRequest="200" StrokeShape="RoundRectangle 5, 5, 5, 5" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Label Text="{Binding}" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </custom:CViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <custom:BottomNavBar/>
+    </Grid>
 </ContentPage>
