@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              x:Class="ESSmPrototype.Views.HRAdminPage">
     <ScrollView>
         <VerticalStackLayout>
@@ -16,15 +17,17 @@
                     </ListView.ItemsSource>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Label Text="{Binding}" 
+                            <custom:CViewCell>
+                                <Border WidthRequest="200" StrokeShape="RoundRectangle 5, 5, 5, 5" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Label Text="{Binding}" 
                                        HorizontalOptions="Center" 
                                        VerticalOptions="Center"
                                        HorizontalTextAlignment="Center"
                                        VerticalTextAlignment="Center"/>
-                                </Grid>
-                            </ViewCell>
+                                    </Grid>
+                                </Border>
+                            </custom:CViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

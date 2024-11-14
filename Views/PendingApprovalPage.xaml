@@ -45,7 +45,7 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <custom:CViewCell SelectedBackgroundColor="DarkBlue">
+                            <custom:CViewCell SelectedBackgroundColor="Grey">
                                 <Frame Padding="0" HasShadow="False" BorderColor="Transparent">
                                     <Grid Padding="10">
                                         <Grid.ColumnDefinitions>
