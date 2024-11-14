@@ -1,4 +1,13 @@
-﻿namespace ESSmPrototype
+﻿#if ANDROID
+using ESSmPrototype.Platforms.Android;
+#endif
+#if IOS
+using ESSmPrototype.Platforms.iOS;
+#endif
+
+using ESSmPrototype.Custom;
+
+namespace ESSmPrototype
 {
     public static class MauiProgram
     {
@@ -7,6 +16,11 @@
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureMauiHandlers(handlers => {
+#if ANDROID
+                    handlers.AddHandler<CViewCell, CustomViewCellHandler>();
+#endif
+                })
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {

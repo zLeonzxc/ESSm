@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              xmlns:converters="clr-namespace:ESSmPrototype.Converters"
+             xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              x:Class="ESSmPrototype.Views.PendingApprovalPage"
              Title="Pending Approval">
 
@@ -44,7 +45,7 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <custom:CViewCell SelectedBackgroundColor="Grey">
                                 <Frame Padding="0" HasShadow="False" BorderColor="Transparent">
                                     <Grid Padding="10">
                                         <Grid.ColumnDefinitions>
@@ -87,7 +88,7 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
                                 </Frame>
-                            </ViewCell>
+                            </custom:CViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

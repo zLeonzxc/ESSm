@@ -10,6 +10,7 @@ public partial class PendingApprovalPage : ContentPage
     {
         if (e.Item is LeaveRequest selectedLeaveRequest)
         {
+            ((ListView)sender).SelectedItem = null;
             await Navigation.PushAsync(new EmployeeLeaveDetailsPageAdmin(selectedLeaveRequest));
         }
     }
