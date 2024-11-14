@@ -132,7 +132,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     {
         if (SelectedLeaveRequest != null)
         {
-            SelectedLeaveRequest.LeaveApprovalStatus = "Approved";
+            LeaveApprovalStatus = "Approved";
             var toast = Toast.Make("Leave request approved", ToastDuration.Short);
             await toast.Show();
         }
