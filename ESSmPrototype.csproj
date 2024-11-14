@@ -68,12 +68,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Employee\EmployeeLeaveDetailsPageView.xaml.cs">
+	    <DependentUpon>EmployeeLeaveDetailsPageView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Employee\EmployeeLeaveDetailsPageAdmin.xaml.cs">
+	    <DependentUpon>EmployeeLeaveDetailsPageAdmin.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Employee\EmployeeLeaveList.xaml.cs">
 	    <DependentUpon>EmployeeLeaveList.xaml</DependentUpon>
 	  </Compile>
@@ -92,7 +99,10 @@
 	  <MauiXaml Update="Views\ApproverPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Employee\EmployeeLeaveDetailsPage.xaml">
+	  <MauiXaml Update="Views\Employee\EmployeeLeaveDetailsPageView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Employee\EmployeeLeaveDetailsPageAdmin.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Employee\EmployeeLeaveList.xaml">

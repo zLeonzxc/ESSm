@@ -1,4 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿#if ANDROID
+using ESSmPrototype.Platforms.Android;
+#endif
+#if IOS
+using ESSmPrototype.Platforms.iOS;
+#endif
+
+using ESSmPrototype.Custom;
 
 namespace ESSmPrototype
 {
@@ -9,6 +16,12 @@ namespace ESSmPrototype
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureMauiHandlers(handlers => {
+#if ANDROID
+                    handlers.AddHandler<CViewCell, CustomViewCellHandler>();
+#endif
+                })
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
-             x:Class="ESSmPrototype.Views.Employee.EmployeeLeaveDetailsPage">
+             x:Class="ESSmPrototype.Views.Employee.EmployeeLeaveDetailsPageAdmin">
 
 <ContentPage.BindingContext>
     <local:EmployeeLeaveDetailsViewModel/>
@@ -31,8 +31,8 @@
                     <Label Text="{Binding EmployeeName}"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
-                    <Label Text="Employee Position: "/>
-                    <Label Text="{Binding EmployeePosition}"/>
+                    <Label Text="Employee Department: "/>
+                    <Label Text="{Binding EmployeeDep}"/>
                 </HorizontalStackLayout>
                 <Label Text="------------------------------------------------------------------------------------"/>
                 <HorizontalStackLayout>
@@ -56,10 +56,11 @@
                 <Label Text="{Binding LeaveEndDate, StringFormat='Leave Ends at {0:dd MMMM yyyy}, {0:t}'}"/>
                 <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0}'}"/>
                 <Label Text="Attachments (optional):"/>
+                <Label Text="{Binding LeaveComment, StringFormat='Comments: {0} '}"/>
             </VerticalStackLayout>
         </ScrollView>
 
-        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+        <StackLayout x:Name="ApprovalOptions" Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
             <Button x:Name="AcceptButton"
                  Text="Approve"
                  BackgroundColor="Green"

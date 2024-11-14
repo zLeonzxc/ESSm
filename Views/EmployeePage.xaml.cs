@@ -16,13 +16,13 @@ public partial class EmployeePage : ContentPage
 
         if (selectedItem == "Employees")
         {
+            ((ListView)sender).SelectedItem = null;
             await Shell.Current.GoToAsync(nameof(EmployeeDetailsPage));
         }
         else if (selectedItem == "Leave")
         {
+            ((ListView)sender).SelectedItem = null;
             await Shell.Current.GoToAsync(nameof(EmployeeLeaveList));
         }
-            // Deselect the item
-            ((ListView)sender).SelectedItem = null;
     }
 }

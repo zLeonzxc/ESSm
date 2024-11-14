@@ -16,11 +16,8 @@ public partial class ApproverPage : ContentPage
 
         if (selectedItem == "Pending Approval")
         {
+            ((ListView)sender).SelectedItem = null;
             await Shell.Current.GoToAsync(nameof(PendingApprovalPage));
         }
-
-          // Deselect the item
-          ((ListView)sender).SelectedItem = null;
-
     }
 }

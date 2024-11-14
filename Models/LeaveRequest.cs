@@ -2,10 +2,9 @@
 {
     public class LeaveRequest : INotifyPropertyChanged
     {
-        public LeaveRequest[]? LeaveRequests { get; set; }
         public string? EmployeeID { get; set; }
         public string? EmployeeName { get; set; }
-        public string? EmployeePosition { get; set; }
+        public string? EmployeeDep { get; set; }
         public string? LeaveApprovalStatus
         {
             get => _leaveApprovalStatus;
@@ -20,20 +19,22 @@
             }
         }
         public string? LeaveReason { get; set; }
+        public string? LeaveComment { get; set; }
         public DateTime AppliedDate { get; set; }
         public DateTime LeaveStartDate { get; set; }
         public DateTime LeaveEndDate { get; set; }
 
-        public LeaveRequest(string employeeID, string employeeName, string employeePosition, string leaveApprovalStatus, string leaveReason, DateTime appliedDate, DateTime leaveStartDate, DateTime leaveEndDate)
+        public LeaveRequest(string employeeID, string employeeName, string employeeDep, string leaveApprovalStatus, string leaveReason, DateTime appliedDate, DateTime leaveStartDate, DateTime leaveEndDate, string leavecomment)
         {
             EmployeeID = employeeID;
             EmployeeName = employeeName;
-            EmployeePosition = employeePosition;
+            EmployeeDep = employeeDep;
             LeaveApprovalStatus = leaveApprovalStatus;
             LeaveReason = leaveReason;
             AppliedDate = appliedDate;
             LeaveStartDate = leaveStartDate;
             LeaveEndDate = leaveEndDate;
+            LeaveComment = leavecomment;
         }
 
         private string? _leaveApprovalStatus;
@@ -58,5 +59,6 @@
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

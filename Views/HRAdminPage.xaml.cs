@@ -16,18 +16,18 @@ public partial class HRAdminPage : ContentPage
 
         if (selectedItem == "Employees")
         {
+            ((ListView)sender).SelectedItem = null;
             await Shell.Current.GoToAsync(nameof(EmployeeDetailsPage));
         }
         else if (selectedItem == "Leave")
         {
+            ((ListView)sender).SelectedItem = null;
             await Shell.Current.GoToAsync(nameof(EmployeeLeaveList));
         }
         else if (selectedItem == "Pending Approval")
         {
+            ((ListView)sender).SelectedItem = null;
             await Shell.Current.GoToAsync(nameof(PendingApprovalPage));
         }
-           // Deselect the item
-           ((ListView)sender).SelectedItem = null;
-        
     }
 }
