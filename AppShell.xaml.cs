@@ -21,7 +21,7 @@
             // Main pages
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             //Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-            Routing.RegisterRoute("//MainPage", typeof(MainPage));
+            Routing.RegisterRoute("//MainPage", typeof(MainPage)); // global route e.g. //MainPage
             Routing.RegisterRoute("//Employee", typeof(EmployeePage));
             Routing.RegisterRoute("//HRAdmin", typeof(HRAdminPage));
             Routing.RegisterRoute("//Approver", typeof(ApproverPage));

@@ -48,14 +48,17 @@
                      Clicked="OnHomeButtonClicked"
                      Margin="-65,-18,0,0" />
 
-        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="28,20,0,0">
-            <ImageButton Source="blank.png"
-                         WidthRequest="20"
-                         HeightRequest="22"
+        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="26,14,0,0">
+            <ImageButton Source="pendingapproval.png"
+                         WidthRequest="30"
+                         HeightRequest="100"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
+                         Clicked="OnApprovalButtonClicked"
                          Grid.Row="0" />
-            <Label Grid.Row="1" Text="" FontFamily="WorkSansRegular"
+            <Label Grid.Row="1" Text="Approval" 
+                   FontFamily="WorkSansRegular" 
+                   TextColor="White"
                    FontSize="12" />
         </Grid>
 
