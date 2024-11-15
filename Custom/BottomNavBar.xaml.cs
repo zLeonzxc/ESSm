@@ -20,4 +20,16 @@ public partial class BottomNavBar : ContentView
         }
     }
 
+    private async void OnApprovalButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            await Shell.Current.Navigation.PushAsync(new PendingApprovalPage());
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Navigation error: {ex.Message}");
+        }
+    }
+
 }
