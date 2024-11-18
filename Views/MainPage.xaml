@@ -5,21 +5,18 @@
              x:Class="ESSmPrototype.Views.MainPage">
 
     <Grid>
-        
-
-    <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            
+
             <!--<Label
                 Text="Home Page"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level2" />-->
 
             <Image Source="oshrs.png"
-                   WidthRequest="200"
-                   HeightRequest="200"/>
+                    WidthRequest="200"
+                    HeightRequest="200"/>
 
             <Label
                 Text="Welcome to ESS Mobile"
@@ -27,11 +24,27 @@
                 SemanticProperties.HeadingLevel="Level3"
                 Margin="0,-60,0,0"/>
 
-        </VerticalStackLayout>
-    </ScrollView>
-    
-    <custom:BottomNavBar/>
-    
-    </Grid>
 
+            <Button WidthRequest="200" 
+                    BackgroundColor="DarkBlue" 
+                    TextColor="White" 
+                    Text="Search Employee"
+                    Clicked="OnSearchEmployeeClicked"/>
+
+            <Button WidthRequest="200" 
+                    BackgroundColor="DarkBlue" 
+                    TextColor="White" 
+                    Text="Leave List"
+                    Clicked="OnLeaveListClicked"/>
+
+            <Button WidthRequest="200" 
+                    BackgroundColor="DarkBlue" 
+                    TextColor="White" 
+                    Text="Approval"
+                    Clicked="OnApprovalClicked"/>
+
+        </VerticalStackLayout>
+
+        <custom:BottomNavBar/>
+    </Grid>
 </ContentPage>
