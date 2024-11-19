@@ -7,11 +7,18 @@ public partial class EmployeeDetailsPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnSearchEntryChanged(object sender, TextChangedEventArgs e)
+    public void OnSearchButtonClicked(object sender, EventArgs e)
     {
+        var name = NameSearchBar.Text;
+        if (name == "") {
+            name = "";
+        }
         var vm = BindingContext as EmployeeDetailsPageViewModel;
-		vm?.OnSearchTextChanged(sender, e);
+        vm?.SearchEmployee(name);
     }
-
-    
+    //protected void OnResetButtonClicked(object sender, EventArgs e)
+    //{
+    //    var vm = BindingContext as EmployeeDetailsPageViewModel;
+    //    vm?.OnResetClicked(sender, e);
+    //}
 }

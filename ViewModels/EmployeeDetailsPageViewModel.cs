@@ -6,6 +6,7 @@ namespace ESSmPrototype.ViewModels
 
         private Employee? _selectedEmployee;
         private string? _message;
+        private Employee? matchedEmployee = null;
         public EmployeeDetailsPageViewModel()
         {
             Employees =
@@ -21,6 +22,9 @@ namespace ESSmPrototype.ViewModels
                     new("MY009", "Tamil", "Tamil Murugan", "tmurugan", "Malaysia"),
                     new("MY010", "Raj", "Rajesh Sarveen ", "rajveen", "Malaysia")
                 ];
+
+            SearchCommand = new Command<string>(searchText => SearchEmployee(searchText));
+            ResetCommand = new Command(ClearEntries);
         }
 
         public Employee? SelectedEmployee
@@ -62,41 +66,62 @@ namespace ESSmPrototype.ViewModels
             }
         }
 
-        public async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        public virtual async void SearchEmployee(string searchText)
         {
-            string searchText = e.NewTextValue;
-            Message = "Searching...";
-
-            int index = -1;
-
-            await Task.Delay(2000);
-
-            for (int i = 0; i < Employees.Count; i++)
+            if (string.IsNullOrWhiteSpace(searchText))
             {
-                if (Employees[i].EmployeeID == searchText || Employees[i].EmployeeName == searchText || Employees[i].EmployeeLegalName == searchText || Employees[i].EmployeeLoginID == searchText)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            
-            if (index != -1)
-            {
-                // bind the selected employee to the view
-                Message = "Employee Record found";
-                SelectedEmployee = Employees[index];
-                
-            }
-            else if (index == -1)
-            {
-                // bind message to display error message
-                Message = "Employee not found";
+                Message = "Please enter your search query.";
+                return;
             }
             else
             {
                 Message = "Searching...";
+                await Task.Delay(2000);
+            }
+
+            bool employeeFound = false;
+
+            foreach (var employee in Employees)
+            {
+                if ((employee.EmployeeID?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                    (employee.EmployeeName?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false))
+                {
+                    Message = "Employee Record found";
+                    matchedEmployee = employee;
+                    SelectedEmployee = matchedEmployee;
+                    employeeFound = true;
+                    break;
+                }
+            }
+
+            if (!employeeFound)
+            {
+                Message = "Employee not found";
+                SelectedEmployee = null;
             }
         }
+
+        public void ClearEntries()
+        {
+            SelectedEmployee = null;
+            Message = string.Empty;
+            matchedEmployee = null;
+
+            // Notify that all properties related to SelectedEmployee have changed
+            OnPropertyChanged(nameof(SelectedEmployee));
+            OnPropertyChanged(nameof(EmployeeID));
+            OnPropertyChanged(nameof(EmployeeName));
+            OnPropertyChanged(nameof(EmployeeLegalName));
+            OnPropertyChanged(nameof(EmployeeLoginID));
+            OnPropertyChanged(nameof(Country));
+            OnPropertyChanged(nameof(Image));
+            OnPropertyChanged(nameof(Message));
+        }
+
+
+
+        public ICommand SearchCommand { get; set; }
+        public ICommand ResetCommand { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
