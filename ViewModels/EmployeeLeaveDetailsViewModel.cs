@@ -21,7 +21,29 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
             new("MY007", "Ahmad", "IT", "Pending", "Emergency Leave", new DateTime(2023, 7, 1), new DateTime(2023, 7, 10), new DateTime(2023, 7, 15), ""),
             new("MY008", "Siti", "IT", "Pending", "Marriage Leave", new DateTime(2023, 8, 1), new DateTime(2023, 8, 10), new DateTime(2023, 8, 15), ""),
             new("MY009", "Tamil", "IT", "Pending", "Compassionate Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 10), new DateTime(2023, 9, 15), ""),
-            new("MY010", "Raj", "IT", "Pending", "Study Leave", new DateTime(2023, 10, 1), new DateTime(2023, 10, 10), new DateTime(2023, 10, 15), "")
+            new("MY010", "Raj", "IT", "Pending", "Study Leave", new DateTime(2023, 10, 1), new DateTime(2023, 10, 10), new DateTime(2023, 10, 15), ""),
+
+            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 3, 20), new DateTime(2023, 4, 1), new DateTime(2023, 4, 6), ""),
+            new("MY001", "John", "IT", "Pending", "Annual Leave", new DateTime(2023, 5, 1), new DateTime(2023, 5, 7), new DateTime(2023, 5, 12), ""),
+            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 6, 1), new DateTime(2023, 6, 5), new DateTime(2023, 6, 8), ""),
+            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 7, 1), new DateTime(2023, 7, 10), new DateTime(2023, 7, 12), ""),
+            new("MY001", "John", "IT", "Pending", "Sick Leave", new DateTime(2023, 8, 1), new DateTime(2023, 8, 5), new DateTime(2023, 8, 7), ""),
+            new("MY001", "John", "IT", "Pending", "Unpaid Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 26), new DateTime(2023, 9, 27), ""),
+            new("MY001", "John", "IT", "Pending", "Emergency Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 1), new DateTime(2023, 9, 2), ""),
+            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 10, 1), new DateTime(2023, 10, 10), new DateTime(2023, 10, 15), ""),
+            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 11, 1), new DateTime(2023, 11, 5), new DateTime(2023, 11, 8), ""),
+            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 12, 1), new DateTime(2023, 12, 7), new DateTime(2023, 12, 9), "")
+
+            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 1), new DateTime(2023, 2, 3), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Annual Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 3), new DateTime(2023, 2, 5), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 7), new DateTime(2023, 2, 9), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 10), new DateTime(2023, 2, 11), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Sick Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 12), new DateTime(2023, 2, 14), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Unpaid Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 14), new DateTime(2023, 2, 16), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Emergency Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 17), new DateTime(2023, 2, 18), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 20), new DateTime(2023, 2, 21), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 23), new DateTime(2023, 2, 27), ""),
+            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 29), new DateTime(2023, 3, 1), ""),
         ];
 
         AcceptCommand = new Command(OnAcceptCommand);

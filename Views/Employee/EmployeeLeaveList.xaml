@@ -14,8 +14,18 @@
             <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="10, 0, 10, 40">
                 <StackLayout Spacing="5" Margin="0, 0, 0, 0">
 
-                    <Entry x:Name="EmployeeIDEntry" Placeholder="Employee ID" TextChanged="OnEmpIDChanged" Text="{Binding EmpID}" />
-                    <Entry x:Name="EmployeeNameEntry" Placeholder="Employee Name" TextChanged="OnEmpNameChanged" Text="{Binding EmpName}" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Entry x:Name="EmployeeIDEntry" 
+                               Placeholder="Employee ID" 
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="120"
+                               Text="{Binding EmpID, Mode=TwoWay}" />
+                        <Entry x:Name="EmployeeNameEntry" 
+                               Placeholder="Employee Name" 
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="220"
+                               Text="{Binding EmpName, Mode=TwoWay}" />
+                    </HorizontalStackLayout>
 
                     <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                         <!-- Month Picker -->
@@ -24,8 +34,7 @@
                                 Title="Leave Month" 
                                 TitleColor="#cecece" 
                                 HorizontalTextAlignment="Center"
-                                SelectedIndexChanged="OnMonthSelectedIndexChanged"
-                                SelectedItem="{Binding SelectedMonth}">
+                                SelectedItem="{Binding SelectedMonth, Mode=TwoWay}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>January</x:String>
@@ -50,8 +59,7 @@
                                 Title="Leave Year" 
                                 TitleColor="#cecece" 
                                 HorizontalTextAlignment="Center" 
-                                SelectedIndexChanged="OnYearSelectedIndexChanged"
-                                SelectedItem="{Binding SelectedYear}">
+                                SelectedItem="{Binding SelectedYear, Mode=TwoWay}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:Int32}">
                                     <x:Int32>2022</x:Int32>
@@ -66,8 +74,8 @@
                     <Picker x:Name="LeaveDescription"
                             Title="Select Leave Description"
                             TitleColor="#cecece"
-                            SelectedIndexChanged="OnLeaveDescriptionSelectedIndexChanged"
-                            SelectedItem="{Binding SelectedLeaveDescription}">
+                            HorizontalTextAlignment="Center"
+                            SelectedItem="{Binding SelectedLeaveDescription, Mode=TwoWay}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Annual Leave</x:String>
@@ -92,8 +100,8 @@
                     <Picker x:Name="LeaveStatus"
                             Title="Select Leave Status"
                             TitleColor="#cecece"
-                            SelectedIndexChanged="OnLeaveStatusSelectedIndexChanged"
-                            SelectedItem="{Binding SelectedLeaveStatus}">
+                            HorizontalTextAlignment="Center"
+                            SelectedItem="{Binding SelectedLeaveStatus, Mode=TwoWay}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Approved</x:String>
@@ -106,27 +114,17 @@
                         </Picker.ItemsSource>
                     </Picker>
 
-                    <CollectionView ItemsSource="{Binding FilteredLeaveRequests}" 
-                                    IsVisible="{Binding IsListVisible}"
-                                    HeightRequest="400">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="0" HasShadow="False" BorderColor="Transparent">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:EmployeeLeaveListViewModel}}, Path=NavigateToDetailsCommand}" CommandParameter="{Binding .}" />
-                                    </Frame.GestureRecognizers>
-                                    <StackLayout Padding="10">
-                                        <Label Text="{Binding EmployeeID, StringFormat='Employee ID: {0} '}" />
-                                        <Label Text="{Binding EmployeeName, StringFormat='Employee Name: {0} '}" />
-                                        <Label Text="{Binding LeaveReason, StringFormat='Leave Description: {0} '}" />
-                                        <Label HorizontalTextAlignment="End" Text="{Binding LeaveApprovalStatus, StringFormat='Status: {0} '}" />
-                                        <BoxView HeightRequest="1" BackgroundColor="Gray" />
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <HorizontalStackLayout Spacing="20" Padding="6" Grid.Row="1" VerticalOptions="End">
+                        <Button Text="Search" 
+                                BackgroundColor="DarkBlue" 
+                                WidthRequest="160"
+                                Command="{Binding SearchFilter}"/>
 
+                        <Button Text="Reset" 
+                                BackgroundColor="Red" 
+                                WidthRequest="160"
+                                Command="{Binding ResetFilter}" />
+                    </HorizontalStackLayout>
                 </StackLayout>
             </Frame>
         </ScrollView>

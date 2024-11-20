@@ -15,6 +15,8 @@
         {
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
             IsListVisible = false;
+            SearchFilter = new Command(async () => await FilterLeaveRequestsAsync());
+            ResetFilter = new Command(ResetFilterEntries);
         }
 
         public ObservableCollection<LeaveRequest>? FilteredLeaveRequests
@@ -34,7 +36,6 @@
             {
                 _empID = value;
                 OnPropertyChanged(nameof(EmpID));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -45,7 +46,6 @@
             {
                 _empName = value;
                 OnPropertyChanged(nameof(EmpName));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -56,7 +56,6 @@
             {
                 _selectedMonth = value;
                 OnPropertyChanged(nameof(SelectedMonth));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -67,7 +66,6 @@
             {
                 _selectedYear = value;
                 OnPropertyChanged(nameof(SelectedYear));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -78,7 +76,6 @@
             {
                 _selectedLeaveDescription = value;
                 OnPropertyChanged(nameof(SelectedLeaveDescription));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -89,7 +86,6 @@
             {
                 _selectedLeaveStatus = value;
                 OnPropertyChanged(nameof(SelectedLeaveStatus));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -98,13 +94,17 @@
             get => _isListVisible;
             set
             {
-                _isListVisible = value;
-                OnPropertyChanged(nameof(IsListVisible));
+                if (_isListVisible != value)
+                {
+                    _isListVisible = value;
+                    OnPropertyChanged(nameof(IsListVisible));
+                }
             }
         }
 
         private async Task FilterLeaveRequestsAsync()
         {
+
             var filtered = await Task.Run(() =>
             {
                 var tempFiltered = new ObservableCollection<LeaveRequest>();
@@ -129,6 +129,42 @@
 
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(filtered);
             IsListVisible = FilteredLeaveRequests.Any();
+            OnPropertyChanged(nameof(IsListVisible));
+
+            Debug.WriteLine(FilteredLeaveRequests.Count);
+
+            // Navigate to the results page only if there are filtered results
+            if (IsListVisible)
+            {
+                await Shell.Current.GoToAsync(nameof(EmployeeLeaveListResults));
+            }
+            else
+            {
+                // Optionally, show a message to the user that no results were found
+                Debug.WriteLine("No results found.");
+            }
         }
+
+        private void ResetFilterEntries()
+        {
+            EmpID = null;
+            EmpName = null;
+            SelectedMonth = null;
+            SelectedYear = null;
+            SelectedLeaveDescription = null;
+            SelectedLeaveStatus = null;
+
+            FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
+            IsListVisible = FilteredLeaveRequests.Any();
+            OnPropertyChanged(nameof(IsListVisible));
+        }
+
+        public ICommand SearchFilter { get; set; }
+        public ICommand ResetFilter { get; set; }
+
     }
 }
+
+
+
+

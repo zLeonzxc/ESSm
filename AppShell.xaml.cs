@@ -28,25 +28,27 @@
 
             // Menu pages
             Routing.RegisterRoute(nameof(EmployeeLeaveList), typeof(EmployeeLeaveList));
-            Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageAdmin), typeof(EmployeeLeaveDetailsPageAdmin));
+            Routing.RegisterRoute(nameof(EmployeeLeaveListResults), typeof(EmployeeLeaveListResults));
             Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageView), typeof(EmployeeLeaveDetailsPageView));
-            Routing.RegisterRoute(nameof(EmployeeDetailsPage), typeof(EmployeeDetailsPage));
+           
 
             // Operations pages
             Routing.RegisterRoute(nameof(PendingApprovalPage), typeof(PendingApprovalPage));
+            Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageAdmin), typeof(EmployeeLeaveDetailsPageAdmin));
+            Routing.RegisterRoute(nameof(EmployeeDetailsPage), typeof(EmployeeDetailsPage));
         }
 
-        protected override async void OnNavigating(ShellNavigatingEventArgs args)
-        {
-            // Check if navigating to the Employee section
-            if (args.Target.Location.OriginalString.Equals("Employee"))
-                await Shell.Current.GoToAsync("//Employee");
-            else if (args.Target.Location.OriginalString.Equals("Approver"))
-                await Shell.Current.GoToAsync("//Approver");
-            else if (args.Target.Location.OriginalString.Equals("HRAdmin"))
-                await Shell.Current.GoToAsync("//HRAdmin");
-            else
-                base.OnNavigating(args);
-        }
+        //protected override async void OnNavigating(ShellNavigatingEventArgs args)
+        //{
+        //    // Check if navigating to the Employee section
+        //    if (args.Target.Location.OriginalString.Equals("Employee"))
+        //        await Shell.Current.GoToAsync("//Employee");
+        //    else if (args.Target.Location.OriginalString.Equals("Approver"))
+        //        await Shell.Current.GoToAsync("//Approver");
+        //    else if (args.Target.Location.OriginalString.Equals("HRAdmin"))
+        //        await Shell.Current.GoToAsync("//HRAdmin");
+        //    else
+        //        base.OnNavigating(args);
+        //}
     }
 }
