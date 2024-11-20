@@ -28,7 +28,6 @@
 
             // Menu pages
             Routing.RegisterRoute(nameof(EmployeeLeaveList), typeof(EmployeeLeaveList));
-            Routing.RegisterRoute(nameof(EmployeeLeaveListResults), typeof(EmployeeLeaveListResults));
             Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageView), typeof(EmployeeLeaveDetailsPageView));
            
 

@@ -10,13 +10,40 @@
         private string? _selectedLeaveDescription;
         private string? _selectedLeaveStatus;
         private bool _isListVisible;
+        private bool _isSearchBoxVisible;
 
         public EmployeeLeaveListViewModel()
         {
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
             IsListVisible = false;
+            IsSearchBoxVisible = true;
             SearchFilter = new Command(async () => await FilterLeaveRequestsAsync());
             ResetFilter = new Command(ResetFilterEntries);
+            ToggleSearchBoxCommand = new Command(ToggleSearchBox);
+
+            // Initialize the ItemsSource properties
+            Months =
+            [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            Years = [2022, 2023, 2024, 2025];
+
+            LeaveDescriptions =
+            [
+                "Annual Leave", "Army Reserve", "Compassionate Leave / Bereavement Leave",
+                "Jury Service", "Leave Without Pay", "Long Service Leave", "Maternity Leave",
+                "Paternity Leave", "Personal Leave", "Personal Leave Without Pay",
+                "Salary Continuance", "Special Leave", "Study Leave", "Volunteer Leave",
+                "Workers Compensation"
+            ];
+
+            LeaveStatuses =
+            [
+                "Approved", "Cancelled", "Pending", "Rejected", "Saved",
+                "Cancelled (Passed Monthly Cutoff)"
+            ];
         }
 
         public ObservableCollection<LeaveRequest>? FilteredLeaveRequests
@@ -102,8 +129,40 @@
             }
         }
 
+        public bool IsSearchBoxVisible
+        {
+            get => _isSearchBoxVisible;
+            set
+            {
+                if (_isSearchBoxVisible != value)
+                {
+                    _isSearchBoxVisible = value;
+                    OnPropertyChanged(nameof(IsSearchBoxVisible));
+                }
+            }
+        }
+
+        // ItemsSource properties for the Pickers
+        public ObservableCollection<string> Months { get; set; }
+        public ObservableCollection<int> Years { get; set; }
+        public ObservableCollection<string> LeaveDescriptions { get; set; }
+        public ObservableCollection<string> LeaveStatuses { get; set; }
+
+        // Command to toggle the visibility of the search box
+        public ICommand ToggleSearchBoxCommand { get; }
+
+        private void ToggleSearchBox()
+        {
+            if (!IsSearchBoxVisible)
+            {
+                IsSearchBoxVisible = true;
+                IsListVisible = false;
+            }
+        }
+
         private async Task FilterLeaveRequestsAsync()
         {
+            IsSearchBoxVisible = false;
 
             var filtered = await Task.Run(() =>
             {
@@ -130,19 +189,6 @@
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(filtered);
             IsListVisible = FilteredLeaveRequests.Any();
             OnPropertyChanged(nameof(IsListVisible));
-
-            Debug.WriteLine(FilteredLeaveRequests.Count);
-
-            // Navigate to the results page only if there are filtered results
-            if (IsListVisible)
-            {
-                await Shell.Current.GoToAsync(nameof(EmployeeLeaveListResults));
-            }
-            else
-            {
-                // Optionally, show a message to the user that no results were found
-                Debug.WriteLine("No results found.");
-            }
         }
 
         private void ResetFilterEntries()
@@ -155,16 +201,12 @@
             SelectedLeaveStatus = null;
 
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
-            IsListVisible = FilteredLeaveRequests.Any();
+            IsListVisible = false;
             OnPropertyChanged(nameof(IsListVisible));
         }
 
         public ICommand SearchFilter { get; set; }
         public ICommand ResetFilter { get; set; }
-
     }
 }
-
-
-
 
