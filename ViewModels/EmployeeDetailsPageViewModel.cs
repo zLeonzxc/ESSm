@@ -6,25 +6,28 @@ namespace ESSmPrototype.ViewModels
 
         private Employee? _selectedEmployee;
         private string? _message;
-        private Employee? matchedEmployee = null;
+        private bool _isListVisible;
+        private string? _employeeName;
+        private ObservableCollection<Employee>? _filteredSearchResults { get; set; }
         public EmployeeDetailsPageViewModel()
         {
-            Employees =
-                [
-                    new("MY001", "John", "John Smith", "jsmith", "Malaysia"),
-                    new("MY002", "Jane", "Jane Doe", "janedoe", "Malaysia"),
-                    new("MY003", "Ben", "Benjamin Tan", "benjamin", "Malaysia"),
-                    new("MY004", "Henry", "Henry Tan", "henrytan", "Malaysia"),
-                    new("MY005", "Dave", "David Cross", "dcross", "Malaysia"),
-                    new("MY006", "Ali", "Muhammad Ali", "muhammadali", "Malaysia"),
-                    new("MY007", "Ahmad", "Daniel Ahmad", "danielahmad", "Malaysia"),
-                    new("MY008", "Siti", "Siti Maisarah", "smaisarah", "Malaysia"),
-                    new("MY009", "Tamil", "Tamil Murugan", "tmurugan", "Malaysia"),
-                    new("MY010", "Raj", "Rajesh Sarveen ", "rajveen", "Malaysia")
-                ];
+            Employees = new ObservableCollection<Employee>
+            {
+                new("MY001", "John", "John Smith", "jsmith", "Malaysia"),
+                new("MY002", "Jane", "Jane Doe", "janedoe", "Malaysia"),
+                new("MY003", "Ben", "Benjamin Tan", "benjamin", "Malaysia"),
+                new("MY004", "Henry", "Henry Tan", "henrytan", "Malaysia"),
+                new("MY005", "Dave", "David Cross", "dcross", "Malaysia"),
+                new("MY006", "Ali", "Muhammad Ali", "muhammadali", "Malaysia"),
+                new("MY007", "Ahmad", "Daniel Ahmad", "danielahmad", "Malaysia"),
+                new("MY008", "Siti", "Siti Maisarah", "smaisarah", "Malaysia"),
+                new("MY009", "Tamil", "Tamil Murugan", "tmurugan", "Malaysia"),
+                new("MY010", "Raj", "Rajesh Sarveen ", "rajveen", "Malaysia")
+            };
 
             SearchCommand = new Command<string>(searchText => SearchEmployee(searchText));
             ResetCommand = new Command(ClearEntries);
+            EntryTap = new Command<Employee>(async (employee) => await OnNavigateToDetailsCommand(employee));
         }
 
         public Employee? SelectedEmployee
@@ -35,6 +38,7 @@ namespace ESSmPrototype.ViewModels
                 if (_selectedEmployee != value)
                 {
                     _selectedEmployee = value;
+                    EmployeeName = _selectedEmployee?.EmployeeName;
                     OnPropertyChanged(nameof(EmployeeID));
                     OnPropertyChanged(nameof(EmployeeName));
                     OnPropertyChanged(nameof(EmployeeLegalName));
@@ -43,12 +47,42 @@ namespace ESSmPrototype.ViewModels
                     OnPropertyChanged(nameof(Image));
                     OnPropertyChanged(nameof(Message));
                 }
-                
+            }
+        }
+
+        public ObservableCollection<Employee>? FilteredSearchResults
+        {
+            get => _filteredSearchResults;
+            set
+            {
+                _filteredSearchResults = value;
+                OnPropertyChanged(nameof(FilteredSearchResults));
+            }
+        }
+
+        public bool IsListVisible
+        {
+            get => _isListVisible;
+            set
+            {
+                if (_isListVisible != value)
+                {
+                    _isListVisible = value;
+                    OnPropertyChanged(nameof(IsListVisible));
+                }
             }
         }
 
         public string? EmployeeID => SelectedEmployee?.EmployeeID;
-        public string? EmployeeName => SelectedEmployee?.EmployeeName;
+        public string? EmployeeName 
+        {
+            get => _employeeName;
+            set
+            {
+                _employeeName = value;
+                OnPropertyChanged(nameof(_employeeName));
+            }
+        }
         public string? EmployeeLegalName => SelectedEmployee?.EmployeeLegalName;
         public string? EmployeeLoginID => SelectedEmployee?.EmployeeLoginID;
         public string? Country => SelectedEmployee?.Country;
@@ -76,28 +110,39 @@ namespace ESSmPrototype.ViewModels
             else
             {
                 Message = "Searching...";
-                await Task.Delay(2000);
             }
 
             bool employeeFound = false;
 
-            foreach (var employee in Employees)
+            var filtered = await Task.Run(() =>
             {
-                if ((employee.EmployeeID?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                    (employee.EmployeeName?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false))
+                var tempFiltered = new ObservableCollection<Employee>();
+
+                foreach (var emp in Employees)
                 {
-                    Message = "Employee Record found";
-                    matchedEmployee = employee;
-                    SelectedEmployee = matchedEmployee;
-                    employeeFound = true;
-                    break;
+                    bool matchesEmpName = !string.IsNullOrEmpty(searchText) && emp.EmployeeName != null && emp.EmployeeName.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+
+                    if (matchesEmpName)
+                    {
+                        employeeFound = true;
+                        Message = "Employee record found";
+                        tempFiltered.Add(emp);
+                    }
                 }
-            }
+
+                return tempFiltered;
+            });
 
             if (!employeeFound)
             {
                 Message = "Employee not found";
                 SelectedEmployee = null;
+            }
+            else
+            {
+                FilteredSearchResults = new ObservableCollection<Employee>(filtered);
+                IsListVisible = FilteredSearchResults.Any();
+                OnPropertyChanged(nameof(IsListVisible));
             }
         }
 
@@ -105,7 +150,9 @@ namespace ESSmPrototype.ViewModels
         {
             SelectedEmployee = null;
             Message = string.Empty;
-            matchedEmployee = null;
+            FilteredSearchResults = null;
+            IsListVisible = false;
+            EmployeeName = string.Empty;
 
             // Notify that all properties related to SelectedEmployee have changed
             OnPropertyChanged(nameof(SelectedEmployee));
@@ -116,18 +163,42 @@ namespace ESSmPrototype.ViewModels
             OnPropertyChanged(nameof(Country));
             OnPropertyChanged(nameof(Image));
             OnPropertyChanged(nameof(Message));
+            OnPropertyChanged(nameof(IsListVisible));
         }
-
-
 
         public ICommand SearchCommand { get; set; }
         public ICommand ResetCommand { get; set; }
+        public ICommand EntryTap { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private async Task OnNavigateToDetailsCommand(Employee employee)
+        {
+            try
+            {
+                SelectedEmployee = employee;
+                Debug.WriteLine(SelectedEmployee.EmployeeLegalName);
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    {"SelectedEmployee", employee }
+                };
+                if (Application.Current?.MainPage?.Navigation != null)
+                {
+                    Debug.WriteLine("before navigate");
+                    await Application.Current.MainPage.Navigation.PushAsync(new EmployeeDetailsPageTab(employee));
+                    Debug.WriteLine("success navigate");
+                }
+                await Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Navigation failed: {ex.Message}");
+            }
         }
     }
 }

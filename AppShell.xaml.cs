@@ -29,26 +29,18 @@
             // Menu pages
             Routing.RegisterRoute(nameof(EmployeeLeaveList), typeof(EmployeeLeaveList));
             Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageView), typeof(EmployeeLeaveDetailsPageView));
-           
+
 
             // Operations pages
             Routing.RegisterRoute(nameof(PendingApprovalPage), typeof(PendingApprovalPage));
             Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageAdmin), typeof(EmployeeLeaveDetailsPageAdmin));
             Routing.RegisterRoute(nameof(EmployeeDetailsPage), typeof(EmployeeDetailsPage));
             Routing.RegisterRoute(nameof(EmployeeDetailsPageTab), typeof(EmployeeDetailsPageTab));
-        }
 
-        //protected override async void OnNavigating(ShellNavigatingEventArgs args)
-        //{
-        //    // Check if navigating to the Employee section
-        //    if (args.Target.Location.OriginalString.Equals("Employee"))
-        //        await Shell.Current.GoToAsync("//Employee");
-        //    else if (args.Target.Location.OriginalString.Equals("Approver"))
-        //        await Shell.Current.GoToAsync("//Approver");
-        //    else if (args.Target.Location.OriginalString.Equals("HRAdmin"))
-        //        await Shell.Current.GoToAsync("//HRAdmin");
-        //    else
-        //        base.OnNavigating(args);
-        //}
+            // Employee Details page
+            Routing.RegisterRoute(nameof(Personal), typeof(Personal));
+            Routing.RegisterRoute(nameof(Family), typeof(Family));
+
+        }
     }
 }

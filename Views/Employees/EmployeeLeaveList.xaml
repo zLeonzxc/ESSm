@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="ESSmPrototype.Views.Employee.EmployeeLeaveList"
+             x:Class="ESSmPrototype.Views.Employees.EmployeeLeaveList"
              HideSoftInputOnTapped="True"
              Title="Leave List">
 
@@ -102,11 +102,11 @@
             <Label Text="{Binding Message}" Padding="10, 0"/>
         </Grid>
 
-        <Grid x:Name="SearchResultsBox" IsVisible="{Binding IsListVisible}" Padding="5" Grid.Row="1" VerticalOptions="FillAndExpand" Margin="0, -40, 0, 0">
+        <Grid x:Name="SearchResultsBox" IsVisible="{Binding IsListVisible}" Padding="5" Grid.Row="1" VerticalOptions="FillAndExpand" Margin="0, -30, 0, 0">
             <CollectionView ItemsSource="{Binding FilteredLeaveRequests}" 
                                 HeightRequest="600">
                 <CollectionView.Header>
-                    <Label Text="Search Results" FontAttributes="Bold" FontSize="20"/>
+                    <Label Text="Search Results" FontAttributes="Bold" FontSize="20" Padding="10,0,0,0"/>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

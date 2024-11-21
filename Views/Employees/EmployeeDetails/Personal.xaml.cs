@@ -1,4 +1,4 @@
-namespace ESSmPrototype.Views.Employee.EmployeeDetails;
+namespace ESSmPrototype.Views.Employees.EmployeeDetails;
 
 public partial class Personal : ContentPage
 {

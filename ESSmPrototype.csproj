@@ -81,16 +81,16 @@
 	  <Compile Update="Platforms\iOS\KeyboardHelper.cs">
 	    <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
 	  </Compile>
-	  <Compile Update="Views\Employee\EmployeeLeaveDetailsPageView.xaml.cs">
+	  <Compile Update="Views\Employees\EmployeeLeaveDetailsPageView.xaml.cs">
 	    <DependentUpon>EmployeeLeaveDetailsPageView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Employee\EmployeeLeaveDetailsPageAdmin.xaml.cs">
+	  <Compile Update="Views\Employees\EmployeeLeaveDetailsPageAdmin.xaml.cs">
 	    <DependentUpon>EmployeeLeaveDetailsPageAdmin.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Employee\EmployeeLeaveList.xaml.cs">
+	  <Compile Update="Views\Employees\EmployeeLeaveList.xaml.cs">
 	    <DependentUpon>EmployeeLeaveList.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Employee\EmployeeDetailsPage.xaml.cs">
+	  <Compile Update="Views\Employees\EmployeeDetailsPage.xaml.cs">
 	    <DependentUpon>EmployeeDetailsPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\HRAdminPage.xaml.cs">
@@ -102,6 +102,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AppFlyoutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Custom\BottomNavBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -111,22 +114,16 @@
 	  <MauiXaml Update="Views\BasePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Employee\EmployeeDetailsPageTab.xaml">
+	  <MauiXaml Update="Views\Employees\EmployeeDetailsPageTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Employee\EmployeeDetails\Family.xaml">
+	  <MauiXaml Update="Views\Employees\EmployeeLeaveDetailsPageView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Employee\EmployeeDetails\Personal.xaml">
+	  <MauiXaml Update="Views\Employees\EmployeeLeaveDetailsPageAdmin.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Employee\EmployeeLeaveDetailsPageView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Employee\EmployeeLeaveDetailsPageAdmin.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Employee\EmployeeLeaveList.xaml">
+	  <MauiXaml Update="Views\Employees\EmployeeLeaveList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HRAdminPage.xaml">

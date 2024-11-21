@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ESSmPrototype.ViewModels"
+             x:Class="ESSmPrototype.Views.Employees.EmployeeDetails.Personal"
+             Title="Personal">
+
+    <ContentPage.BindingContext>
+        <vm:EmployeeDetailsPageViewModel />
+    </ContentPage.BindingContext>
+
+
+    <Grid>
+        <StackLayout Spacing="10" Padding="20" Margin="0, 0, 0, 0">
+            <Label Text="{Binding EmployeeID, StringFormat='Employee ID:  {0} '}"/>
+            <Label Text="{Binding EmployeeLegalName, StringFormat='Legal Name:  {0} '}"/>
+            <Label Text="{Binding EmployeeLoginID, StringFormat='Login ID:  {0} '}"/>
+            <Label Text="{Binding Country, StringFormat='Country:  {0} '}"/>
+        </StackLayout>
+    </Grid>
+    
+</ContentPage>

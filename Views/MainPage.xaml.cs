@@ -43,16 +43,25 @@
             }
         }
 
-        private async void OnTestClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                await Shell.Current.Navigation.PushAsync(new EmployeeDetailsPageTab());
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Navigation error: {ex.Message}");
-            }
-        }
+        //private async void OnTestClicked(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (Application.Current != null)
+        //        {
+        //            //await Shell.Current.Navigation.PushAsync(new EmployeeDetailsPageTab());
+        //            Application.Current.MainPage = new EmployeeDetailsPageTab();
+        //            await Task.CompletedTask;
+        //        }
+        //        else
+        //        {
+        //            Debug.WriteLine("Application.Current is null");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine($"Navigation error: {ex.Message}");
+        //    }
+        //}
     }
 }

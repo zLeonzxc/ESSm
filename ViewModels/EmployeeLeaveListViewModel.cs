@@ -210,6 +210,12 @@
 
             if (string.IsNullOrEmpty(EmpID) && string.IsNullOrEmpty(EmpName) && string.IsNullOrEmpty(SelectedMonth) && !SelectedYear.HasValue && string.IsNullOrEmpty(SelectedLeaveDescription) && string.IsNullOrEmpty(SelectedLeaveStatus))
             {
+                // Validation for user not entering any input (list will add every element)
+                Message = "No records found.";
+            }
+            else if (filtered.Count == 0)
+            {
+                // Validation when list is empty
                 Message = "No records found.";
             }
             else

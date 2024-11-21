@@ -1,4 +1,4 @@
-namespace ESSmPrototype.Views.Employee;
+namespace ESSmPrototype.Views.Employees;
 
 public partial class EmployeeLeaveDetailsPageView : ContentPage
 {

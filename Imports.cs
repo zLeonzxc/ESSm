@@ -19,10 +19,11 @@ global using Microsoft.Maui.Devices;
 // file imports
 global using ESSmPrototype;
 global using ESSmPrototype.Views;
-global using ESSmPrototype.Views.Employee;
-global using ESSmPrototype.Views.Employee.EmployeeDetails;
+global using ESSmPrototype.Views.Employees;
+global using ESSmPrototype.Views.Employees.EmployeeDetails;
 global using ESSmPrototype.ViewModels;
 global using ESSmPrototype.Models;
+
 
 // maui community
 global using CommunityToolkit.Maui;
