@@ -42,5 +42,17 @@
                 Debug.WriteLine($"Navigation error: {ex.Message}");
             }
         }
+
+        private async void OnTestClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Shell.Current.Navigation.PushAsync(new EmployeeDetailsPageTab());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Navigation error: {ex.Message}");
+            }
+        }
     }
 }

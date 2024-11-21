@@ -43,6 +43,12 @@
                     Text="Approval"
                     Clicked="OnApprovalClicked"/>
 
+            <!--<Button WidthRequest="200" 
+                    BackgroundColor="DarkBlue" 
+                    TextColor="White" 
+                    Text="Test"
+                    Clicked="OnTestClicked"/>-->
+
         </VerticalStackLayout>
 
         <custom:BottomNavBar/>

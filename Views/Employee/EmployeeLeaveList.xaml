@@ -5,6 +5,7 @@
              xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ESSmPrototype.Views.Employee.EmployeeLeaveList"
+             HideSoftInputOnTapped="True"
              Title="Leave List">
 
     <ContentPage.BindingContext>
@@ -96,6 +97,10 @@
                 </Frame>
             </toolkit:Expander>
         </StackLayout>
+        
+        <Grid Grid.Row="1">
+            <Label Text="{Binding Message}" Padding="10, 0"/>
+        </Grid>
 
         <Grid x:Name="SearchResultsBox" IsVisible="{Binding IsListVisible}" Padding="5" Grid.Row="1" VerticalOptions="FillAndExpand" Margin="0, -40, 0, 0">
             <CollectionView ItemsSource="{Binding FilteredLeaveRequests}" 

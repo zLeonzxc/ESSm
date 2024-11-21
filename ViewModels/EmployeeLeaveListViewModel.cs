@@ -11,12 +11,14 @@
         private string? _selectedLeaveStatus;
         private bool _isListVisible;
         private bool _isSearchBoxVisible;
+        private string? _message;
 
         public EmployeeLeaveListViewModel()
         {
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
             IsListVisible = false;
             IsSearchBoxVisible = true;
+            Message = "";
             SearchFilter = new Command(async () => await FilterLeaveRequestsAsync());
             ResetFilter = new Command(ResetFilterEntries);
             ToggleSearchBoxCommand = new Command(ToggleSearchBox);
@@ -142,6 +144,19 @@
             }
         }
 
+        public string? Message
+        {
+            get => _message ?? string.Empty;
+            set
+            {
+                if (_message != value)
+                {
+                    _message = value;
+                    OnPropertyChanged(nameof(Message));
+                }
+            }
+        }
+
         // ItemsSource properties for the Pickers
         public ObservableCollection<string> Months { get; set; }
         public ObservableCollection<int> Years { get; set; }
@@ -162,6 +177,13 @@
 
         private async Task FilterLeaveRequestsAsync()
         {
+            // Clear message
+            Message = "";
+            // Hide the keyboard if the platform supports it
+            if (this is Microsoft.Maui.ITextInput textInput)
+            {
+                _ = await textInput.HideKeyboardAsync(); // Ignore warning for MacCatalyst 
+            }
             IsSearchBoxVisible = false;
 
             var filtered = await Task.Run(() =>
@@ -186,9 +208,16 @@
                 return tempFiltered;
             });
 
-            FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(filtered);
-            IsListVisible = FilteredLeaveRequests.Any();
-            OnPropertyChanged(nameof(IsListVisible));
+            if (string.IsNullOrEmpty(EmpID) && string.IsNullOrEmpty(EmpName) && string.IsNullOrEmpty(SelectedMonth) && !SelectedYear.HasValue && string.IsNullOrEmpty(SelectedLeaveDescription) && string.IsNullOrEmpty(SelectedLeaveStatus))
+            {
+                Message = "No records found.";
+            }
+            else
+            {
+                FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(filtered);
+                IsListVisible = FilteredLeaveRequests.Any();
+                OnPropertyChanged(nameof(IsListVisible));
+            }
         }
 
         private void ResetFilterEntries()
@@ -199,6 +228,7 @@
             SelectedYear = null;
             SelectedLeaveDescription = null;
             SelectedLeaveStatus = null;
+            Message = "";
 
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
             IsListVisible = false;
