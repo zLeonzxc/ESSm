@@ -1,10 +1,9 @@
-using Android.Widget;
-
 namespace ESSmPrototype.ViewModels
 {
     public partial class EmployeeDetailsPageViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Employee> Employees { get; set; }
+        public ObservableCollection<Family> EmployeeFamilies { get; set; }
 
         private Employee? _selectedEmployee;
         private string? _message;
@@ -25,6 +24,11 @@ namespace ESSmPrototype.ViewModels
                 new("MY008", "Siti", "Siti Maisarah", "smaisarah", "Malaysia"),
                 new("MY009", "Tamil", "Tamil Murugan", "tmurugan", "Malaysia"),
                 new("MY010", "Raj", "Rajesh Sarveen ", "rajveen", "Malaysia")
+            };
+
+            EmployeeFamilies = new ObservableCollection<Family>
+            {
+                new("John Smith", "Tom Smith", 68, "Retired", "0123456789", "Father", "tomsmith@example.com"),
             };
 
             SearchCommand = new Command(async() => await SearchEmployee());
@@ -200,5 +204,7 @@ namespace ESSmPrototype.ViewModels
                 Debug.WriteLine($"Navigation failed: {ex.Message}");
             }
         }
+
+        
     }
 }
