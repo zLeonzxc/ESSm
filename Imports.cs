@@ -20,7 +20,6 @@ global using Microsoft.Maui.Devices;
 global using ESSmPrototype;
 global using ESSmPrototype.Views;
 global using ESSmPrototype.Views.Employees;
-global using ESSmPrototype.Views.Employees.EmployeeDetails;
 global using ESSmPrototype.ViewModels;
 global using ESSmPrototype.Models;
 
