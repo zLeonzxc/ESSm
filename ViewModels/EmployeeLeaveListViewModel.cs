@@ -179,11 +179,7 @@
         {
             // Clear message
             Message = "";
-            // Hide the keyboard if the platform supports it
-            if (this is Microsoft.Maui.ITextInput textInput)
-            {
-                _ = await textInput.HideKeyboardAsync(); // Ignore warning for MacCatalyst 
-            }
+
             IsSearchBoxVisible = false;
 
             var filtered = await Task.Run(() =>

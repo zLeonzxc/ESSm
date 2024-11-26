@@ -102,9 +102,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AppFlyoutPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Custom\BottomNavBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

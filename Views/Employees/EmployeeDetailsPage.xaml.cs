@@ -1,9 +1,13 @@
-namespace ESSmPrototype.Views.Employees;
-
-public partial class EmployeeDetailsPage : ContentPage
+namespace ESSmPrototype.Views.Employees
 {
-    public EmployeeDetailsPage()
+    public partial class EmployeeDetailsPage : ContentPage
     {
-        InitializeComponent();
+        public EmployeeDetailsPage()
+        {
+            InitializeComponent();
+            BindingContext = new EmployeeDetailsPageViewModel();
+        }
     }
 }
+
+

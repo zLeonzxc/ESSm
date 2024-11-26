@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              x:Class="ESSmPrototype.Views.Employees.EmployeeDetailsPage"
+             HideSoftInputOnTapped="True"
              Title="Employee Search">
 
     <ContentPage.BindingContext>
@@ -40,8 +41,8 @@
 
         <Grid x:Name="SearchResultsBox" IsVisible="{Binding IsListVisible}" Padding="5" Grid.Row="1">
             <CollectionView ItemsSource="{Binding FilteredSearchResults}" 
-                            HeightRequest="600"
-                            Margin="0,120,0,0">
+                            HeightRequest="480"
+                            VerticalOptions="EndAndExpand">
                 <CollectionView.Header>
                     <Label Text="Search Results" FontAttributes="Bold" FontSize="20" Padding="10,0,0,0"/>
                 </CollectionView.Header>

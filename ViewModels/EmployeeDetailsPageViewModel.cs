@@ -1,3 +1,5 @@
+using Android.Widget;
+
 namespace ESSmPrototype.ViewModels
 {
     public partial class EmployeeDetailsPageViewModel : INotifyPropertyChanged
@@ -104,12 +106,6 @@ namespace ESSmPrototype.ViewModels
         {
             var searchText = EmployeeName;
             bool employeeFound = false;
-
-            // Hide the keyboard if the platform supports it
-            if (this is Microsoft.Maui.ITextInput textInput)
-            {
-                _ = await textInput.HideKeyboardAsync(); // Ignore warning for MacCatalyst 
-            }
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
