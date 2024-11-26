@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="10" HeightRequest="160" VerticalOptions="Start" Grid.Row="0">
-            <StackLayout Spacing="10" Margin="0, 0, 0, 0">
+            <StackLayout Spacing="10">
                 <Entry x:Name="NameSearchBar" Placeholder="Name" Text="{Binding EmployeeName}"/>
                 <!--<Entry x:Name="EmpIDSearchBar" Placeholder="Employee ID" Text="{Binding EmployeeID}"/>-->
 
@@ -28,7 +28,7 @@
                     <Button Text="Search" 
                             BackgroundColor="DarkBlue" 
                             WidthRequest="160"
-                            Clicked="OnSearchButtonClicked"/>
+                            Command="{Binding SearchCommand}"/>
 
                     <Button Text="Reset" 
                             BackgroundColor="DarkBlue" 
@@ -38,9 +38,10 @@
             </StackLayout>
         </Frame>
 
-        <Grid x:Name="SearchResultsBox" IsVisible="{Binding IsListVisible}" Padding="5" Grid.Row="1" VerticalOptions="FillAndExpand" Margin="0, 100, 0, 0">
+        <Grid x:Name="SearchResultsBox" IsVisible="{Binding IsListVisible}" Padding="5" Grid.Row="1">
             <CollectionView ItemsSource="{Binding FilteredSearchResults}" 
-                            HeightRequest="600">
+                            HeightRequest="600"
+                            Margin="0,120,0,0">
                 <CollectionView.Header>
                     <Label Text="Search Results" FontAttributes="Bold" FontSize="20" Padding="10,0,0,0"/>
                 </CollectionView.Header>

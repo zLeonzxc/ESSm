@@ -25,9 +25,9 @@ namespace ESSmPrototype.ViewModels
                 new("MY010", "Raj", "Rajesh Sarveen ", "rajveen", "Malaysia")
             };
 
-            SearchCommand = new Command<string>(searchText => SearchEmployee(searchText));
+            SearchCommand = new Command(async() => await SearchEmployee());
             ResetCommand = new Command(ClearEntries);
-            EntryTap = new Command<Employee>(async (employee) => await OnNavigateToDetailsCommand(employee));
+            EntryTap = new Command<Employee>(OnNavigateToDetailsCommand);
         }
 
         public Employee? SelectedEmployee
@@ -100,8 +100,17 @@ namespace ESSmPrototype.ViewModels
             }
         }
 
-        public virtual async void SearchEmployee(string searchText)
+        private async Task SearchEmployee()
         {
+            var searchText = EmployeeName;
+            bool employeeFound = false;
+
+            // Hide the keyboard if the platform supports it
+            if (this is Microsoft.Maui.ITextInput textInput)
+            {
+                _ = await textInput.HideKeyboardAsync(); // Ignore warning for MacCatalyst 
+            }
+
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 Message = "Please enter your search query.";
@@ -112,15 +121,13 @@ namespace ESSmPrototype.ViewModels
                 Message = "Searching...";
             }
 
-            bool employeeFound = false;
-
             var filtered = await Task.Run(() =>
             {
                 var tempFiltered = new ObservableCollection<Employee>();
 
                 foreach (var emp in Employees)
                 {
-                    bool matchesEmpName = !string.IsNullOrEmpty(searchText) && emp.EmployeeName != null && emp.EmployeeName.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+                    bool matchesEmpName = !string.IsNullOrEmpty(EmployeeName) && emp.EmployeeName != null && emp.EmployeeName.Contains(searchText, StringComparison.OrdinalIgnoreCase);
 
                     if (matchesEmpName)
                     {
@@ -177,23 +184,20 @@ namespace ESSmPrototype.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private async Task OnNavigateToDetailsCommand(Employee employee)
+        private async void OnNavigateToDetailsCommand(Employee employee)
         {
             try
             {
                 SelectedEmployee = employee;
-                Debug.WriteLine(SelectedEmployee.EmployeeLegalName);
-                var navigationParameter = new Dictionary<string, object>
-                {
-                    {"SelectedEmployee", employee }
-                };
+                OnPropertyChanged(nameof(SelectedEmployee));
+
+                var tabbedPage = new NavigationPage(new EmployeeDetailsPageTab(employee));
+
                 if (Application.Current?.MainPage?.Navigation != null)
-                {
-                    Debug.WriteLine("before navigate");
-                    await Application.Current.MainPage.Navigation.PushAsync(new EmployeeDetailsPageTab(employee));
-                    Debug.WriteLine("success navigate");
+                { 
+                    Application.Current.MainPage = tabbedPage;
+                    await Task.CompletedTask;
                 }
-                await Task.CompletedTask;
             }
             catch (Exception ex)
             {

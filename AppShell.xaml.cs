@@ -36,11 +36,6 @@
             Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageAdmin), typeof(EmployeeLeaveDetailsPageAdmin));
             Routing.RegisterRoute(nameof(EmployeeDetailsPage), typeof(EmployeeDetailsPage));
             Routing.RegisterRoute(nameof(EmployeeDetailsPageTab), typeof(EmployeeDetailsPageTab));
-
-            // Employee Details page
-            Routing.RegisterRoute(nameof(Personal), typeof(Personal));
-            Routing.RegisterRoute(nameof(Family), typeof(Family));
-
         }
     }
 }
