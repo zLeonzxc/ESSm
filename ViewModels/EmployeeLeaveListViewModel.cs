@@ -10,11 +10,42 @@
         private string? _selectedLeaveDescription;
         private string? _selectedLeaveStatus;
         private bool _isListVisible;
+        private bool _isSearchBoxVisible;
+        private string? _message;
 
         public EmployeeLeaveListViewModel()
         {
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
             IsListVisible = false;
+            IsSearchBoxVisible = true;
+            Message = "";
+            SearchFilter = new Command(async () => await FilterLeaveRequestsAsync());
+            ResetFilter = new Command(ResetFilterEntries);
+            ToggleSearchBoxCommand = new Command(ToggleSearchBox);
+
+            // Initialize the ItemsSource properties
+            Months =
+            [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            Years = [2022, 2023, 2024, 2025];
+
+            LeaveDescriptions =
+            [
+                "Annual Leave", "Army Reserve", "Compassionate Leave / Bereavement Leave",
+                "Jury Service", "Leave Without Pay", "Long Service Leave", "Maternity Leave",
+                "Paternity Leave", "Personal Leave", "Personal Leave Without Pay",
+                "Salary Continuance", "Special Leave", "Study Leave", "Volunteer Leave",
+                "Workers Compensation"
+            ];
+
+            LeaveStatuses =
+            [
+                "Approved", "Cancelled", "Pending", "Rejected", "Saved",
+                "Cancelled (Passed Monthly Cutoff)"
+            ];
         }
 
         public ObservableCollection<LeaveRequest>? FilteredLeaveRequests
@@ -34,7 +65,6 @@
             {
                 _empID = value;
                 OnPropertyChanged(nameof(EmpID));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -45,7 +75,6 @@
             {
                 _empName = value;
                 OnPropertyChanged(nameof(EmpName));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -56,7 +85,6 @@
             {
                 _selectedMonth = value;
                 OnPropertyChanged(nameof(SelectedMonth));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -67,7 +95,6 @@
             {
                 _selectedYear = value;
                 OnPropertyChanged(nameof(SelectedYear));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -78,7 +105,6 @@
             {
                 _selectedLeaveDescription = value;
                 OnPropertyChanged(nameof(SelectedLeaveDescription));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -89,7 +115,6 @@
             {
                 _selectedLeaveStatus = value;
                 OnPropertyChanged(nameof(SelectedLeaveStatus));
-                _ = FilterLeaveRequestsAsync();
             }
         }
 
@@ -98,13 +123,69 @@
             get => _isListVisible;
             set
             {
-                _isListVisible = value;
-                OnPropertyChanged(nameof(IsListVisible));
+                if (_isListVisible != value)
+                {
+                    _isListVisible = value;
+                    OnPropertyChanged(nameof(IsListVisible));
+                }
+            }
+        }
+
+        public bool IsSearchBoxVisible
+        {
+            get => _isSearchBoxVisible;
+            set
+            {
+                if (_isSearchBoxVisible != value)
+                {
+                    _isSearchBoxVisible = value;
+                    OnPropertyChanged(nameof(IsSearchBoxVisible));
+                }
+            }
+        }
+
+        public string? Message
+        {
+            get => _message ?? string.Empty;
+            set
+            {
+                if (_message != value)
+                {
+                    _message = value;
+                    OnPropertyChanged(nameof(Message));
+                }
+            }
+        }
+
+        // ItemsSource properties for the Pickers
+        public ObservableCollection<string> Months { get; set; }
+        public ObservableCollection<int> Years { get; set; }
+        public ObservableCollection<string> LeaveDescriptions { get; set; }
+        public ObservableCollection<string> LeaveStatuses { get; set; }
+
+        // Command to toggle the visibility of the search box
+        public ICommand ToggleSearchBoxCommand { get; }
+
+        private void ToggleSearchBox()
+        {
+            if (!IsSearchBoxVisible)
+            {
+                IsSearchBoxVisible = true;
+                IsListVisible = false;
             }
         }
 
         private async Task FilterLeaveRequestsAsync()
         {
+            // Clear message
+            Message = "";
+            // Hide the keyboard if the platform supports it
+            if (this is Microsoft.Maui.ITextInput textInput)
+            {
+                _ = await textInput.HideKeyboardAsync(); // Ignore warning for MacCatalyst 
+            }
+            IsSearchBoxVisible = false;
+
             var filtered = await Task.Run(() =>
             {
                 var tempFiltered = new ObservableCollection<LeaveRequest>();
@@ -127,8 +208,41 @@
                 return tempFiltered;
             });
 
-            FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(filtered);
-            IsListVisible = FilteredLeaveRequests.Any();
+            if (string.IsNullOrEmpty(EmpID) && string.IsNullOrEmpty(EmpName) && string.IsNullOrEmpty(SelectedMonth) && !SelectedYear.HasValue && string.IsNullOrEmpty(SelectedLeaveDescription) && string.IsNullOrEmpty(SelectedLeaveStatus))
+            {
+                // Validation for user not entering any input (list will add every element)
+                Message = "No records found.";
+            }
+            else if (filtered.Count == 0)
+            {
+                // Validation when list is empty
+                Message = "No records found.";
+            }
+            else
+            {
+                FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(filtered);
+                IsListVisible = FilteredLeaveRequests.Any();
+                OnPropertyChanged(nameof(IsListVisible));
+            }
         }
+
+        private void ResetFilterEntries()
+        {
+            EmpID = null;
+            EmpName = null;
+            SelectedMonth = null;
+            SelectedYear = null;
+            SelectedLeaveDescription = null;
+            SelectedLeaveStatus = null;
+            Message = "";
+
+            FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
+            IsListVisible = false;
+            OnPropertyChanged(nameof(IsListVisible));
+        }
+
+        public ICommand SearchFilter { get; set; }
+        public ICommand ResetFilter { get; set; }
     }
 }
+

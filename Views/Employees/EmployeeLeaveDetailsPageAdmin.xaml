@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
-             x:Class="ESSmPrototype.Views.Employee.EmployeeLeaveDetailsPageAdmin">
+             x:Class="ESSmPrototype.Views.Employees.EmployeeLeaveDetailsPageAdmin">
 
 <ContentPage.BindingContext>
     <local:EmployeeLeaveDetailsViewModel/>
