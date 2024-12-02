@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ESSmPrototype.ViewModels"
              xmlns:custom="clr-namespace:ESSmPrototype.Custom"
-             xmlns:local="clr-namespace:ESSmPrototype.Views.Employees.EmployeeDetails"
              x:Class="ESSmPrototype.Views.Employees.EmployeeDetailsPageTab"
              Title="EmployeeDetailsPageTab">
 
@@ -15,39 +14,25 @@
         <ToolbarItem Text="Back"  Clicked="OnBackButtonClicked" Order="Primary" Priority="0"/>
     </TabbedPage.ToolbarItems>
 
-    <!-- Tabs-->
-    
-    <!--<ContentPage Title="Personal">
-        <ContentView>
-            <Grid>
-                <StackLayout Spacing="10" Padding="20" Margin="0, 0, 0, 0">
-                    <Label Text="{Binding EmployeeID, StringFormat='Employee ID:  {0} '}"/>
-                    <Label Text="{Binding EmployeeLegalName, StringFormat='Legal Name:  {0} '}"/>
-                    <Label Text="{Binding EmployeeLoginID, StringFormat='Login ID:  {0} '}"/>
-                    <Label Text="{Binding Country, StringFormat='Country:  {0} '}"/>
-                </StackLayout>
-            </Grid>
-        </ContentView>
-    </ContentPage>
-
-    <ContentPage Title="Family">
-        <ContentView>
-            <Grid>
-                <StackLayout Spacing="10" Padding="20" Margin="0, 0, 0, 0">
-                    <Label Text="Details 1: "/>
-                    <Label Text="Details 2: "/>
-                    <Label Text="Details 3: "/>
-                    <Label Text="Details 4:"/>
-                </StackLayout>
-            </Grid>
-        </ContentView>
-    </ContentPage>-->
-
-    <NavigationPage Title="Personal" IconImageSource="user.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+    <NavigationPage IconImageSource="user.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
         <x:Arguments>
             <ContentPage Title="Employee Details">
                 <Grid>
                     <StackLayout Spacing="10" Padding="20">
+                        <Label Text="User" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage IconImageSource="personal.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Personal" FontAttributes="Bold" FontSize="Large"/>
                         <Label Text="{Binding EmployeeID, StringFormat='Employee ID:  {0} '}"/>
                         <Label Text="{Binding EmployeeLegalName, StringFormat='Legal Name:  {0} '}"/>
                         <Label Text="{Binding EmployeeLoginID, StringFormat='Login ID:  {0} '}"/>
@@ -58,11 +43,12 @@
         </x:Arguments>
     </NavigationPage>
 
-    <NavigationPage Title="Family" IconImageSource="employee.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+    <NavigationPage IconImageSource="family.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
         <x:Arguments>
             <ContentPage Title="Employee Details">
                 <Grid>
                     <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Family" FontAttributes="Bold" FontSize="Large"/>
                         <Label Text="Family Detail 1:"/>
                         <Label Text="Family Detail 2:"/>
                         <Label Text="Family Detail 3:"/>
@@ -72,9 +58,44 @@
         </x:Arguments>
     </NavigationPage>
 
+    <NavigationPage IconImageSource="banking.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Banking" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
 
-    <!-- add more tabs if needed-->
+    <NavigationPage IconImageSource="job.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Job History" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
 
+    <NavigationPage IconImageSource="managers.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Managers" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
 
 </TabbedPage>
 
