@@ -30,10 +30,12 @@ namespace ESSmPrototype
 
             // register viewmodels
             builder.Services.AddSingleton<LoginViewModel>();
-            builder.Services.AddSingleton<BaseViewModel>();
+
+            // register API services
+
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
