@@ -18,9 +18,9 @@ namespace ESSmPrototype.Platforms.Android
 
     public class CustomViewCellHandler : Microsoft.Maui.Controls.Handlers.Compatibility.ViewCellRenderer
     {
-        private AView? pCellCore;
+        private AView pCellCore;
         private bool pSelected;
-        private Drawable? pUnselectedBackground;
+        private Drawable pUnselectedBackground;
 
         protected override AView GetCellCore(Cell item, AView convertView, AViewGroup parent, AContext context)
         {
@@ -41,7 +41,7 @@ namespace ESSmPrototype.Platforms.Android
                 pSelected = !(pSelected);
                 if (pSelected)
                 {
-                    pCellCore?.SetBackgroundColor(((CViewCell)sender).SelectedBackgroundColor.ToAndroid());
+                    pCellCore.SetBackgroundColor(((CViewCell)sender).SelectedBackgroundColor.ToAndroid());
                 }
                 else
                 {
