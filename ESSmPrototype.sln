@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESSmPrototype", "ESSmPrototype.csproj", "{10F6B816-EC2D-4F93-A20B-D6F3E555EDA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESSmAPI", "ESSmAPI\ESSmAPI.csproj", "{DCA8B93C-1F9D-4541-A3F6-4338A34010D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{10F6B816-EC2D-4F93-A20B-D6F3E555EDA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10F6B816-EC2D-4F93-A20B-D6F3E555EDA9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10F6B816-EC2D-4F93-A20B-D6F3E555EDA9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DCA8B93C-1F9D-4541-A3F6-4338A34010D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA8B93C-1F9D-4541-A3F6-4338A34010D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA8B93C-1F9D-4541-A3F6-4338A34010D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA8B93C-1F9D-4541-A3F6-4338A34010D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
