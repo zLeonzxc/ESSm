@@ -1,6 +1,0 @@
-@ESSmAPI_HostAddress = http://localhost:5104
-
-GET {{ESSmAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
