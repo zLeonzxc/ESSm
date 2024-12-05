@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ESSmPrototype.Custom.BottomNavBar">
+
+    <HorizontalStackLayout VerticalOptions="End" Margin="0,0,0,0" BackgroundColor="#151C50">
+        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="28,20,10,0">
+            <ImageButton Source="blank.png"
+                         WidthRequest="20"
+                         HeightRequest="22"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Grid.Row="0"
+                         />
+            <Label Grid.Row="1" Text=""
+                   FontFamily="WorkSansRegular"
+                   FontSize="12"
+                   />
+        </Grid>
+
+        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="28,20,10,0">
+            <ImageButton Source="blank.png"
+                         WidthRequest="20"
+                         HeightRequest="22"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Grid.Row="0"
+                         />
+            <Label Grid.Row="1" Text=""
+                   FontFamily="WorkSansRegular"
+                   FontSize="12"
+                   />
+        </Grid>
+
+        <Ellipse Margin="47,-15,0,0"
+                 Fill="DarkBlue"
+                 StrokeThickness="4"
+                 WidthRequest="70"
+                 HeightRequest="70"
+                 HorizontalOptions="Start"
+                 VerticalOptions="Start" />
+
+        <ImageButton Source="homeinvert.png"
+                     WidthRequest="60"
+                     HeightRequest="62"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"   
+                     Clicked="OnHomeButtonClicked"
+                     Margin="-65,-18,0,0" />
+
+        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="26,14,0,0">
+            <ImageButton Source="pendingapproval.png"
+                         WidthRequest="30"
+                         HeightRequest="100"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Clicked="OnApprovalButtonClicked"
+                         Grid.Row="0" />
+            <Label Grid.Row="1" Text="Approval" 
+                   FontFamily="WorkSansRegular" 
+                   TextColor="White"
+                   FontSize="12" />
+        </Grid>
+
+        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="28,20,0,0">
+            <ImageButton Source="blank.png"
+                         WidthRequest="20"
+                         HeightRequest="22"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Grid.Row="0" />
+            <Label Grid.Row="1" Text="" FontFamily="WorkSansRegular"
+                   FontSize="12" />
+        </Grid>
+    </HorizontalStackLayout>
+</ContentView>

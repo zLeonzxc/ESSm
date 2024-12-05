@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
+             x:Class="ESSmPrototype.Views.Employees.EmployeeLeaveDetailsPageAdmin">
+
+<ContentPage.BindingContext>
+    <local:EmployeeLeaveDetailsViewModel/>
+</ContentPage.BindingContext>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="20" Margin="10,0,0,0">
+                <Label Text="Leave Details"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level4"/>
+                <HorizontalStackLayout>
+                    <Label Text="Employee ID: "/>
+                    <Label Text="{Binding EmployeeID}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Employee Name: "/>
+                    <Label Text="{Binding EmployeeName}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Employee Department: "/>
+                    <Label Text="{Binding EmployeeDep}"/>
+                </HorizontalStackLayout>
+                <Label Text="------------------------------------------------------------------------------------"/>
+                <HorizontalStackLayout>
+                    <Label Text="Leave Approval Status: "/>
+                    <Label Text="{Binding LeaveApprovalStatus}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Approved">
+                                <Setter Property="TextColor" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Rejected">
+                                <Setter Property="TextColor" Value="Red" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Pending">
+                                <Setter Property="TextColor" Value="DarkOrange" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </HorizontalStackLayout>
+                <Label Text="{Binding AppliedDate, StringFormat='Applied at {0:dd MMMM yyyy}, {0:t}'}"/>
+                <Label Text="{Binding LeaveStartDate, StringFormat='Leave Starts at {0:dd MMMM yyyy}, {0:t}'}"/>
+                <Label Text="{Binding LeaveEndDate, StringFormat='Leave Ends at {0:dd MMMM yyyy}, {0:t}'}"/>
+                <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0}'}"/>
+                <Label Text="Attachments (optional):"/>
+                <Label Text="{Binding LeaveComment, StringFormat='Comments: {0} '}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <StackLayout x:Name="ApprovalOptions" Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+            <Button x:Name="AcceptButton"
+                 Text="Approve"
+                 BackgroundColor="Green"
+                 TextColor="White"
+                 CornerRadius="0"
+                 HorizontalOptions="FillAndExpand"
+                 Command="{Binding AcceptCommand}"/>
+
+            <Button x:Name="RejectButton"
+                 Text="Reject"
+                 BackgroundColor="Red"
+                 TextColor="White"
+                 CornerRadius="0"
+                 HorizontalOptions="FillAndExpand"
+                 Command="{Binding RejectCommand}"/>
+        </StackLayout>
+    </Grid>
+
+
+
+</ContentPage>
