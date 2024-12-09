@@ -5,7 +5,7 @@ namespace ESSmAPI.Data
 {
     public class UserContext : DbContext
     {
-        public UserContext(DbContextOptions<UserContext> dbContextOptions) : base(dbContextOptions)
+        public UserContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
 
         }

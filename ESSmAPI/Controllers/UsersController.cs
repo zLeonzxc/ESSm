@@ -14,6 +14,15 @@ namespace ESSmAPI.Controllers
         public UsersController(UserContext context)
         {
             _context = context;
+
+            if (!_context.Users.Any())
+            {
+                _context.Users.AddRange(
+                    new User { Name = "admin", Email = "admin@example.com" },
+                    new User { Name = "jsmith", Email = "johnsmith@example.com"}
+                );
+                _context.SaveChanges();
+            }
         }
 
         // GET: api/Users
