@@ -48,21 +48,74 @@
             }
         }
 
-        private void OnLogin()
+        //private void OnLogin()
+        //{
+        //    // Dummy authentication
+        //    if (Username == "admin" && Password == "password")
+        //    {
+        //        if (Application.Current != null)
+        //        {
+        //            Username = _username;
+        //            Application.Current.MainPage = new AppShell();
+        //        }
+        //        else
+        //            Message = "Uh oh... An unknown error has occured. \n[Error Code: ESSM1001]";
+        //    }
+        //    else
+        //        Message = "Invalid username or password.\n[Error Code: ESSM1002]";
+        //}
+
+        private async Task OnLogin()
         {
-            // Dummy authentication
-            if (Username == "admin" && Password == "password")
+            var handler = new HttpClientHandler
             {
-                if (Application.Current != null)
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            };
+
+            using var httpClient = new HttpClient(handler);
+
+            var loginDTO = new
+            {
+                username = Username,
+                password = Password
+            };
+            var content = new StringContent(JsonSerializer.Serialize(loginDTO), Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync("https://10.0.2.2:7087/api/Users/login", content);
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine($"Raw Response: {responseContent}");
+
+                if (response.IsSuccessStatusCode)
                 {
-                    Username = _username;
-                    Application.Current.MainPage = new AppShell();
+                    if (Application.Current != null)
+                    {
+                        Application.Current.MainPage = new AppShell();
+                    }
+                    else
+                    {
+                        Message = "Uh oh... An unknown error has occurred. \n[Error Code: ESSM1001]";
+                    }
+                }
+                else if (response.Content.Equals("ESSM1002"))
+                {
+                    Message = "User does not exist.\n[Error Code: ESSM1002]";
+                }
+                else if (response.Content.Equals("ESSM1003"))
+                {
+                    Message = "Invalid username or password.\n[Error Code: ESSM1003]";
                 }
                 else
-                    Message = "Uh oh... An unknown error has occured. \n[Error Code: ESSM1001]";
+                {
+                    Message = $"An unknown error has occurred";
+                }
             }
-            else
-                Message = "Invalid username or password.\n[Error Code: ESSM1002]";
+            catch (Exception ex)
+            {
+                Message = $"An error occurred: {ex.Message}";
+            }
         }
         private void GetName()
         {
@@ -74,7 +127,7 @@
         public ICommand RetrieveName { get; }
         public LoginViewModel()
         {
-            LoginCommand = new Command(OnLogin);
+            LoginCommand = new Command(async() => await OnLogin());
 
             RetrieveName = new Command(GetName);
         }

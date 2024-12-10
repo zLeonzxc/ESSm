@@ -10,12 +10,14 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<UserContext>(options =>
 {
     //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-    //options.UseInMemoryDatabase("Users");
-    var connString = builder.Configuration.GetConnectionString("DbCon");
-    options.UseSqlServer(connString);
+    options.UseInMemoryDatabase("Users");
+    //var connString = builder.Configuration.GetConnectionString("DbCon");
+    //options.UseSqlServer(connString);
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.WebHost.UseUrls("https://*:5122");
 
 var app = builder.Build();
 

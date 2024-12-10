@@ -11,6 +11,9 @@ global using System.Runtime.CompilerServices;
 global using System.Timers;
 global using System.Diagnostics;
 global using System.Net.Http.Json;
+global using System.Net.Http;
+global using System.Text;
+global using System.Text.Json;
 
 // microsoft imports
 global using Microsoft.Maui.Controls;

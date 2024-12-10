@@ -3,13 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ESSmAPI.Data
 {
-    public class UserContext : DbContext
+    public class UserContext(DbContextOptions options) : DbContext(options)
     {
-        public UserContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
-        {
-
-        }
-
         public DbSet<User> Users { get; set; }
 
     }
