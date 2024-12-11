@@ -28,6 +28,8 @@ namespace ESSmPrototype
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddScoped<StartedPage>();
+
             // register viewmodels
             builder.Services.AddSingleton<LoginViewModel>();
 

@@ -86,7 +86,6 @@
                 var response = await httpClient.PostAsync("https://10.0.2.2:7087/api/Users/login", content);
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine($"Raw Response: {responseContent}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -96,25 +95,19 @@
                     }
                     else
                     {
-                        Message = "Uh oh... An unknown error has occurred. \n[Error Code: ESSM1001]";
+                        Message = "Uh oh... An unknown error has occurred. \n[Error Code: ESSM1001]"; // maui app error
                     }
-                }
-                else if (response.Content.Equals("ESSM1002"))
-                {
-                    Message = "User does not exist.\n[Error Code: ESSM1002]";
-                }
-                else if (response.Content.Equals("ESSM1003"))
-                {
-                    Message = "Invalid username or password.\n[Error Code: ESSM1003]";
                 }
                 else
                 {
-                    Message = $"An unknown error has occurred";
+                    Message = "Invalid username or password.\n[Error Code: ESSM1002]"; // wrong username or password
                 }
             }
             catch (Exception ex)
             {
-                Message = $"An error occurred: {ex.Message}";
+                //Message = $"An error occurred: {ex.Message}";
+                Message = "Internal server error. Please try again later.\n[Error Code:ESSM1003]"; // api server error
+                Console.WriteLine(ex.Message);
             }
         }
         private void GetName()

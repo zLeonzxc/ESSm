@@ -12,6 +12,10 @@ public partial class LoginPage : ContentPage
     {
         if (Application.Current != null)
         {
+            if (Application.Current is App app)
+            {
+                app.StartIdleTimer();
+            }
             Application.Current.MainPage = new NavigationPage(new AppShell());
         }
     }

@@ -115,21 +115,21 @@ namespace ESSmAPI.Controllers
         public async Task<ActionResult<User>> LoginUser([FromBody] UserDTO userDTO)
         {
 
-            var userName = await _context.Users.FirstOrDefaultAsync(user => user.Username == userDTO.Username);
-            Console.WriteLine(userName?.Username);
-            if (userName == null)
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.Username == userDTO.Username);
+            if (user == null)
             {
-                return NotFound("ESSM1002");
+                Console.WriteLine("Login attempt failed: Username [{0}] not found [ESSM1004]", userDTO.Username); // user does not exist
+                return NotFound();
             }
 
-            var userPassword = await _context.Users.FirstOrDefaultAsync(user => user.Password == userDTO.Password);
-            Console.WriteLine(userPassword?.Password);
-            if (userPassword == null)
+            if (user.Password != userDTO.Password)
             {
-                return NotFound("ESSM1003");
+                Console.WriteLine("Login attempt failed: Incorrect password for username [{0}] [ESSM1002]", userDTO.Username); // incorrect password for existing username
+                return NotFound();
             }
 
-            return Ok(userName.Name);
+            Console.WriteLine("User with username: [{0}] has logged in", user.Username);
+            return Ok(user.Name);
         }
     }
 }

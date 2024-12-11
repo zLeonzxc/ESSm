@@ -96,6 +96,9 @@
 	  <Compile Update="Views\HRAdminPage.xaml.cs">
 	    <DependentUpon>HRAdminPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\StartedPage.xaml.cs">
+	    <DependentUpon>StartedPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\PendingApprovalPage.xaml.cs">
 	    <DependentUpon>PendingApprovalPage.xaml</DependentUpon>
 	  </Compile>
@@ -124,6 +127,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HRAdminPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\StartedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

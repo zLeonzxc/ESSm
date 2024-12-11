@@ -43,6 +43,28 @@
             }
         }
 
+        private async void OnChangeComCodeClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await ShowSessionExpiredMessage();
+                SecureStorage.Default.Remove("CompanyCode");
+                await Shell.Current.Navigation.PopToRootAsync(false);
+                await Shell.Current.Navigation.PushAsync(new StartedPage());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Navigation error: {ex.Message}");
+            }
+        }
+
+        private async Task ShowSessionExpiredMessage()
+        {
+            if (Application.Current?.MainPage != null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Warning", "You will be signed out should you confirm to proceed", "Confirm", "Cancel");
+            }
+        }
         //private async void OnTestClicked(object sender, EventArgs e)
         //{
         //    try

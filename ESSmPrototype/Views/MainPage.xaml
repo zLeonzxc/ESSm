@@ -43,6 +43,12 @@
                     Text="Approval"
                     Clicked="OnApprovalClicked"/>
 
+            <Button WidthRequest="200" 
+                    BackgroundColor="DarkBlue" 
+                    TextColor="White" 
+                    Text="Change Company Code"
+                    Clicked="OnChangeComCodeClicked"/>
+
             <!--Button to navigate to test pages-->
             <!--<Button WidthRequest="200" 
                     BackgroundColor="DarkBlue" 

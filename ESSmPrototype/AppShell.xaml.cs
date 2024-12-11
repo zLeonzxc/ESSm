@@ -19,6 +19,7 @@
         public void RegisterRoutes()
         {
             // Main pages
+            Routing.RegisterRoute(nameof(StartedPage), typeof(StartedPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             //Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute("//MainPage", typeof(MainPage)); // global route e.g. //MainPage

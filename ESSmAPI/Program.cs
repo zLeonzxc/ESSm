@@ -14,6 +14,10 @@ builder.Services.AddDbContext<UserContext>(options =>
     //var connString = builder.Configuration.GetConnectionString("DbCon");
     //options.UseSqlServer(connString);
 });
+builder.Services.AddDbContext<EmployeeContext>(options =>
+{
+    options.UseInMemoryDatabase("Employees");
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
