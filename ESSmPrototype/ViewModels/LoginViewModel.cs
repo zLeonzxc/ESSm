@@ -6,6 +6,7 @@
         private string _password = string.Empty;
         private bool _rememberMe = false;
         private string _message = string.Empty;
+        private bool _autoLogin = false;
 
         public string Username
         {
@@ -16,54 +17,62 @@
                 {
                     _username = value;
                     OnPropertyChanged(nameof(Username));
-
                 }
             }
         }
+
         public string Password
         {
             get => _password;
             set
             {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
+                if (_password != value)
+                {
+                    _password = value;
+                    OnPropertyChanged(nameof(Password));
+                }
             }
         }
+
         public bool RememberMe
         {
             get => _rememberMe;
             set
             {
-                _rememberMe = value;
-                OnPropertyChanged(nameof(RememberMe));
+                if (_rememberMe != value)
+                {
+                    _rememberMe = value;
+                    OnPropertyChanged(nameof(RememberMe));
+                }
             }
         }
+
+        public bool AutoLogin
+        {
+            get => _autoLogin;
+            set
+            {
+                if (_autoLogin != value)
+                {
+                    _autoLogin = value;
+                    OnPropertyChanged(nameof(AutoLogin));
+                    Preferences.Set(nameof(AutoLogin), AutoLogin);
+                }
+            }
+        }
+
         public string Message
         {
             get => _message;
             set
             {
-                _message = value;
-                OnPropertyChanged(nameof(Message));
+                if (_message != value)
+                {
+                    _message = value;
+                    OnPropertyChanged(nameof(Message));
+                }
             }
         }
-
-        //private void OnLogin()
-        //{
-        //    // Dummy authentication
-        //    if (Username == "admin" && Password == "password")
-        //    {
-        //        if (Application.Current != null)
-        //        {
-        //            Username = _username;
-        //            Application.Current.MainPage = new AppShell();
-        //        }
-        //        else
-        //            Message = "Uh oh... An unknown error has occured. \n[Error Code: ESSM1001]";
-        //    }
-        //    else
-        //        Message = "Invalid username or password.\n[Error Code: ESSM1002]";
-        //}
 
         private async Task OnLogin()
         {
@@ -91,7 +100,22 @@
                 {
                     if (Application.Current != null)
                     {
-                        Application.Current.MainPage = new AppShell();
+                        if (RememberMe)
+                        {
+                            Preferences.Set(nameof(Username), Username);
+                            Preferences.Set(nameof(RememberMe), RememberMe);
+                            await SecureStorage.SetAsync(nameof(Password), Password);
+                        }
+                        else
+                        {
+                            Preferences.Set(nameof(RememberMe), RememberMe);
+                        }
+
+                        // Check if the current MainPage is already set to avoid re-adding it
+                        if (Application.Current.MainPage is not AppShell)
+                        {
+                            Application.Current.MainPage = new AppShell();
+                        }
                     }
                     else
                     {
@@ -110,19 +134,52 @@
                 Console.WriteLine(ex.Message);
             }
         }
+
+        private async Task LoadStoredCredentials()
+        {
+            RememberMe = Preferences.Get(nameof(RememberMe), false);
+            if (RememberMe)
+            {
+                Username = Preferences.Get(nameof(Username), string.Empty);
+                Password = await SecureStorage.GetAsync(nameof(Password)) ?? string.Empty;
+            }
+        }
+
+        public async Task AutoLoginUser()
+        {
+            try
+            {
+                AutoLogin = Preferences.Get(nameof(AutoLogin), false);
+                RememberMe = Preferences.Get(nameof(RememberMe), false);
+
+                if (RememberMe && AutoLogin)
+                {
+                    await LoadStoredCredentials();
+                    await OnLogin();
+                }
+            }
+            catch (Exception ex)
+            {
+                Message = $"An error occurred: {ex.Message}";
+            }
+        }
+
         private void GetName()
         {
             var LoginViewModel = new LoginViewModel();
             Username = LoginViewModel.Username;
         }
-        public ICommand LoginCommand { get; }
 
+        public ICommand LoginCommand { get; }
         public ICommand RetrieveName { get; }
+
         public LoginViewModel()
         {
-            LoginCommand = new Command(async() => await OnLogin());
-
+            LoginCommand = new Command(async () => await OnLogin());
             RetrieveName = new Command(GetName);
+
+            // Load stored credentials and attempt auto-login when the view model is created
+            Task.Run(async () => await LoadStoredCredentials());
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -133,3 +190,6 @@
         }
     }
 }
+
+
+

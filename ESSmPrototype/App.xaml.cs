@@ -5,9 +5,11 @@ namespace ESSmPrototype
     public partial class App : Application
     {
         Timer IdleTimer = new Timer(10 * 60000); // 10 minutes
-        Timer LogTimer = new Timer(1000); // 1 second
         DateTime IdleTimerStartTime;
         string? companyCode = "";
+
+        // FOR DEBUG ONLY
+        //Timer LogTimer = new Timer(1000); // 1 second
 
         public App()
         {
@@ -22,7 +24,7 @@ namespace ESSmPrototype
             MainPage = new StartedPage();
             SetMainPageAsync().ConfigureAwait(false);
 
-            // for debug only
+            // FOR DEBUG ONLY
             //// Log Timer
             //LogTimer.Elapsed += LogRemainingTime;
             //LogTimer.Start();
@@ -56,24 +58,18 @@ namespace ESSmPrototype
 
         async void IdleCountdown_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            if (MainThread.IsMainThread)
+            try
             {
-                //await Shell.Current.Navigation.PopToRootAsync();
-                await ShowSessionExpiredMessage();
-                await Shell.Current.Navigation.PopToRootAsync(false); // Clear the navigation stack
-                Shell.Current.FlyoutIsPresented = false; // Close the flyout if open
-                Application.Current!.MainPage = new NavigationPage(new LoginPage()); 
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await ShowSessionExpiredMessage();
+                    await Shell.Current.Navigation.PopToRootAsync(false); // Clear the navigation stack
+                    Application.Current!.MainPage = new NavigationPage(new LoginPage());
+                });
             }
-            else
+            catch (Exception ex)
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await ShowSessionExpiredMessage();
-                        await Shell.Current.Navigation.PopToRootAsync(false); // Clear the navigation stack
-                        Shell.Current.FlyoutIsPresented = false; // Close the flyout if open
-                        Application.Current!.MainPage = new NavigationPage(new LoginPage());
-                    }
-                );
+                Console.WriteLine($"Error occured during session timeout: {ex.Message}");
             }
         }
         public void ResetIdleTimer()
@@ -83,7 +79,7 @@ namespace ESSmPrototype
             Debug.WriteLine(":::Idle timer reset");
         }
 
-        // for debug only
+        // FOR DEBUG ONLY
         //void LogRemainingTime(object? sender, ElapsedEventArgs e)
         //{
         //    var remainingTime = IdleTimer.Interval - (DateTime.Now - IdleTimerStartTime).TotalMilliseconds;
@@ -92,9 +88,19 @@ namespace ESSmPrototype
 
         public void StartIdleTimer()
         {
+            if (IdleTimer.Enabled)
+            {
+                IdleTimer.Stop();
+            }
+
+            IdleTimer.Elapsed -= IdleCountdown_Elapsed; // Unsubscribe to avoid multiple subscriptions
             IdleTimer.Elapsed += IdleCountdown_Elapsed;
             IdleTimerStartTime = DateTime.Now;
             IdleTimer.Start();
+        }
+        public void StopIdleTimer()
+        {
+            IdleTimer.Stop();
         }
 
         private async Task ShowSessionExpiredMessage()

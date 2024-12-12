@@ -50,6 +50,6 @@
     <!--Content Page to simulate logging out-->
     <ShellContent Title="Logout"
                   Icon="logout.png"
-                  ContentTemplate="{DataTemplate Views:LoginPage}"/>
+                  ContentTemplate="{DataTemplate Views:LogoutPage}"/>
 </Shell>
 

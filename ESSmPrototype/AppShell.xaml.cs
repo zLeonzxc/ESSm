@@ -8,6 +8,12 @@
             InitializeComponent();
 
             RegisterRoutes();
+
+            if (Application.Current is App app)
+            {
+                app.StartIdleTimer();
+            }
+
         }
 
         private string _loggedInUserName = string.Empty;
@@ -21,6 +27,8 @@
             // Main pages
             Routing.RegisterRoute(nameof(StartedPage), typeof(StartedPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(LogoutPage), typeof(LogoutPage));
+            Routing.RegisterRoute(nameof(UserSettingsPage), typeof(UserSettingsPage));
             //Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute("//MainPage", typeof(MainPage)); // global route e.g. //MainPage
             Routing.RegisterRoute("//Employee", typeof(EmployeePage));

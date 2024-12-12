@@ -62,14 +62,15 @@
                    FontSize="12" />
         </Grid>
 
-        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="28,20,0,0">
-            <ImageButton Source="blank.png"
+        <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="26,14,0,0">
+            <ImageButton Source="settingsinvert.png"
                          WidthRequest="20"
                          HeightRequest="22"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
+                         Clicked="OnSettingsButtonClicked"
                          Grid.Row="0" />
-            <Label Grid.Row="1" Text="" FontFamily="WorkSansRegular"
+            <Label Grid.Row="1" Text="Settings" FontFamily="WorkSansRegular" TextColor="White"
                    FontSize="12" />
         </Grid>
     </HorizontalStackLayout>

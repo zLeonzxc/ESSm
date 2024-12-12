@@ -5,68 +5,73 @@
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              Shell.NavBarIsVisible="False"
              HideSoftInputOnTapped="True">
-    
+
     <ContentPage.BindingContext>
         <local:LoginViewModel/>
     </ContentPage.BindingContext>
-      
-    <ScrollView>
+
+    <Grid>
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="25">
+            Spacing="10">
 
-            <!--<HorizontalStackLayout WidthRequest="110">
-
-                <Label
-                    Text="OS "
-                    Style="{StaticResource Headline}"
-                    SemanticProperties.HeadingLevel="Level1"
-                    TextColor="DarkBlue"
-                    VerticalTextAlignment="Center"
-                    HorizontalTextAlignment="Center"/>
-                    
-                <Label
-                    Text="HRS"
-                    Style="{StaticResource Headline}"
-                    SemanticProperties.HeadingLevel="Level1" 
-                    FontAttributes="Bold"
-                    TextColor="DarkBlue"
-                    VerticalTextAlignment="Center"
-                    HorizontalTextAlignment="Center"/>
-                 
-            </HorizontalStackLayout>-->
             <Image
+                Grid.Row="0"
                 Source="oshrs.png"
                 WidthRequest="200"
                 HeightRequest="200">
             </Image>
 
             <Label
+                Grid.Row="1"
                 Text="Welcome to ESS Mobile"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
                 Margin="0,-40,0,0"/>
 
             <Entry
+                Grid.Row="2"
                 x:Name="UsernameEntry"
                 Placeholder="Username"
                 Text="{Binding Username}"
                 ReturnType="Next"/>
 
             <Entry
+                Grid.Row="3"
                 x:Name="PasswordEntry"
                 Placeholder="Password"
                 IsPassword="True"
                 Text="{Binding Password}"
                 ReturnType="Done" />
-            <Label
+
+            <!--<Label
                 x:Name="ErrorLabel"
                 Text="{Binding Message}"
                 TextColor="Red"
                 IsVisible="{Binding IsErrorVisible}"
-                Margin="0,-10,0,0"/>
+                Margin="0,-10,0,0"/>-->
+
+            <HorizontalStackLayout
+                Padding="-10,0"
+                Spacing="-8"
+                Grid.Row="4">
+
+                <CheckBox 
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"
+                    Color="DarkBlue"
+                    IsChecked="{Binding RememberMe}"/>
+
+                <Label
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Text="Remember me"
+                    TextColor="DarkBlue"/>
+
+            </HorizontalStackLayout>
 
             <Button
+                Grid.Row="5"
                 x:Name="LoginBtn"
                 Text="Login"
                 HorizontalOptions="Fill" 
@@ -74,6 +79,6 @@
                 Command="{Binding LoginCommand}"/>
 
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
     
 </ContentPage>

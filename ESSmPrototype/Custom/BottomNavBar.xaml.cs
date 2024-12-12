@@ -32,4 +32,16 @@ public partial class BottomNavBar : ContentView
         }
     }
 
+    private async void OnSettingsButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            await Shell.Current.Navigation.PushAsync(new UserSettingsPage());
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Navigation error: {ex.Message}");
+        }
+    }
+
 }

@@ -7,15 +7,26 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is LoginViewModel viewModel)
+        {
+            await viewModel.AutoLoginUser();
+        }
+    }
+
 
     private void OnLoginButtonClicked(object sender, EventArgs e)
     {
         if (Application.Current != null)
         {
-            if (Application.Current is App app)
-            {
-                app.StartIdleTimer();
-            }
+            //if (Application.Current is App app)
+            //{
+            //    app.StartIdleTimer();
+            //}
+
             Application.Current.MainPage = new NavigationPage(new AppShell());
         }
     }
