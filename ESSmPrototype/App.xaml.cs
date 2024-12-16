@@ -21,13 +21,20 @@ namespace ESSmPrototype
                 App.Current.UserAppTheme = AppTheme.Light;
             }
 
-            MainPage = new StartedPage();
+            MainPage = new NavigationPage(new StartedPage());
             SetMainPageAsync().ConfigureAwait(false);
 
             // FOR DEBUG ONLY
             //// Log Timer
             //LogTimer.Elapsed += LogRemainingTime;
             //LogTimer.Start();
+        }
+
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            var window = base.CreateWindow(activationState);
+            SetMainPageAsync().ConfigureAwait(false);
+            return window;
         }
 
         private async Task SetMainPageAsync()
@@ -41,18 +48,18 @@ namespace ESSmPrototype
 
                 if (string.IsNullOrEmpty(companyCode))
                 {
-                    MainPage = new StartedPage();
+                    MainPage = new NavigationPage(new StartedPage());
                 }
                 else
                 {
-                    MainPage = new LoginPage();
+                    MainPage = new NavigationPage(new LoginPage());
                 }
             }
             catch (Exception ex)
             {
                 // Handle potential exceptions, such as when the device does not support secure storage
                 Console.WriteLine($"Error retrieving CompanyCode from secure storage: {ex.Message}");
-                MainPage = new StartedPage(); // Fallback to StartedPage in case of an error
+                MainPage = new NavigationPage(new StartedPage()); // Fallback to StartedPage in case of an error
             }
         }
 

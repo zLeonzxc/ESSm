@@ -44,12 +44,12 @@
                 Text="{Binding Password}"
                 ReturnType="Done" />
 
-            <!--<Label
+            <Label
                 x:Name="ErrorLabel"
                 Text="{Binding Message}"
                 TextColor="Red"
                 IsVisible="{Binding IsErrorVisible}"
-                Margin="0,-10,0,0"/>-->
+                Margin="0,-10,0,0"/>
 
             <HorizontalStackLayout
                 Padding="-10,0"

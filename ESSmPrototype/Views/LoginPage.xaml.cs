@@ -11,6 +11,11 @@ public partial class LoginPage : ContentPage
     {
         base.OnAppearing();
 
+        if (App.Current is App app)
+        {
+            app.StopIdleTimer();
+        }
+
         if (BindingContext is LoginViewModel viewModel)
         {
             await viewModel.AutoLoginUser();

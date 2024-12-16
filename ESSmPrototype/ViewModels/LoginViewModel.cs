@@ -7,6 +7,7 @@
         private bool _rememberMe = false;
         private string _message = string.Empty;
         private bool _autoLogin = false;
+        private bool _isErrorVisible = false;
 
         public string Username
         {
@@ -70,6 +71,20 @@
                 {
                     _message = value;
                     OnPropertyChanged(nameof(Message));
+                    IsErrorVisible = !string.IsNullOrEmpty(_message);
+                }
+            }
+        }
+
+        public bool IsErrorVisible
+        {
+            get => _isErrorVisible;
+            set
+            {
+                if (_isErrorVisible != value)
+                {
+                    _isErrorVisible = value;
+                    OnPropertyChanged(nameof(IsErrorVisible));
                 }
             }
         }
@@ -130,7 +145,7 @@
             catch (Exception ex)
             {
                 //Message = $"An error occurred: {ex.Message}";
-                Message = "Internal server error. Please try again later.\n[Error Code:ESSM1003]"; // api server error
+                Message = "Server unreachable. Please try again later.\n[Error Code:ESSM1003]"; // api server error
                 Console.WriteLine(ex.Message);
             }
         }
