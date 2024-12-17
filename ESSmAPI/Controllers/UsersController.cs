@@ -18,8 +18,8 @@ namespace ESSmAPI.Controllers
             if (!_context.Users.Any())
             {
                 _context.Users.AddRange(
-                    new User { Name = "admin", Username = "admin", Password = "password", Email = "admin@example.com" },
-                    new User { Name = "John Smith", Username = "jsmith", Password = "jsmith123", Email = "johnsmith@example.com"}
+                    new User { Name = "admin", Username = "admin", Password = "password", Email = "admin@example.com", IsLoggedIn = false },
+                    new User { Name = "John Smith", Username = "jsmith", Password = "jsmith123", Email = "johnsmith@example.com", IsLoggedIn = false }
                 );
                 _context.SaveChanges();
             }
@@ -128,8 +128,46 @@ namespace ESSmAPI.Controllers
                 return NotFound();
             }
 
-            Console.WriteLine("User with username: [{0}] has logged in", user.Username);
+            user.IsLoggedIn = true;
+            await _context.SaveChangesAsync();
+
+            Console.WriteLine("User [{0}] has logged in. Login status: [{1}]", user.Username, user.IsLoggedIn);
             return Ok(user.Name);
+        }
+
+        // LOGOUT: api/Users/logout
+        [HttpPost("logout")]
+        public async Task<ActionResult<User>> LogoutUser([FromBody] string username)
+        {
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(user => user.Username == username);
+
+                if (user == null)
+                {
+                    Console.WriteLine("User with username: [{0}] could not be found", username);
+                    return NotFound();
+                }
+
+                if (user.IsLoggedIn)
+                {
+                    user.IsLoggedIn = false;
+
+                    await _context.SaveChangesAsync(); // Ensure changes are saved to the database
+                    Console.WriteLine("User [{0}] has logged out. Login status: [{1}]", user.Username, user.IsLoggedIn);
+                    return Ok(user.Name);
+                }
+                else
+                {
+                    Console.WriteLine("User with username: [{0}] is not logged in", username);
+                    return BadRequest("User is not logged in");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: {0}", ex.Message);
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }

@@ -109,7 +109,7 @@
             {
                 var response = await httpClient.PostAsync("https://10.0.2.2:7087/api/Users/login", content);
 
-                var responseContent = await response.Content.ReadAsStringAsync();
+
 
                 if (response.IsSuccessStatusCode)
                 {

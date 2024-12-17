@@ -29,7 +29,7 @@
                    BackgroundColor="DarkBlue">
 
                 <HorizontalStackLayout VerticalOptions="Center" Spacing="50" Padding="15,0">
-                    <Label Text="Auto-login"
+                    <Label Text="Auto Login"
                            VerticalOptions="Center"
                            HorizontalOptions="Start"
                            TextColor="White"/>
