@@ -175,7 +175,8 @@
             }
             catch (Exception ex)
             {
-                Message = $"An error occurred: {ex.Message}";
+                // unreachable error
+                Message = $"An error occurred: {ex.Message}"; // AutoLogin or RememberMe values null
             }
         }
 

@@ -70,7 +70,7 @@ namespace ESSmPrototype
                 {
                     await ShowSessionExpiredMessage();
                     await Shell.Current.Navigation.PopToRootAsync(false); // Clear the navigation stack
-                    Application.Current!.MainPage = new NavigationPage(new LoginPage());
+                    Application.Current!.MainPage = new LogoutPage();
                 });
             }
             catch (Exception ex)

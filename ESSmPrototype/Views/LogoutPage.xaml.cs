@@ -12,11 +12,8 @@ public partial class LogoutPage : ContentPage
 
         OnLogout();
     }
-    private static async void RedirectLoginPage()
+    private static void RedirectLoginPage()
     {
-        // Clear the navigation stack
-        await Shell.Current.Navigation.PopToRootAsync(false);
-
         // Redirect to login page
         if (Application.Current != null)
         {

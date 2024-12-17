@@ -118,20 +118,22 @@ namespace ESSmAPI.Controllers
             var user = await _context.Users.FirstOrDefaultAsync(user => user.Username == userDTO.Username);
             if (user == null)
             {
-                Console.WriteLine("Login attempt failed: Username [{0}] not found [ESSM1004]", userDTO.Username); // user does not exist
+                Console.WriteLine("Login attempt failed: Username [{0}] not found \n[ESSM1004]", userDTO.Username); // user does not exist
                 return NotFound();
             }
 
             if (user.Password != userDTO.Password)
             {
-                Console.WriteLine("Login attempt failed: Incorrect password for username [{0}] [ESSM1002]", userDTO.Username); // incorrect password for existing username
+                Console.WriteLine("Login attempt failed: Incorrect password for username [{0}] \n[ESSM1002]", userDTO.Username); // incorrect password for existing username
                 return NotFound();
             }
 
             user.IsLoggedIn = true;
             await _context.SaveChangesAsync();
 
-            Console.WriteLine("User [{0}] has logged in. Login status: [{1}]", user.Username, user.IsLoggedIn);
+            Console.WriteLine(new string('-', 50));
+            Console.WriteLine("User [{0}] has logged in. \nLogin status: [{1}] \nTime:[{2:dd MMMM yyyy}, {2:t}]", user.Username, user.IsLoggedIn, DateTime.Now);
+            Console.WriteLine(new string('-', 50));
             return Ok(user.Name);
         }
 
@@ -145,7 +147,7 @@ namespace ESSmAPI.Controllers
 
                 if (user == null)
                 {
-                    Console.WriteLine("User with username: [{0}] could not be found", username);
+                    Console.WriteLine("User with username: [{0}] could not be found", username); // ESSM1004
                     return NotFound();
                 }
 
@@ -154,18 +156,23 @@ namespace ESSmAPI.Controllers
                     user.IsLoggedIn = false;
 
                     await _context.SaveChangesAsync(); // Ensure changes are saved to the database
-                    Console.WriteLine("User [{0}] has logged out. Login status: [{1}]", user.Username, user.IsLoggedIn);
+
+                    Console.WriteLine(new string('-', 50));
+                    Console.WriteLine("User [{0}] has logged out. \nLogin status: [{1}] \nTime:[{2:dd MMMM yyyy}, {2:t}]", user.Username, user.IsLoggedIn, DateTime.Now);
+                    Console.WriteLine(new string('-', 50));
                     return Ok(user.Name);
                 }
                 else
                 {
+                    // should be unreachable code
+                    // scenario: api server down -> all users (isLoggedIn) status set to false
                     Console.WriteLine("User with username: [{0}] is not logged in", username);
                     return BadRequest("User is not logged in");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: {0}", ex.Message);
+                Console.WriteLine("An error occurred: {0}", ex.Message); // ESSM1004
                 return StatusCode(500, "Internal server error");
             }
         }
