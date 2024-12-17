@@ -3,11 +3,16 @@ namespace ESSmPrototype.Views;
 public partial class StartedPage : ContentPage
 {
     public string CompanyCode { get; set; }
-	public StartedPage()
-	{
-		InitializeComponent();
+    public StartedPage()
+    {
+        InitializeComponent();
         BindingContext = this;
-	}
+
+        if (App.Current is App app)
+        {
+            app.StopIdleTimer();
+        }
+    }
 
     private async void OnSelectButtonClicked(object sender, EventArgs e)
     {

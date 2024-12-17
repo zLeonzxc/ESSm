@@ -129,7 +129,7 @@
                         // Check if the current MainPage is already set to avoid re-adding it
                         if (Application.Current.MainPage is not AppShell)
                         {
-                            Application.Current.MainPage = new AppShell();
+                            Application.Current.MainPage = new AppShell(this);
                         }
                     }
                     else

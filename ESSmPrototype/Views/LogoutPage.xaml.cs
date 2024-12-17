@@ -12,7 +12,7 @@ public partial class LogoutPage : ContentPage
 
         OnLogout();
     }
-    private async void RedirectLoginPage()
+    private static async void RedirectLoginPage()
     {
         // Clear the navigation stack
         await Shell.Current.Navigation.PopToRootAsync(false);
@@ -24,7 +24,7 @@ public partial class LogoutPage : ContentPage
         }
     }
 
-    private async void OnLogout()
+    private static async void OnLogout()
     {
         await BasicAuth.NotifyLogout();
 

@@ -4,8 +4,7 @@ namespace ESSmPrototype
 {
     public partial class App : Application
     {
-        Timer IdleTimer = new Timer(10 * 60000); // 10 minutes
-        DateTime IdleTimerStartTime;
+        private readonly Timer IdleTimer = new(10 * 60000); // 10 minutes
         string? companyCode = "";
 
         // FOR DEBUG ONLY
@@ -102,7 +101,7 @@ namespace ESSmPrototype
 
             IdleTimer.Elapsed -= IdleCountdown_Elapsed; // Unsubscribe to avoid multiple subscriptions
             IdleTimer.Elapsed += IdleCountdown_Elapsed;
-            IdleTimerStartTime = DateTime.Now;
+            DateTime IdleTimerStartTime = DateTime.Now;
             IdleTimer.Start();
         }
         public void StopIdleTimer()
@@ -110,7 +109,7 @@ namespace ESSmPrototype
             IdleTimer.Stop();
         }
 
-        private async Task ShowSessionExpiredMessage()
+        private static async Task ShowSessionExpiredMessage()
         {
             if (Application.Current?.MainPage != null)
             {

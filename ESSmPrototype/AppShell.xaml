@@ -8,7 +8,6 @@
     Shell.TabBarForegroundColor="DarkBlue"
     Shell.TabBarTitleColor="DarkBlue">
 
-
     <!--Side Bar User Name + Image-->
     <Shell.FlyoutHeader>
 
@@ -23,7 +22,7 @@
                                              -->
             <Label Grid.Column="1"
                    Margin="20, 0, 0, 0"
-                   Text="admin"
+                   Text="{Binding Username}"
                    VerticalTextAlignment="Center"
                    FontSize="28"
                    FontAttributes="Bold"

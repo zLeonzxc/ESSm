@@ -28,7 +28,10 @@ public partial class UserSettingsPage : ContentPage
             Preferences.Default.Remove("RememberMe");
             Preferences.Default.Remove("AutoLogin");
             await Shell.Current.Navigation.PopToRootAsync(false);
-            await Shell.Current.Navigation.PushAsync(new StartedPage());
+            if (Application.Current != null)
+            {
+                Application.Current.MainPage = new NavigationPage(new StartedPage());
+            }
         }
         catch (Exception ex)
         {

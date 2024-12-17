@@ -2,9 +2,12 @@ namespace ESSmPrototype.Views.Employees;
 
 public partial class EmployeeDetailsPageTab : TabbedPage
 {
-    public EmployeeDetailsPageTab(Employee selectedEmployee)
+    private readonly LoginViewModel _loginViewModel;
+    public EmployeeDetailsPageTab(Employee selectedEmployee, LoginViewModel loginViewModel)
     {
         InitializeComponent();
+
+        _loginViewModel = loginViewModel;
 
         BindingContext = new EmployeeDetailsPageViewModel
         {
@@ -16,8 +19,8 @@ public partial class EmployeeDetailsPageTab : TabbedPage
     {
         if (Application.Current != null)
         {
-            //await Shell.Current.Navigation.PushAsync(new EmployeeDetailsPageTab());
-            Application.Current.MainPage = new AppShell();
+            
+            Application.Current.MainPage = new AppShell(_loginViewModel);
             await Shell.Current.GoToAsync(nameof(EmployeeDetailsPage));
         }
     }

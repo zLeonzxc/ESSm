@@ -191,7 +191,8 @@ namespace ESSmPrototype.ViewModels
                 SelectedEmployee = employee;
                 OnPropertyChanged(nameof(SelectedEmployee));
 
-                var tabbedPage = new NavigationPage(new EmployeeDetailsPageTab(employee));
+                var loginViewModel = new LoginViewModel();
+                var tabbedPage = new NavigationPage(new EmployeeDetailsPageTab(employee, loginViewModel));
 
                 if (Application.Current?.MainPage?.Navigation != null)
                 { 

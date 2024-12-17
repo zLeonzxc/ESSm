@@ -65,13 +65,15 @@
         <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="26,14,0,0">
             <ImageButton Source="settingsinvert.png"
                          WidthRequest="30"
-                         HeightRequest="80"
+                         HeightRequest="100"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
                          Clicked="OnSettingsButtonClicked"
                          Grid.Row="0" />
+
             <Label Grid.Row="1" Text="Settings" FontFamily="WorkSansRegular" TextColor="White"
                    FontSize="12" />
         </Grid>
+        
     </HorizontalStackLayout>
 </ContentView>

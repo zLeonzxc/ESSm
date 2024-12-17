@@ -3,9 +3,12 @@
     public partial class AppShell : Shell
     {
         public static LoginViewModel? LoginViewModel { get; private set; }
-        public AppShell()
+        public AppShell(LoginViewModel loginViewModel)
         {
             InitializeComponent();
+
+            LoginViewModel = loginViewModel;
+            BindingContext = LoginViewModel;
 
             RegisterRoutes();
 
@@ -14,12 +17,6 @@
                 app.StartIdleTimer();
             }
 
-        }
-
-        private string _loggedInUserName = string.Empty;
-        public void SetUserName(string userName)
-        {
-            _loggedInUserName = userName;
         }
 
         public void RegisterRoutes()
@@ -46,5 +43,8 @@
             Routing.RegisterRoute(nameof(EmployeeDetailsPage), typeof(EmployeeDetailsPage));
             Routing.RegisterRoute(nameof(EmployeeDetailsPageTab), typeof(EmployeeDetailsPageTab));
         }
+
     }
+
+    
 }

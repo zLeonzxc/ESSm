@@ -25,14 +25,15 @@ public partial class LoginPage : ContentPage
 
     private void OnLoginButtonClicked(object sender, EventArgs e)
     {
-        if (Application.Current != null)
+        if (BindingContext is LoginViewModel viewModel)
         {
-            //if (Application.Current is App app)
-            //{
-            //    app.StartIdleTimer();
-            //}
+            // var username = viewModel.Username;
 
-            Application.Current.MainPage = new NavigationPage(new AppShell());
+            if (Application.Current != null)
+            {
+                // Pass the username to the AppShell constructor
+                Application.Current.MainPage = new NavigationPage(new AppShell(viewModel));
+            }
         }
     }
 }
