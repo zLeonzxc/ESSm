@@ -64,8 +64,8 @@
 
         <Grid RowDefinitions="22,15" HorizontalOptions="Center" Margin="26,14,0,0">
             <ImageButton Source="settingsinvert.png"
-                         WidthRequest="20"
-                         HeightRequest="22"
+                         WidthRequest="30"
+                         HeightRequest="80"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
                          Clicked="OnSettingsButtonClicked"

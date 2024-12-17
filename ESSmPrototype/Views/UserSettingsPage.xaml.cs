@@ -1,11 +1,13 @@
+using ESSmPrototype.Custom;
+
 namespace ESSmPrototype.Views;
 
 public partial class UserSettingsPage : ContentPage
 {
-	public UserSettingsPage()
-	{
-		InitializeComponent();
-	}
+    public UserSettingsPage()
+    {
+        InitializeComponent();
+    }
 
     private async void OnChangeComCodeClicked(object sender, EventArgs e)
     {
@@ -17,6 +19,8 @@ public partial class UserSettingsPage : ContentPage
             {
                 return;
             }
+
+            await BasicAuth.NotifyLogout();
 
             SecureStorage.Default.Remove("CompanyCode");
             SecureStorage.Default.Remove("Password");

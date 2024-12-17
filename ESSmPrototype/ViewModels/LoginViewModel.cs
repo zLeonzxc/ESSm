@@ -192,6 +192,7 @@
         {
             LoginCommand = new Command(async () => await OnLogin());
             RetrieveName = new Command(GetName);
+            _autoLogin = Preferences.Get(nameof(AutoLogin), false);
 
             // Load stored credentials and attempt auto-login when the view model is created
             Task.Run(async () => await LoadStoredCredentials());
