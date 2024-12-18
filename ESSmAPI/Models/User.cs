@@ -37,5 +37,6 @@ namespace ESSmAPI.Models
         public string Password { get; set; }
         public string? Email { get; set; }
         public bool IsLoggedIn { get; set; }
+        public string CompanyCode { get; set; }
     }
 }

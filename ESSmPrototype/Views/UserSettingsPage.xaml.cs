@@ -7,6 +7,9 @@ public partial class UserSettingsPage : ContentPage
     public UserSettingsPage()
     {
         InitializeComponent();
+
+        var startedPageVM = new StartedPageViewModel();
+        BindingContext = new LoginViewModel(startedPageVM.CompanyCode);
     }
 
     private async void OnChangeComCodeClicked(object sender, EventArgs e)

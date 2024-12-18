@@ -129,10 +129,11 @@ namespace ESSmAPI.Controllers
             }
 
             user.IsLoggedIn = true;
+            user.CompanyCode = userDTO.CompanyCode;
             await _context.SaveChangesAsync();
 
             Console.WriteLine(new string('-', 50));
-            Console.WriteLine("User [{0}] has logged in. \nLogin status: [{1}] \nTime:[{2:dd MMMM yyyy}, {2:t}]", user.Username, user.IsLoggedIn, DateTime.Now);
+            Console.WriteLine("User [{0}] from company [{1}] has logged in. \nLogin status: [{2}] \nTime:[{3:dd MMMM yyyy}, {3:t}]", user.Username, user.CompanyCode, user.IsLoggedIn, DateTime.Now);
             Console.WriteLine(new string('-', 50));
             return Ok(user.Name);
         }
@@ -151,6 +152,8 @@ namespace ESSmAPI.Controllers
                     return NotFound();
                 }
 
+                var comCode = user.CompanyCode;
+
                 if (user.IsLoggedIn)
                 {
                     user.IsLoggedIn = false;
@@ -158,7 +161,7 @@ namespace ESSmAPI.Controllers
                     await _context.SaveChangesAsync(); // Ensure changes are saved to the database
 
                     Console.WriteLine(new string('-', 50));
-                    Console.WriteLine("User [{0}] has logged out. \nLogin status: [{1}] \nTime:[{2:dd MMMM yyyy}, {2:t}]", user.Username, user.IsLoggedIn, DateTime.Now);
+                    Console.WriteLine("User [{0}] from company [{1}] has logged out. \nLogin status: [{2}] \nTime:[{3:dd MMMM yyyy}, {3:t}]", user.Username, comCode, user.IsLoggedIn, DateTime.Now);
                     Console.WriteLine(new string('-', 50));
                     return Ok(user.Name);
                 }

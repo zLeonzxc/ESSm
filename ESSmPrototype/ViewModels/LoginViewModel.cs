@@ -8,6 +8,7 @@
         private string _message = string.Empty;
         private bool _autoLogin = false;
         private bool _isErrorVisible = false;
+        private string _companyCode;
 
         public string Username
         {
@@ -88,6 +89,18 @@
                 }
             }
         }
+        public string CompanyCode
+        {
+            get => _companyCode;
+            set
+            {
+                if (_companyCode != value)
+                {
+                    _companyCode = value;
+                    OnPropertyChanged(nameof(CompanyCode));
+                }
+            }
+        }
 
         private async Task OnLogin()
         {
@@ -101,7 +114,8 @@
             var loginDTO = new
             {
                 username = Username,
-                password = Password
+                password = Password,
+                companyCode = CompanyCode
             };
             var content = new StringContent(JsonSerializer.Serialize(loginDTO), Encoding.UTF8, "application/json");
 
@@ -182,17 +196,18 @@
 
         private void GetName()
         {
-            var LoginViewModel = new LoginViewModel();
+            var startedPageVM = new StartedPageViewModel();
+            var LoginViewModel = new LoginViewModel(startedPageVM.CompanyCode);
             Username = LoginViewModel.Username;
         }
 
         public ICommand LoginCommand { get; }
-        public ICommand RetrieveName { get; }
+        //public ICommand RetrieveName { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(string companyCode)
         {
             LoginCommand = new Command(async () => await OnLogin());
-            RetrieveName = new Command(GetName);
+            //RetrieveName = new Command(GetName);
             _autoLogin = Preferences.Get(nameof(AutoLogin), false);
 
             // Load stored credentials and attempt auto-login when the view model is created

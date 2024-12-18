@@ -6,10 +6,6 @@
              Shell.NavBarIsVisible="False"
              HideSoftInputOnTapped="True">
 
-    <ContentPage.BindingContext>
-        <local:LoginViewModel/>
-    </ContentPage.BindingContext>
-
     <Grid>
         <VerticalStackLayout
             Padding="30,0"

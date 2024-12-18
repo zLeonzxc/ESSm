@@ -4,10 +4,7 @@
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              x:Class="ESSmPrototype.Views.UserSettingsPage"
              Title="Settings">
-    <ContentPage.BindingContext>
-        <local:LoginViewModel/>
-    </ContentPage.BindingContext>
-    
+
     <Grid>
         <VerticalStackLayout
         Padding="20"

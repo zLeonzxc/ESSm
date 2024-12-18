@@ -5,6 +5,9 @@ public partial class LoginPage : ContentPage
     public LoginPage()
     {
         InitializeComponent();
+
+        var startedPageVM = new StartedPageViewModel();
+        BindingContext = new LoginViewModel(startedPageVM.CompanyCode);
     }
 
     protected override async void OnAppearing()

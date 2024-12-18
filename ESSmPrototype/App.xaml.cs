@@ -5,7 +5,7 @@ namespace ESSmPrototype
     public partial class App : Application
     {
         private readonly Timer IdleTimer = new(10 * 60000); // 10 minutes
-        string? companyCode = "";
+        string? companyCode;
 
         // FOR DEBUG ONLY
         //Timer LogTimer = new Timer(1000); // 1 second
@@ -19,6 +19,9 @@ namespace ESSmPrototype
             {
                 App.Current.UserAppTheme = AppTheme.Light;
             }
+            
+            var startedPageVM = new StartedPageViewModel();
+            BindingContext = new LoginViewModel(startedPageVM.CompanyCode);
 
             MainPage = new NavigationPage(new StartedPage());
             SetMainPageAsync().ConfigureAwait(false);
