@@ -8,6 +8,7 @@
         private string _message = string.Empty;
         private bool _autoLogin = false;
         private bool _isErrorVisible = false;
+        private bool _isOverlayVisible = false;
 
         public string Username
         {
@@ -85,6 +86,18 @@
                 {
                     _isErrorVisible = value;
                     OnPropertyChanged(nameof(IsErrorVisible));
+                }
+            }
+        }
+        public bool IsOverlayVisible
+        {
+            get => _isOverlayVisible;
+            set
+            {
+                if (_isOverlayVisible != value)
+                {
+                    _isOverlayVisible = value;
+                    OnPropertyChanged(nameof(IsOverlayVisible));
                 }
             }
         }
@@ -168,6 +181,7 @@
         {
             try
             {
+                IsOverlayVisible = true;
                 AutoLogin = Preferences.Get(nameof(AutoLogin), false);
                 RememberMe = Preferences.Get(nameof(RememberMe), false);
 
@@ -181,6 +195,10 @@
             {
                 // unreachable error
                 Message = $"An error occurred: {ex.Message}"; // AutoLogin or RememberMe values null
+            }
+            finally
+            {
+                IsOverlayVisible = false;
             }
         }
 

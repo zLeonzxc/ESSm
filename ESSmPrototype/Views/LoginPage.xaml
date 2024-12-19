@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ESSmPrototype.Views.LoginPage"
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
+             xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              Shell.NavBarIsVisible="False"
              HideSoftInputOnTapped="True">
 
@@ -79,6 +80,8 @@
                 Command="{Binding LoginCommand}"/>
 
         </VerticalStackLayout>
+
+        <custom:OverlayView IsVisible="{Binding IsOverlayVisible}"/>
     </Grid>
     
 </ContentPage>
