@@ -2,38 +2,28 @@ namespace ESSmPrototype.Views;
 
 public partial class LoginPage : ContentPage
 {
+    private readonly LoginViewModel _viewModel;
     public LoginPage()
     {
         InitializeComponent();
-    }
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
+        _viewModel = new LoginViewModel();
+        BindingContext = _viewModel;
 
         if (App.Current is App app)
         {
             app.StopIdleTimer();
         }
 
-        if (BindingContext is LoginViewModel viewModel)
-        {
-            await viewModel.AutoLoginUser();
-        }
+        AutoLoginVerify(_viewModel);
+
     }
 
-
-    private void OnLoginButtonClicked(object sender, EventArgs e)
+    private async void AutoLoginVerify(LoginViewModel _viewModel)
     {
-        if (BindingContext is LoginViewModel viewModel)
+        if (_viewModel.AutoLogin)
         {
-            // var username = viewModel.Username;
-
-            if (Application.Current != null)
-            {
-                // Pass the username to the AppShell constructor
-                Application.Current.MainPage = new NavigationPage(new AppShell(viewModel));
-            }
+            await _viewModel.AutoLoginUser();
         }
     }
 }

@@ -6,6 +6,7 @@ namespace ESSmPrototype
     {
         private readonly Timer IdleTimer = new(10 * 60000); // 10 minutes
         string? companyCode = "";
+        private bool _isSessionExpiredMessageDisplayed = false;
 
         // FOR DEBUG ONLY
         //Timer LogTimer = new Timer(1000); // 1 second
@@ -68,7 +69,11 @@ namespace ESSmPrototype
             {
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await ShowSessionExpiredMessage();
+                    if (!_isSessionExpiredMessageDisplayed)
+                    {
+                        _isSessionExpiredMessageDisplayed = true;
+                        await ShowSessionExpiredMessage();
+                    }
                     await Shell.Current.Navigation.PopToRootAsync(false); // Clear the navigation stack
                     Application.Current!.MainPage = new LogoutPage();
                 });
@@ -109,11 +114,15 @@ namespace ESSmPrototype
             IdleTimer.Stop();
         }
 
-        private static async Task ShowSessionExpiredMessage()
+        private async Task ShowSessionExpiredMessage()
         {
             if (Application.Current?.MainPage != null)
             {
-                await Application.Current.MainPage.DisplayAlert("Session Expired", "Session has been terminated. Please sign in again.", "OK");
+                if (_isSessionExpiredMessageDisplayed)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Session Expired", "Session has been terminated. Please sign in again.", "OK");
+                    _isSessionExpiredMessageDisplayed = false;
+                }
             }
         }
     }

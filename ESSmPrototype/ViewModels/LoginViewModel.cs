@@ -9,6 +9,8 @@
         private bool _autoLogin = false;
         private bool _isErrorVisible = false;
         private bool _isOverlayVisible = false;
+        private bool _isSessionExpired = false;
+        private bool _isLoginInProgress = false;
 
         public string Username
         {
@@ -102,68 +104,88 @@
             }
         }
 
+        public bool IsSessionExpired
+        {
+            get => _isSessionExpired;
+            set
+            {
+                if (_isSessionExpired != value)
+                {
+                    _isSessionExpired = value;
+                    OnPropertyChanged(nameof(IsSessionExpired));
+                }
+            }
+        }
+
         private async Task OnLogin()
         {
-            var handler = new HttpClientHandler
+            _isLoginInProgress = true;
+
+            if (_isLoginInProgress)
             {
-                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-            };
-
-            using var httpClient = new HttpClient(handler);
-
-            var retrievedComCode = await SecureStorage.GetAsync("CompanyCode");
-
-            var loginDTO = new
-            {
-                username = Username,
-                password = Password,
-                companyCode = retrievedComCode
-            };
-
-            var content = new StringContent(JsonSerializer.Serialize(loginDTO), Encoding.UTF8, "application/json");
-
-            try
-            {
-                var response = await httpClient.PostAsync("https://10.0.2.2:7087/api/Users/login", content);
-
-
-
-                if (response.IsSuccessStatusCode)
+                var handler = new HttpClientHandler
                 {
-                    if (Application.Current != null)
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+                };
+
+                using var httpClient = new HttpClient(handler);
+
+                var retrievedComCode = await SecureStorage.GetAsync("CompanyCode");
+
+                var loginDTO = new
+                {
+                    username = Username,
+                    password = Password,
+                    companyCode = retrievedComCode
+                };
+
+                var content = new StringContent(JsonSerializer.Serialize(loginDTO), Encoding.UTF8, "application/json");
+
+                try
+                {
+                    var response = await httpClient.PostAsync("https://10.0.2.2:7087/api/Users/login", content);
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        if (RememberMe)
+                        if (Application.Current != null)
                         {
-                            Preferences.Set(nameof(Username), Username);
-                            Preferences.Set(nameof(RememberMe), RememberMe);
-                            await SecureStorage.SetAsync(nameof(Password), Password);
+                            if (RememberMe) // if set to true, saves username, password and rememberMe option (true)
+                            {
+                                Preferences.Set(nameof(Username), Username);
+                                Preferences.Set(nameof(RememberMe), RememberMe);
+                                await SecureStorage.SetAsync(nameof(Password), Password);
+                            }
+                            else
+                            {
+                                Preferences.Set(nameof(RememberMe), RememberMe); // rememberMe option (false)
+                            }
+
+                            IsSessionExpired = false;
+
+                            // Check if the current MainPage is already set to avoid re-adding it
+                            if (Application.Current.MainPage is not AppShell)
+                            {
+                                Application.Current.MainPage = new AppShell(this);
+                            }
                         }
                         else
                         {
-                            Preferences.Set(nameof(RememberMe), RememberMe);
-                        }
-
-                        // Check if the current MainPage is already set to avoid re-adding it
-                        if (Application.Current.MainPage is not AppShell)
-                        {
-                            Application.Current.MainPage = new AppShell(this);
+                            Message = "Uh oh... An unknown error has occurred. \n[Error Code: ESSM1001]"; // maui app error
                         }
                     }
                     else
                     {
-                        Message = "Uh oh... An unknown error has occurred. \n[Error Code: ESSM1001]"; // maui app error
+                        Message = "Invalid username or password.\n[Error Code: ESSM1002]"; // wrong username or password
                     }
+
+                    _isLoginInProgress = false;
                 }
-                else
+                catch (Exception ex)
                 {
-                    Message = "Invalid username or password.\n[Error Code: ESSM1002]"; // wrong username or password
+                    //Message = $"An error occurred: {ex.Message}";
+                    Message = "Server unreachable. Please try again later.\n[Error Code:ESSM1003]"; // api server error
+                    Console.WriteLine(ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                //Message = $"An error occurred: {ex.Message}";
-                Message = "Server unreachable. Please try again later.\n[Error Code:ESSM1003]"; // api server error
-                Console.WriteLine(ex.Message);
             }
         }
 
@@ -179,15 +201,20 @@
 
         public async Task AutoLoginUser()
         {
+            IsOverlayVisible = true;
+
             try
             {
-                IsOverlayVisible = true;
+                if (IsSessionExpired)
+                {
+                    return;
+                }
+           
                 AutoLogin = Preferences.Get(nameof(AutoLogin), false);
                 RememberMe = Preferences.Get(nameof(RememberMe), false);
 
-                if (RememberMe && AutoLogin)
+                if (RememberMe && AutoLogin) // user credentials are loaded upon loading page
                 {
-                    await LoadStoredCredentials();
                     await OnLogin();
                 }
             }
@@ -202,19 +229,19 @@
             }
         }
 
-        private void GetName()
-        {
-            var LoginViewModel = new LoginViewModel();
-            Username = LoginViewModel.Username;
-        }
+        //private void GetName()
+        //{
+        //    var LoginViewModel = new LoginViewModel();
+        //    Username = LoginViewModel.Username;
+        //}
 
         public ICommand LoginCommand { get; }
-        public ICommand RetrieveName { get; }
+        // public ICommand RetrieveName { get; }
 
         public LoginViewModel()
         {
             LoginCommand = new Command(async () => await OnLogin());
-            RetrieveName = new Command(GetName);
+            //RetrieveName = new Command(GetName);
             _autoLogin = Preferences.Get(nameof(AutoLogin), false);
 
             // Load stored credentials and attempt auto-login when the view model is created

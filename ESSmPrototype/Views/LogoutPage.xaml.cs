@@ -25,12 +25,17 @@ public partial class LogoutPage : ContentPage
     {
         await BasicAuth.NotifyLogout();
 
-        RedirectLoginPage();
+        if (Application.Current?.MainPage?.BindingContext is LoginViewModel loginViewModel)
+        {
+            loginViewModel.IsSessionExpired = true; // Set session expired flag
+        }
 
         // stop idle timeout timer
         if (Application.Current is App app)
         {
             app.StopIdleTimer();
         }
+
+        RedirectLoginPage();
     }
 }
