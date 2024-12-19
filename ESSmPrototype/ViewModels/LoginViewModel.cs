@@ -98,11 +98,15 @@
 
             using var httpClient = new HttpClient(handler);
 
+            var retrievedComCode = await SecureStorage.GetAsync("CompanyCode");
+
             var loginDTO = new
             {
                 username = Username,
-                password = Password
+                password = Password,
+                companyCode = retrievedComCode
             };
+
             var content = new StringContent(JsonSerializer.Serialize(loginDTO), Encoding.UTF8, "application/json");
 
             try

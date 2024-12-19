@@ -10,5 +10,7 @@ namespace ESSmAPI.Models
         [Required]
         public string Password { get; set; }
 
+        public string CompanyCode { get; set; }
+
     }
 }

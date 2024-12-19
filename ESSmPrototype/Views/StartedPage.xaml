@@ -13,7 +13,9 @@
     <Grid>
         <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="10" VerticalOptions="Start" Grid.Row="0">
             <VerticalStackLayout>
-                <Image Source="oshrs.png"/>
+                <HorizontalStackLayout Padding="0,40,0,40" HorizontalOptions="Center">
+                    <Image Source="oshrs.png" />
+                </HorizontalStackLayout>
                 
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Label 

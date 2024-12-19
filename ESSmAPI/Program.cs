@@ -18,6 +18,10 @@ builder.Services.AddDbContext<EmployeeContext>(options =>
 {
     options.UseInMemoryDatabase("Employees");
 });
+builder.Services.AddDbContext<CompanyContext>(options =>
+{
+    options.UseInMemoryDatabase("Companies");
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

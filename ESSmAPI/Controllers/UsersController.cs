@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ESSmAPI.Data;
 using ESSmAPI.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ESSmAPI.Controllers
 {
@@ -10,19 +11,36 @@ namespace ESSmAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserContext _context;
+        private readonly CompanyContext _companyContext;
+        private User? _currentUser;
 
-        public UsersController(UserContext context)
+        public UsersController(UserContext context, CompanyContext companyContext)
         {
             _context = context;
+            _companyContext = companyContext;
 
             if (!_context.Users.Any())
             {
                 _context.Users.AddRange(
-                    new User { Name = "admin", Username = "admin", Password = "password", Email = "admin@example.com", IsLoggedIn = false },
-                    new User { Name = "John Smith", Username = "jsmith", Password = "jsmith123", Email = "johnsmith@example.com", IsLoggedIn = false }
+                    new User { Name = "admin", Username = "admin", Password = "password", Email = "admin@example.com", IsLoggedIn = false, CompanyCode="" },
+                    new User { Name = "John Smith", Username = "jsmith", Password = "jsmith123", Email = "johnsmith@example.com", IsLoggedIn = false, CompanyCode = "" }
                 );
                 _context.SaveChanges();
             }
+
+            if (!_companyContext.Companies.Any())
+            {
+                _companyContext.Companies.AddRange(
+                    new Company { CompanyCode = "AB", CompanyName = "ABC" },
+                    new Company { CompanyCode = "XY", CompanyName = "XYZ" },
+                    new Company { CompanyCode = "QW", CompanyName = "QWE" },
+                    new Company { CompanyCode = "", CompanyName = "Unregistered" },
+                    new Company { CompanyCode = "MB", CompanyName = "Mercedes Benz" }
+                );
+                _companyContext.SaveChanges();
+            }
+
+
         }
 
         // GET: api/Users
@@ -128,11 +146,25 @@ namespace ESSmAPI.Controllers
                 return NotFound();
             }
 
+            // check if company code exists
+            var company = await _companyContext.Companies.FirstOrDefaultAsync(c => c.CompanyCode == userDTO.CompanyCode);
+
+            if (company == null)
+            {
+                return BadRequest("Invalid company code");
+            }
+
+            if (string.IsNullOrEmpty(user.CompanyCode) || user.CompanyCode != company.CompanyCode)
+            {
+                user.CompanyCode = company.CompanyCode ?? string.Empty;
+            }
+
             user.IsLoggedIn = true;
+            _currentUser = user;
             await _context.SaveChangesAsync();
 
             Console.WriteLine(new string('-', 50));
-            Console.WriteLine("User [{0}] has logged in. \nLogin status: [{1}] \nTime:[{2:dd MMMM yyyy}, {2:t}]", user.Username, user.IsLoggedIn, DateTime.Now);
+            Console.WriteLine("User [{0}] from company [{1}] has logged in. \nLogin status: [{2}] \nTime:[{3:dd MMMM yyyy}, {3:t}]", user.Username, user.CompanyCode, user.IsLoggedIn, DateTime.Now);
             Console.WriteLine(new string('-', 50));
             return Ok(user.Name);
         }
@@ -151,14 +183,16 @@ namespace ESSmAPI.Controllers
                     return NotFound();
                 }
 
+                var comCode = user.CompanyCode;
+
                 if (user.IsLoggedIn)
                 {
                     user.IsLoggedIn = false;
-
+                    _currentUser = null;
                     await _context.SaveChangesAsync(); // Ensure changes are saved to the database
 
                     Console.WriteLine(new string('-', 50));
-                    Console.WriteLine("User [{0}] has logged out. \nLogin status: [{1}] \nTime:[{2:dd MMMM yyyy}, {2:t}]", user.Username, user.IsLoggedIn, DateTime.Now);
+                    Console.WriteLine("User [{0}] from company [{1}] has logged out. \nLogin status: [{2}] \nTime:[{3:dd MMMM yyyy}, {3:t}]", user.Username, comCode, user.IsLoggedIn, DateTime.Now);
                     Console.WriteLine(new string('-', 50));
                     return Ok(user.Name);
                 }

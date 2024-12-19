@@ -2,11 +2,12 @@ namespace ESSmPrototype.Views;
 
 public partial class StartedPage : ContentPage
 {
-    public string CompanyCode { get; set; }
+    private StartedPageViewModel _vm;
     public StartedPage()
     {
         InitializeComponent();
-        BindingContext = this;
+        _vm = new StartedPageViewModel();
+        BindingContext = _vm;
 
         if (App.Current is App app)
         {
@@ -16,15 +17,14 @@ public partial class StartedPage : ContentPage
 
     private async void OnSelectButtonClicked(object sender, EventArgs e)
     {
-        // Save the selection as "completed" in SecureStorage
-        await SecureStorage.SetAsync("CompanyCode", CompanyCode);
+        await SecureStorage.SetAsync("CompanyCode", _vm.CompanyCode);
 
-        // verify company code
-        Debug.WriteLine($"Company code: {CompanyCode}");
-        // Navigate to the LoginPage
+        _vm.VerifyCompanyCode(_vm.CompanyCode);
+
+
+        Debug.WriteLine("Navigated from StartedPage.xaml.cs");
         await Navigation.PushAsync(new LoginPage());
 
-        // Optionally remove this page from the navigation stack
         Navigation.RemovePage(this);
     }
 }
