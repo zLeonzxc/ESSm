@@ -21,6 +21,8 @@ namespace ESSmPrototype
                 App.Current.UserAppTheme = AppTheme.Light;
             }
 
+            ReadDeviceInfo();
+
             MainPage = new NavigationPage(new StartedPage());
             SetMainPageAsync().ConfigureAwait(false);
 
@@ -124,6 +126,30 @@ namespace ESSmPrototype
                     _isSessionExpiredMessageDisplayed = false;
                 }
             }
+        }
+        private void ReadDeviceInfo()
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            sb.AppendLine($"Manufacturer: {DeviceInfo.Manufacturer}"); // brand?
+            sb.AppendLine($"Model: {DeviceInfo.Model}");
+            string version = AppInfo.Current.VersionString;
+            sb.AppendLine($"App Version: {version}");
+            sb.AppendLine($"Platform: {DeviceInfo.Platform}");
+            sb.AppendLine($"Version: {DeviceInfo.VersionString}");
+            sb.AppendLine($"Name: {DeviceInfo.Name}");
+            sb.AppendLine($"DeviceType: {DeviceInfo.DeviceType}");
+
+            bool isVirtual = DeviceInfo.Current.DeviceType switch
+            {
+                DeviceType.Physical => false,
+                DeviceType.Virtual => true,
+                _ => false
+            };
+
+            sb.AppendLine($"IsVirtual: {isVirtual}");
+
+            Debug.WriteLine(sb.ToString());
         }
     }
 }

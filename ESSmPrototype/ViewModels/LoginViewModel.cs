@@ -177,14 +177,16 @@
                     {
                         Message = "Invalid username or password.\n[Error Code: ESSM1002]"; // wrong username or password
                     }
-
-                    _isLoginInProgress = false;
                 }
                 catch (Exception ex)
                 {
                     //Message = $"An error occurred: {ex.Message}";
                     Message = "Server unreachable. Please try again later.\n[Error Code:ESSM1003]"; // api server error
                     Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    _isLoginInProgress = false;
                 }
             }
         }
