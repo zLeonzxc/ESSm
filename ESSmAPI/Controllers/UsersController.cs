@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using ESSmAPI.Data;
 using ESSmAPI.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace ESSmAPI.Controllers
 {
@@ -10,6 +12,7 @@ namespace ESSmAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        //private string decodedPassword;
         private readonly UserContext _context;
         private readonly CompanyContext _companyContext;
         private User? _currentUser;
@@ -18,29 +21,6 @@ namespace ESSmAPI.Controllers
         {
             _context = context;
             _companyContext = companyContext;
-
-            if (!_context.Users.Any())
-            {
-                _context.Users.AddRange(
-                    new User { Name = "admin", Username = "admin", Password = "password", Email = "admin@example.com", IsLoggedIn = false, CompanyCode="" },
-                    new User { Name = "John Smith", Username = "jsmith", Password = "jsmith123", Email = "johnsmith@example.com", IsLoggedIn = false, CompanyCode = "" }
-                );
-                _context.SaveChanges();
-            }
-
-            if (!_companyContext.Companies.Any())
-            {
-                _companyContext.Companies.AddRange(
-                    new Company { CompanyCode = "AB", CompanyName = "ABC" },
-                    new Company { CompanyCode = "XY", CompanyName = "XYZ" },
-                    new Company { CompanyCode = "QW", CompanyName = "QWE" },
-                    new Company { CompanyCode = "", CompanyName = "Unregistered" },
-                    new Company { CompanyCode = "MB", CompanyName = "Mercedes Benz" }
-                );
-                _companyContext.SaveChanges();
-            }
-
-
         }
 
         // GET: api/Users
@@ -100,6 +80,7 @@ namespace ESSmAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> AddUser(User user)
         {
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -132,7 +113,6 @@ namespace ESSmAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> LoginUser([FromBody] UserDTO userDTO)
         {
-
             var user = await _context.Users.FirstOrDefaultAsync(user => user.Username == userDTO.Username);
             if (user == null)
             {
@@ -140,7 +120,10 @@ namespace ESSmAPI.Controllers
                 return NotFound();
             }
 
-            if (user.Password != userDTO.Password)
+            using var sha256 = SHA256.Create();
+            var hashedPw = sha256.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password));
+
+            if (!user.Pw.SequenceEqual(hashedPw))
             {
                 Console.WriteLine("Login attempt failed: Incorrect password for username [{0}] \n[ESSM1002]", userDTO.Username); // incorrect password for existing username
                 return NotFound();
@@ -166,7 +149,7 @@ namespace ESSmAPI.Controllers
             Console.WriteLine(new string('-', 50));
             Console.WriteLine("User [{0}] from company [{1}] has logged in. \nLogin status: [{2}] \nTime:[{3:dd MMMM yyyy}, {3:t}]", user.Username, user.CompanyCode, user.IsLoggedIn, DateTime.Now);
             Console.WriteLine(new string('-', 50));
-            return Ok(user.Name);
+            return Ok(user.Username);
         }
 
         // LOGOUT: api/Users/logout
@@ -194,7 +177,7 @@ namespace ESSmAPI.Controllers
                     Console.WriteLine(new string('-', 50));
                     Console.WriteLine("User [{0}] from company [{1}] has logged out. \nLogin status: [{2}] \nTime:[{3:dd MMMM yyyy}, {3:t}]", user.Username, comCode, user.IsLoggedIn, DateTime.Now);
                     Console.WriteLine(new string('-', 50));
-                    return Ok(user.Name);
+                    return Ok(user.Username);
                 }
                 else
                 {

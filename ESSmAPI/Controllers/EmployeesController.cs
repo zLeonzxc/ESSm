@@ -14,23 +14,6 @@ namespace ESSmAPI.Controllers
         public EmployeesController(EmployeeContext context)
         {
             _context = context;
-
-            if (!_context.Employees.Any())
-            {
-                _context.Employees.AddRange(
-                    new Employee { EmployeeId = "MY001", Name = "John", LegalName = "John Smith", Username = "jsmith", Email = "jsmith@example.com", Department = "IT", Country = "MY"},
-                    new Employee { EmployeeId = "MY002", Name = "Jane", LegalName = "Jane Doe", Username = "janedoe", Email = "janedoe@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY003", Name = "Ben", LegalName = "Benjamin Tan", Username = "benjamin", Email = "benjamin@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY004", Name = "Henry", LegalName = "Henry Tan", Username = "henrytan", Email = "henrytan@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY005", Name = "Dave", LegalName = "David Cross", Username = "dcross", Email = "dcross@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY006", Name = "Ali", LegalName = "Muhammad Ali", Username = "muhammadali", Email = "muhammadali@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY007", Name = "Ahmad", LegalName = "Daniel Ahmad", Username = "danielahmad", Email = "danielahmad@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY008", Name = "Siti", LegalName = "Siti Maisarah", Username = "smaisarah", Email = "smaisarah@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY009", Name = "Tamil", LegalName = "Tamil Murugan", Username = "tmurugan", Email = "tmurugan@example.com", Department = "IT", Country = "MY" },
-                    new Employee { EmployeeId = "MY010", Name = "Raj", LegalName = "Rajesh Sarveen", Username = "rajveen", Email = "rajveen@example.com", Department = "IT", Country = "MY" }
-                );
-                _context.SaveChanges();
-            }
         }
 
         // GET: api/Employees
@@ -104,6 +87,7 @@ namespace ESSmAPI.Controllers
             return CreatedAtAction(nameof(FindEmployee), new { empid = employee.EmployeeId }, employee);
         }
 
+        // DELETE: api/Employees/5
         // DELETE: api/Employees/5
         [HttpDelete("{empid}")]
         public async Task<IActionResult> DeleteEmployee(string empid)

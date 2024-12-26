@@ -7,20 +7,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
+});
 builder.Services.AddDbContext<UserContext>(options =>
 {
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-    options.UseInMemoryDatabase("Users");
-    //var connString = builder.Configuration.GetConnectionString("DbCon");
-    //options.UseSqlServer(connString);
-});
-builder.Services.AddDbContext<EmployeeContext>(options =>
-{
-    options.UseInMemoryDatabase("Employees");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
 });
 builder.Services.AddDbContext<CompanyContext>(options =>
 {
-    options.UseInMemoryDatabase("Companies");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
+});
+builder.Services.AddDbContext<EmployeeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

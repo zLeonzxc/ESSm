@@ -32,13 +32,11 @@ namespace ESSmAPI.Models
         //public DateTime UpdatedAt { get; init; }
 
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string? EmployeeId { get; set; }
         public string? Username { get; set; }
-        public string? Password { get; set; }
-        public string? Email { get; set; }
-        public bool IsLoggedIn { get; set; }
+        public byte[]? Pw { get; set; }
         public string? CompanyCode { get; set; }
-            
-        public Company? Company { get; set; }
+        public bool IsLoggedIn { get; set; }
+
     }
 }

@@ -3,6 +3,7 @@ namespace ESSmPrototype.ViewModels
     public class StartedPageViewModel : INotifyPropertyChanged
     {
         private string? _companyCode;
+        private readonly LoginViewModel _loginViewModel;
 
         public string? CompanyCode
         {
@@ -16,6 +17,12 @@ namespace ESSmPrototype.ViewModels
                 }
             }
         }
+        public StartedPageViewModel(LoginViewModel loginViewModel)
+        {
+            _loginViewModel = loginViewModel;
+        }
+
+        public bool IsOverlayVisible => _loginViewModel.IsOverlayVisible;
 
         public async void VerifyCompanyCode(string companyCode)
         {

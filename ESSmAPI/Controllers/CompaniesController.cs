@@ -15,17 +15,10 @@ namespace ESSmAPI.Controllers
         {
             _context = context;
 
-            if (!_context.Companies.Any())
-            {
-                _context.Companies.AddRange(
-                    new Company { CompanyCode = "AB", CompanyName = "ABC" },
-                    new Company { CompanyCode = "XY", CompanyName = "XYZ" },
-                    new Company { CompanyCode = "QW", CompanyName = "QWE" },
-                    new Company { CompanyCode = "", CompanyName = "Unregistered" },
-                    new Company { CompanyCode = "MB", CompanyName = "Mercedes Benz" }
-                );
-                _context.SaveChanges();
-            }
+            //if (_context.Companies.Count() == 0)
+            //{
+            //    Console.WriteLine("No company data found in the database.");
+            //}
         }
 
         // GET: api/Companies

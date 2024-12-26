@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ESSmPrototype.ViewModels"
+             xmlns:custom="clr-namespace:ESSmPrototype.Custom"
              x:Class="ESSmPrototype.Views.StartedPage"
              Shell.NavBarIsVisible="False"
              HideSoftInputOnTapped="True">
 
-    <ContentPage.BindingContext>
-        <vm:StartedPageViewModel />
-    </ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
+        <vm:StartedPageViewMode/>
+    </ContentPage.BindingContext>-->
 
     <Grid>
         <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="10" VerticalOptions="Start" Grid.Row="0">
@@ -43,6 +44,7 @@
             </VerticalStackLayout>
             
         </Frame>
+        <custom:OverlayView IsVisible="{Binding IsOverlayVisible}"/>
     </Grid>
     
 </ContentPage>

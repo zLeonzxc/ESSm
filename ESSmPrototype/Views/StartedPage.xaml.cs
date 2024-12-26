@@ -6,7 +6,9 @@ public partial class StartedPage : ContentPage
     public StartedPage()
     {
         InitializeComponent();
-        _vm = new StartedPageViewModel();
+
+        var loginViewModel = new LoginViewModel();
+        _vm = new StartedPageViewModel(loginViewModel);
         BindingContext = _vm;
 
         if (App.Current is App app)

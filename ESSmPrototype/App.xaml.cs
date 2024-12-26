@@ -140,6 +140,7 @@ namespace ESSmPrototype
             sb.AppendLine($"Name: {DeviceInfo.Name}");
             sb.AppendLine($"DeviceType: {DeviceInfo.DeviceType}");
 
+
             bool isVirtual = DeviceInfo.Current.DeviceType switch
             {
                 DeviceType.Physical => false,
