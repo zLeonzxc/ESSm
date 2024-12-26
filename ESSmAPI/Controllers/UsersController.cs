@@ -113,6 +113,7 @@ namespace ESSmAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> LoginUser([FromBody] UserDTO userDTO)
         {
+            // username verification
             var user = await _context.Users.FirstOrDefaultAsync(user => user.Username == userDTO.Username);
             if (user == null)
             {
@@ -120,10 +121,11 @@ namespace ESSmAPI.Controllers
                 return NotFound();
             }
 
-            using var sha256 = SHA256.Create();
-            var hashedPw = sha256.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password));
+            // password verification
+            // decode password from byte[] to string
+            var storedPw = System.Text.Encoding.UTF8.GetString(user.Pw);
 
-            if (!user.Pw.SequenceEqual(hashedPw))
+            if (userDTO.Password != storedPw)
             {
                 Console.WriteLine("Login attempt failed: Incorrect password for username [{0}] \n[ESSM1002]", userDTO.Username); // incorrect password for existing username
                 return NotFound();
@@ -140,6 +142,10 @@ namespace ESSmAPI.Controllers
             if (string.IsNullOrEmpty(user.CompanyCode) || user.CompanyCode != company.CompanyCode)
             {
                 user.CompanyCode = company.CompanyCode ?? string.Empty;
+            }
+            else
+            {
+                Console.WriteLine("Invalid company code");
             }
 
             user.IsLoggedIn = true;
