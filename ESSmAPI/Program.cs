@@ -23,6 +23,10 @@ builder.Services.AddDbContext<EmployeeContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
 });
+builder.Services.AddDbContext<LeaveRequestContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

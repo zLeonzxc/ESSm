@@ -1,3 +1,5 @@
+using System.Net.Http;
+
 namespace ESSmPrototype.ViewModels;
 
 public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
@@ -10,45 +12,11 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     public EmployeeLeaveDetailsViewModel()
     {
-        LeaveRequests =
-        [
-            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 1, 1), new DateTime(2023, 1, 10), new DateTime(2023, 1, 15), ""),
-            new("MY002", "Jane", "IT", "Pending", "Annual Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 10), new DateTime(2023, 2, 15), ""),
-            new("MY003", "Ben", "IT", "Pending", "Maternity Leave", new DateTime(2023, 3, 1), new DateTime(2023, 3, 10), new DateTime(2023, 3, 15), ""),
-            new("MY004", "Henry", "IT", "Pending", "Paternity Leave", new DateTime(2023, 4, 1), new DateTime(2023, 4, 10), new DateTime(2023, 4, 15), ""),
-            new("MY005", "Dave", "IT", "Pending", "Sick Leave", new DateTime(2023, 5, 1), new DateTime(2023, 5, 10), new DateTime(2023, 5, 15), ""),
-            new("MY006", "Ali", "IT", "Pending", "Unpaid Leave", new DateTime(2023, 6, 1), new DateTime(2023, 6, 10), new DateTime(2023, 6, 15), ""),
-            new("MY007", "Ahmad", "IT", "Pending", "Emergency Leave", new DateTime(2023, 7, 1), new DateTime(2023, 7, 10), new DateTime(2023, 7, 15), ""),
-            new("MY008", "Siti", "IT", "Pending", "Marriage Leave", new DateTime(2023, 8, 1), new DateTime(2023, 8, 10), new DateTime(2023, 8, 15), ""),
-            new("MY009", "Tamil", "IT", "Pending", "Compassionate Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 10), new DateTime(2023, 9, 15), ""),
-            new("MY010", "Raj", "IT", "Pending", "Study Leave", new DateTime(2023, 10, 1), new DateTime(2023, 10, 10), new DateTime(2023, 10, 15), ""),
-
-            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 3, 20), new DateTime(2023, 4, 1), new DateTime(2023, 4, 6), ""),
-            new("MY001", "John", "IT", "Pending", "Annual Leave", new DateTime(2023, 5, 1), new DateTime(2023, 5, 7), new DateTime(2023, 5, 12), ""),
-            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 6, 1), new DateTime(2023, 6, 5), new DateTime(2023, 6, 8), ""),
-            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 7, 1), new DateTime(2023, 7, 10), new DateTime(2023, 7, 12), ""),
-            new("MY001", "John", "IT", "Pending", "Sick Leave", new DateTime(2023, 8, 1), new DateTime(2023, 8, 5), new DateTime(2023, 8, 7), ""),
-            new("MY001", "John", "IT", "Pending", "Unpaid Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 26), new DateTime(2023, 9, 27), ""),
-            new("MY001", "John", "IT", "Pending", "Emergency Leave", new DateTime(2023, 9, 1), new DateTime(2023, 9, 1), new DateTime(2023, 9, 2), ""),
-            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 10, 1), new DateTime(2023, 10, 10), new DateTime(2023, 10, 15), ""),
-            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 11, 1), new DateTime(2023, 11, 5), new DateTime(2023, 11, 8), ""),
-            new("MY001", "John", "IT", "Pending", "Medical Leave", new DateTime(2023, 12, 1), new DateTime(2023, 12, 7), new DateTime(2023, 12, 9), "")
-
-            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 1), new DateTime(2023, 2, 3), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Annual Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 3), new DateTime(2023, 2, 5), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 7), new DateTime(2023, 2, 9), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 10), new DateTime(2023, 2, 11), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Sick Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 12), new DateTime(2023, 2, 14), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Unpaid Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 14), new DateTime(2023, 2, 16), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Emergency Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 17), new DateTime(2023, 2, 18), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 20), new DateTime(2023, 2, 21), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 23), new DateTime(2023, 2, 27), ""),
-            //new("MY005", "Dave", "IT", "Pending", "Medical Leave", new DateTime(2023, 2, 1), new DateTime(2023, 2, 29), new DateTime(2023, 3, 1), ""),
-        ];
-
+        LeaveRequests = new ObservableCollection<LeaveRequest>();
         AcceptCommand = new Command(OnAcceptCommand);
         RejectCommand = new Command(OnRejectCommand);
         NavigateToDetailsCommand = new Command<LeaveRequest>(OnNavigateToDetailsCommand);
+        RetrieveLeaveRequests();
     }
 
     public LeaveRequest? SelectedLeaveRequest
@@ -73,30 +41,30 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     }
 
     public string? EmployeeID => SelectedLeaveRequest?.EmployeeID;
-    public string? EmployeeName => SelectedLeaveRequest?.EmployeeName;
-    public string? EmployeeDep => SelectedLeaveRequest?.EmployeeDep;
+    public string? EmployeeName => SelectedLeaveRequest?.LegalName;
+    public string? EmployeeDep => SelectedLeaveRequest?.Department;
     public string? LeaveApprovalStatus
     {
-        get => SelectedLeaveRequest?.LeaveApprovalStatus;
+        get => SelectedLeaveRequest?.ApprovalStatus;
         set
         {
-            if (SelectedLeaveRequest != null && SelectedLeaveRequest.LeaveApprovalStatus != value)
+            if (SelectedLeaveRequest != null && SelectedLeaveRequest.ApprovalStatus != value)
             {
-                SelectedLeaveRequest.LeaveApprovalStatus = value;
+                SelectedLeaveRequest.ApprovalStatus = value;
                 OnPropertyChanged(nameof(LeaveApprovalStatus));
                 OnPropertyChanged(nameof(StatusImage));
             }
         }
     }
-    public string? LeaveReason => SelectedLeaveRequest?.LeaveReason;
+    public string? LeaveReason => SelectedLeaveRequest?.Reason;
     public string? LeaveComment
     {
-        get => SelectedLeaveRequest?.LeaveComment;
+        get => SelectedLeaveRequest?.Remarks;
         set
         {
-            if (SelectedLeaveRequest != null && SelectedLeaveRequest.LeaveComment != value)
+            if (SelectedLeaveRequest != null && SelectedLeaveRequest.Remarks != value)
             {
-                SelectedLeaveRequest.LeaveComment = value;
+                SelectedLeaveRequest.Remarks = value;
                 OnPropertyChanged(nameof(LeaveComment));
             }
         }
@@ -188,6 +156,47 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
         catch (Exception ex)
         {
             Debug.WriteLine($"Navigation failed: {ex.Message}");
+        }
+    }
+
+    private async void RetrieveLeaveRequests()
+    {
+        await RequestLeavesFromAPI();
+    }
+
+    private async Task RequestLeavesFromAPI()
+    {
+        try
+        {
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            };
+
+            using var httpClient = new HttpClient(handler);
+
+            var response = await httpClient.GetAsync("https://10.0.2.2:7087/api/LeaveRequests");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var leaveRequests = JsonSerializer.Deserialize<List<LeaveRequest>>(content);
+                LeaveRequests = new ObservableCollection<LeaveRequest>(leaveRequests ?? new List<LeaveRequest>());
+
+                Debug.WriteLine("Retrieved LeaveRequests:");
+                foreach (var leaveRequest in LeaveRequests)
+                {
+                    Debug.WriteLine($"EmployeeID: {leaveRequest.EmployeeID}, EmployeeName: {leaveRequest.LegalName}, LeaveApprovalStatus: {leaveRequest.ApprovalStatus}, LeaveReason: {leaveRequest.Reason}, AppliedDate: {leaveRequest.AppliedDate}, LeaveStartDate: {leaveRequest.LeaveStartDate}, LeaveEndDate: {leaveRequest.LeaveEndDate}");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("Failed to retrieve leave requests: {0}", response);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to retrieve leave requests: {ex.Message}");
         }
     }
 }

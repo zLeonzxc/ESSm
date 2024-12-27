@@ -189,11 +189,11 @@
                 foreach (var lr in LeaveRequests)
                 {
                     bool matchesEmpID = string.IsNullOrEmpty(EmpID) || (lr.EmployeeID != null && lr.EmployeeID.Contains(EmpID, StringComparison.OrdinalIgnoreCase));
-                    bool matchesEmpName = string.IsNullOrEmpty(EmpName) || (lr.EmployeeName != null && lr.EmployeeName.Contains(EmpName, StringComparison.OrdinalIgnoreCase));
+                    bool matchesEmpName = string.IsNullOrEmpty(EmpName) || (lr.LegalName != null && lr.LegalName.Contains(EmpName, StringComparison.OrdinalIgnoreCase));
                     bool matchesSelectedMonth = string.IsNullOrEmpty(SelectedMonth) || lr.LeaveStartDate.ToString("MMMM") == SelectedMonth;
                     bool matchesSelectedYear = !SelectedYear.HasValue || lr.LeaveStartDate.Year == SelectedYear;
-                    bool matchesLeaveDescription = string.IsNullOrEmpty(SelectedLeaveDescription) || lr.LeaveReason == SelectedLeaveDescription;
-                    bool matchesLeaveStatus = string.IsNullOrEmpty(SelectedLeaveStatus) || lr.LeaveApprovalStatus == SelectedLeaveStatus;
+                    bool matchesLeaveDescription = string.IsNullOrEmpty(SelectedLeaveDescription) || lr.Reason == SelectedLeaveDescription;
+                    bool matchesLeaveStatus = string.IsNullOrEmpty(SelectedLeaveStatus) || lr.ApprovalStatus == SelectedLeaveStatus;
 
                     if (matchesEmpID && matchesEmpName && matchesSelectedMonth && matchesSelectedYear && matchesLeaveDescription && matchesLeaveStatus)
                     {

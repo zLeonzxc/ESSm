@@ -1,9 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ESSmAPI.Models
+﻿namespace ESSmAPI.Models
 {
-    [Table("employees")]
     public record Employee
     {
         public int Id { get; set; }
