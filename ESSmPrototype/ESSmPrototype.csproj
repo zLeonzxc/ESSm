@@ -102,7 +102,7 @@
 	  <Compile Update="Views\StartedPage.xaml.cs">
 	    <DependentUpon>StartedPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\PendingApprovalPage.xaml.cs">
+	  <Compile Update="Views\Approval\PendingApprovalPage.xaml.cs">
 	    <DependentUpon>PendingApprovalPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -144,10 +144,6 @@
 	  <MauiXaml Update="Views\UserSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Views\Approval\" />
 	</ItemGroup>
 
 </Project>

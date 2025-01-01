@@ -25,6 +25,7 @@ global using Microsoft.Maui.Storage;
 global using ESSmPrototype.Models;
 global using ESSmPrototype.ViewModels;
 global using ESSmPrototype.Views.Employees;
+global using ESSmPrototype.Views.Approval;
 global using ESSmPrototype.Views;
 global using ESSmPrototype;
 

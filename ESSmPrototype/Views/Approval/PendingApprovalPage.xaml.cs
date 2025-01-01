@@ -1,4 +1,4 @@
-namespace ESSmPrototype.Views;
+namespace ESSmPrototype.Views.Approval;
 
 public partial class PendingApprovalPage : ContentPage
 {

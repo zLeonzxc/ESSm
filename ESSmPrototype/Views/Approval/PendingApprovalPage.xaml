@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              xmlns:converters="clr-namespace:ESSmPrototype.Converters"
              xmlns:custom="clr-namespace:ESSmPrototype.Custom"
-             x:Class="ESSmPrototype.Views.PendingApprovalPage"
+             x:Class="ESSmPrototype.Views.Approval.PendingApprovalPage"
              Title="Pending Approval">
 
     <ContentPage.Resources>
@@ -32,6 +32,7 @@
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Leave</x:String>
+                        <x:String>Overtime</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
