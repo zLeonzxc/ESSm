@@ -2,6 +2,7 @@
 {
     public class LeaveRequest : INotifyPropertyChanged
     {
+        public int Id { get; set; }
         public string? EmployeeID { get; set; }
         public string? LegalName { get; set; }
         public string? Department { get; set; }
@@ -35,6 +36,24 @@
             LeaveStartDate = leaveStartDate;
             LeaveEndDate = leaveEndDate;
             Remarks = leavecomment;
+        }
+
+        // Parameterless constructor for deserialization
+        public LeaveRequest() { }
+
+        // Constructor with parameters matching property names
+        public LeaveRequest(int id, string? employeeID, string? legalName, string? department, string? approvalStatus, string? reason, string? remarks, DateTime appliedDate, DateTime leaveStartDate, DateTime leaveEndDate)
+        {
+            Id = id;
+            EmployeeID = employeeID;
+            LegalName = legalName;
+            Department = department;
+            ApprovalStatus = approvalStatus;
+            Reason = reason;
+            Remarks = remarks;
+            AppliedDate = appliedDate;
+            LeaveStartDate = leaveStartDate;
+            LeaveEndDate = leaveEndDate;
         }
 
         private string? _approvalStatus;

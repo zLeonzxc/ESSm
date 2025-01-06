@@ -23,6 +23,8 @@
             ResetFilter = new Command(ResetFilterEntries);
             ToggleSearchBoxCommand = new Command(ToggleSearchBox);
 
+            RetrieveLeaveRequests();
+
             // Initialize the ItemsSource properties
             Months =
             [
@@ -235,6 +237,80 @@
             FilteredLeaveRequests = new ObservableCollection<LeaveRequest>(LeaveRequests);
             IsListVisible = false;
             OnPropertyChanged(nameof(IsListVisible));
+        }
+
+        private async void RetrieveLeaveRequests()
+        {
+            if (LeaveRequests.Count != 0)
+            {
+                return;
+            }
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            };
+
+            using var httpClient = new HttpClient(handler);
+
+            try
+            {
+                var response = await httpClient.GetAsync("https://10.0.2.2:7087/api/LeaveRequests/");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine(content);
+
+                    if (!string.IsNullOrEmpty(content))
+                    {
+                        // Clear the existing collection
+                        LeaveRequests.Clear();
+
+                        // Parse the JSON response
+                        using (JsonDocument document = JsonDocument.Parse(content))
+                        {
+                            JsonElement root = document.RootElement;
+                            if (root.ValueKind == JsonValueKind.Array)
+                            {
+                                foreach (JsonElement element in root.EnumerateArray())
+                                {
+                                    var leaveRequest = new LeaveRequest
+                                    {
+                                        Id = element.GetProperty("id").GetInt32(),
+                                        EmployeeID = element.GetProperty("employeeID").GetString(),
+                                        LegalName = element.GetProperty("legalName").GetString(),
+                                        Department = element.GetProperty("department").GetString(),
+                                        ApprovalStatus = element.GetProperty("approvalStatus").GetString(),
+                                        Reason = element.GetProperty("reason").GetString(),
+                                        Remarks = element.GetProperty("remarks").GetString(),
+                                        AppliedDate = element.GetProperty("appliedDate").GetDateTime(),
+                                        LeaveStartDate = element.GetProperty("leaveStartDate").GetDateTime(),
+                                        LeaveEndDate = element.GetProperty("leaveEndDate").GetDateTime()
+                                    };
+
+                                    LeaveRequests.Add(leaveRequest);
+                                }
+                            }
+                        }
+
+                        // Log the content of the LeaveRequests collection
+                        Debug.WriteLine("Retrieved LeaveRequests: {0}", LeaveRequests.Count());
+
+                        foreach (var lr in LeaveRequests)
+                        {
+                            Debug.WriteLine($"ID: {lr.Id}, EmployeeID: {lr.EmployeeID}, LegalName: {lr.LegalName}, Department: {lr.Department}, ApprovalStatus: {lr.ApprovalStatus}, Reason: {lr.Reason}, Remarks: {lr.Remarks}, AppliedDate: {lr.AppliedDate}, LeaveStartDate: {lr.LeaveStartDate}, LeaveEndDate: {lr.LeaveEndDate}");
+                        }
+                    }
+                    else
+                    {
+                        Message = "Failed to retrieve leave requests.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Message = $"API server error: {ex.Message}";
+            }
         }
 
         public ICommand SearchFilter { get; set; }

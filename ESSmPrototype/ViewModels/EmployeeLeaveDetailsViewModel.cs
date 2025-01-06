@@ -16,7 +16,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
         AcceptCommand = new Command(OnAcceptCommand);
         RejectCommand = new Command(OnRejectCommand);
         NavigateToDetailsCommand = new Command<LeaveRequest>(OnNavigateToDetailsCommand);
-        RetrieveLeaveRequests();
+        //RetrieveLeaveRequests();
     }
 
     public LeaveRequest? SelectedLeaveRequest

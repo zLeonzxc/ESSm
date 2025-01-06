@@ -116,9 +116,9 @@
                             </Frame.GestureRecognizers>
                             <StackLayout Padding="10">
                                 <Label Text="{Binding EmployeeID, StringFormat='Employee ID: {0} '}" />
-                                <Label Text="{Binding EmployeeName, StringFormat='Employee Name: {0} '}" />
-                                <Label Text="{Binding LeaveReason, StringFormat='Leave Description: {0} '}" />
-                                <Label HorizontalTextAlignment="End" Text="{Binding LeaveApprovalStatus, StringFormat='Status: {0} '}" />
+                                <Label Text="{Binding LegalName, StringFormat='Employee Name: {0} '}" />
+                                <Label Text="{Binding Reason, StringFormat='Leave Description: {0} '}" />
+                                <Label HorizontalTextAlignment="End" Text="{Binding ApprovalStatus, StringFormat='Status: {0} '}" />
                                 <BoxView HeightRequest="1" BackgroundColor="Gray" />
                             </StackLayout>
                         </Frame>

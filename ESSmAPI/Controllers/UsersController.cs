@@ -139,13 +139,10 @@ namespace ESSmAPI.Controllers
                 return BadRequest("Invalid company code");
             }
 
+            // change user's company code if it is empty / different than the 1 provided
             if (string.IsNullOrEmpty(user.CompanyCode) || user.CompanyCode != company.CompanyCode)
             {
                 user.CompanyCode = company.CompanyCode ?? string.Empty;
-            }
-            else
-            {
-                Console.WriteLine("Invalid company code");
             }
 
             user.IsLoggedIn = true;
