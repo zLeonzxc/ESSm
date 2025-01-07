@@ -78,6 +78,9 @@
 	  <Compile Update="Custom\BottomNavBar.xaml.cs">
 	    <DependentUpon>BottomNavBar.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Custom\LoadRequestOverlay.xaml.cs">
+	    <DependentUpon>LoadRequestOverlay.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Custom\OverlayView.xaml.cs">
 	    <DependentUpon>OverlayView.xaml</DependentUpon>
 	  </Compile>
@@ -111,7 +114,16 @@
 	  <MauiXaml Update="Custom\BottomNavBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Custom\LoadRequestOverlay.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Custom\OverlayView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Approval\LeaveView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Approval\OvertimeView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ApproverPage.xaml">

@@ -23,7 +23,7 @@
             ResetFilter = new Command(ResetFilterEntries);
             ToggleSearchBoxCommand = new Command(ToggleSearchBox);
 
-            RetrieveLeaveRequests();
+            //RetrieveLeaveRequests();
 
             // Initialize the ItemsSource properties
             Months =

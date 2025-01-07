@@ -7,16 +7,22 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     private LeaveRequest? _selectedLeaveRequest;
     private string? _selectedApprovalType;
     private bool _isApprovalOptionsVisible;
+    private string? _message;
+    private bool _isLoadingRequest;
+    private bool _isApprovalTypeEmpty = false; // approval type is empty
+    private bool _isLeaveRequestsEmpty = true; // initial should be empty
     public ObservableCollection<LeaveRequest> LeaveRequests { get; set; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public EmployeeLeaveDetailsViewModel()
     {
         LeaveRequests = new ObservableCollection<LeaveRequest>();
+        RetrieveLeaveRequests();
+
         AcceptCommand = new Command(OnAcceptCommand);
         RejectCommand = new Command(OnRejectCommand);
         NavigateToDetailsCommand = new Command<LeaveRequest>(OnNavigateToDetailsCommand);
-        //RetrieveLeaveRequests();
+
     }
 
     public LeaveRequest? SelectedLeaveRequest
@@ -57,7 +63,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
         }
     }
     public string? LeaveReason => SelectedLeaveRequest?.Reason;
-    public string? LeaveComment
+    public string? Remarks
     {
         get => SelectedLeaveRequest?.Remarks;
         set
@@ -65,7 +71,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
             if (SelectedLeaveRequest != null && SelectedLeaveRequest.Remarks != value)
             {
                 SelectedLeaveRequest.Remarks = value;
-                OnPropertyChanged(nameof(LeaveComment));
+                OnPropertyChanged(nameof(Remarks));
             }
         }
     }
@@ -79,7 +85,9 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
         set
         {
             _selectedApprovalType = value;
+            _isApprovalTypeEmpty = true; // entry is not empty
             OnPropertyChanged(nameof(SelectedApprovalType));
+            OnPropertyChanged(nameof(ShowList));
         }
     }
 
@@ -106,6 +114,44 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
             {
                 _isApprovalOptionsVisible = value;
                 OnPropertyChanged(nameof(IsApprovalOption));
+            }
+        }
+    }
+
+    public bool ShowList
+    {
+        get => _isApprovalTypeEmpty;
+        set
+        {
+            if (_isApprovalTypeEmpty != value)
+            {
+                _isApprovalTypeEmpty = value;
+                OnPropertyChanged(nameof(ShowList));
+            }
+        }
+    }
+    public string? Message
+    {
+        get => _message ?? string.Empty;
+        set
+        {
+            if (_message != value)
+            {
+                _message = value;
+                OnPropertyChanged(nameof(Message));
+            }
+        }
+    }
+
+    public bool IsLoadingRequest
+    {
+        get => _isLoadingRequest;
+        set
+        {
+            if (_isLoadingRequest != value)
+            {
+                _isLoadingRequest = value;
+                OnPropertyChanged(nameof(IsLoadingRequest));
             }
         }
     }
@@ -137,7 +183,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
             await toast.Show();
             if (Application.Current?.MainPage != null)
             {
-                LeaveComment = await Application.Current.MainPage.DisplayPromptAsync("Comments", "");
+                Remarks = await Application.Current.MainPage.DisplayPromptAsync("Comments", "");
             }
         }
     }
@@ -161,11 +207,17 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
 
     private async void RetrieveLeaveRequests()
     {
+        if (!_isLeaveRequestsEmpty)
+        {
+            return;
+        }
         await RequestLeavesFromAPI();
     }
 
     private async Task RequestLeavesFromAPI()
     {
+        IsLoadingRequest = true;
+
         try
         {
             var handler = new HttpClientHandler
@@ -175,28 +227,60 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
 
             using var httpClient = new HttpClient(handler);
 
-            var response = await httpClient.GetAsync("https://10.0.2.2:7087/api/LeaveRequests");
+            var response = await httpClient.GetAsync("https://10.0.2.2:7087/api/LeaveRequests/");
 
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var leaveRequests = JsonSerializer.Deserialize<List<LeaveRequest>>(content);
-                LeaveRequests = new ObservableCollection<LeaveRequest>(leaveRequests ?? new List<LeaveRequest>());
+                Debug.WriteLine(content);
 
-                Debug.WriteLine("Retrieved LeaveRequests:");
-                foreach (var leaveRequest in LeaveRequests)
+                if (!string.IsNullOrEmpty(content))
                 {
-                    Debug.WriteLine($"EmployeeID: {leaveRequest.EmployeeID}, EmployeeName: {leaveRequest.LegalName}, LeaveApprovalStatus: {leaveRequest.ApprovalStatus}, LeaveReason: {leaveRequest.Reason}, AppliedDate: {leaveRequest.AppliedDate}, LeaveStartDate: {leaveRequest.LeaveStartDate}, LeaveEndDate: {leaveRequest.LeaveEndDate}");
+                    // Clear the existing collection
+                    LeaveRequests.Clear();
+
+                    // Parse the JSON response
+                    using (JsonDocument document = JsonDocument.Parse(content))
+                    {
+                        JsonElement root = document.RootElement;
+                        if (root.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach (JsonElement element in root.EnumerateArray())
+                            {
+                                var leaveRequest = new LeaveRequest
+                                {
+                                    Id = element.GetProperty("id").GetInt32(),
+                                    EmployeeID = element.GetProperty("employeeID").GetString(),
+                                    LegalName = element.GetProperty("legalName").GetString(),
+                                    Department = element.GetProperty("department").GetString(),
+                                    ApprovalStatus = element.GetProperty("approvalStatus").GetString(),
+                                    Reason = element.GetProperty("reason").GetString(),
+                                    Remarks = element.GetProperty("remarks").GetString(),
+                                    AppliedDate = element.GetProperty("appliedDate").GetDateTime(),
+                                    LeaveStartDate = element.GetProperty("leaveStartDate").GetDateTime(),
+                                    LeaveEndDate = element.GetProperty("leaveEndDate").GetDateTime()
+                                };
+
+                                LeaveRequests.Add(leaveRequest);
+                            }
+                        }
+                    }
                 }
-            }
-            else
-            {
-                Debug.WriteLine("Failed to retrieve leave requests: {0}", response);
+                else
+                {
+                    Message = "Failed to retrieve leave requests.";
+                }
             }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to retrieve leave requests: {ex.Message}");
+            Message = $"API server error: {ex.Message}";
+        }
+
+        finally
+        {
+            IsLoadingRequest = false;
+            _isLeaveRequestsEmpty = false;
         }
     }
 }
