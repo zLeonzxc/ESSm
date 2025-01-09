@@ -37,15 +37,15 @@
                 <Label Text="------------------------------------------------------------------------------------"/>
                 <HorizontalStackLayout>
                     <Label Text="Leave Approval Status: "/>
-                    <Label Text="{Binding LeaveApprovalStatus}">
+                    <Label Text="{Binding ApprovalStatus}">
                         <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Approved">
+                            <DataTrigger TargetType="Label" Binding="{Binding ApprovalStatus}" Value="Approved">
                                 <Setter Property="TextColor" Value="Green" />
                             </DataTrigger>
-                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Rejected">
+                            <DataTrigger TargetType="Label" Binding="{Binding ApprovalStatus}" Value="Rejected">
                                 <Setter Property="TextColor" Value="Red" />
                             </DataTrigger>
-                            <DataTrigger TargetType="Label" Binding="{Binding LeaveApprovalStatus}" Value="Pending">
+                            <DataTrigger TargetType="Label" Binding="{Binding ApprovalStatus}" Value="Pending">
                                 <Setter Property="TextColor" Value="DarkOrange" />
                             </DataTrigger>
                         </Label.Triggers>

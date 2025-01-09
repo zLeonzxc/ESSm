@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net.Http;
 
 namespace ESSmPrototype.ViewModels;
@@ -8,8 +9,8 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     private string? _selectedApprovalType;
     private bool _isApprovalOptionsVisible;
     private string? _message;
-    private bool _isLoadingRequest;
-    private bool _isApprovalTypeEmpty = false; // approval type is empty
+    private bool _isLoadingRequest = false;
+    private bool _isApprovalTypeEmpty = true;
     private bool _isLeaveRequestsEmpty = true; // initial should be empty
     public ObservableCollection<LeaveRequest> LeaveRequests { get; set; }
 
@@ -22,7 +23,6 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
         AcceptCommand = new Command(OnAcceptCommand);
         RejectCommand = new Command(OnRejectCommand);
         NavigateToDetailsCommand = new Command<LeaveRequest>(OnNavigateToDetailsCommand);
-
     }
 
     public LeaveRequest? SelectedLeaveRequest
@@ -37,7 +37,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
                 OnPropertyChanged(nameof(EmployeeID));
                 OnPropertyChanged(nameof(EmployeeName));
                 OnPropertyChanged(nameof(EmployeeDep));
-                OnPropertyChanged(nameof(LeaveApprovalStatus));
+                OnPropertyChanged(nameof(ApprovalStatus));
                 OnPropertyChanged(nameof(LeaveReason));
                 OnPropertyChanged(nameof(AppliedDate));
                 OnPropertyChanged(nameof(LeaveStartDate));
@@ -49,7 +49,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     public string? EmployeeID => SelectedLeaveRequest?.EmployeeID;
     public string? EmployeeName => SelectedLeaveRequest?.LegalName;
     public string? EmployeeDep => SelectedLeaveRequest?.Department;
-    public string? LeaveApprovalStatus
+    public string? ApprovalStatus
     {
         get => SelectedLeaveRequest?.ApprovalStatus;
         set
@@ -57,7 +57,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
             if (SelectedLeaveRequest != null && SelectedLeaveRequest.ApprovalStatus != value)
             {
                 SelectedLeaveRequest.ApprovalStatus = value;
-                OnPropertyChanged(nameof(LeaveApprovalStatus));
+                OnPropertyChanged(nameof(ApprovalStatus));
                 OnPropertyChanged(nameof(StatusImage));
             }
         }
@@ -85,7 +85,14 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
         set
         {
             _selectedApprovalType = value;
-            _isApprovalTypeEmpty = true; // entry is not empty
+            _isApprovalTypeEmpty = false;
+            Debug.WriteLine($"SelectedApprovalType changed to: {SelectedApprovalType}");
+            Debug.WriteLine($"ItemsSource: {(SelectedApprovalType == "Overtime" ? "OTRequests" : "LeaveRequests")}");
+            Debug.WriteLine($"ItemTemplate: {(SelectedApprovalType == "Overtime" ? "OvertimeTemplate" : "LeaveTemplate")}");
+            Debug.WriteLine($"ShowList changed to: {ShowList}");
+
+
+
             OnPropertyChanged(nameof(SelectedApprovalType));
             OnPropertyChanged(nameof(ShowList));
         }
@@ -95,7 +102,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     {
         get
         {
-            return LeaveApprovalStatus switch
+            return ApprovalStatus switch
             {
                 "Approved" => "approvedleave.png",
                 "Rejected" => "rejectedleave.png",
@@ -120,7 +127,7 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
 
     public bool ShowList
     {
-        get => _isApprovalTypeEmpty;
+        get => !_isApprovalTypeEmpty;
         set
         {
             if (_isApprovalTypeEmpty != value)
@@ -168,8 +175,8 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     {
         if (SelectedLeaveRequest != null)
         {
-            LeaveApprovalStatus = "Approved";
-            var toast = Toast.Make("Leave request approved", ToastDuration.Short);
+            ApprovalStatus = "Approved";
+            var toast = Toast.Make("Request has been approved", ToastDuration.Short);
             await toast.Show();
         }
     }
@@ -178,8 +185,8 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     {
         if (SelectedLeaveRequest != null)
         {
-            LeaveApprovalStatus = "Rejected";
-            var toast = Toast.Make("Leave request rejected", ToastDuration.Short);
+            ApprovalStatus = "Rejected";
+            var toast = Toast.Make("Request has been rejected", ToastDuration.Short);
             await toast.Show();
             if (Application.Current?.MainPage != null)
             {
@@ -218,69 +225,73 @@ public partial class EmployeeLeaveDetailsViewModel : INotifyPropertyChanged
     {
         IsLoadingRequest = true;
 
-        try
+        if (_isLeaveRequestsEmpty)
         {
-            var handler = new HttpClientHandler
+            try
             {
-                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-            };
-
-            using var httpClient = new HttpClient(handler);
-
-            var response = await httpClient.GetAsync("https://10.0.2.2:7087/api/LeaveRequests/");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(content);
-
-                if (!string.IsNullOrEmpty(content))
+                var handler = new HttpClientHandler
                 {
-                    // Clear the existing collection
-                    LeaveRequests.Clear();
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+                };
 
-                    // Parse the JSON response
-                    using (JsonDocument document = JsonDocument.Parse(content))
+                using var httpClient = new HttpClient(handler);
+
+                var response = await httpClient.GetAsync("https://10.0.2.2:7087/api/LeaveRequests/");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine(content);
+
+                    if (!string.IsNullOrEmpty(content))
                     {
-                        JsonElement root = document.RootElement;
-                        if (root.ValueKind == JsonValueKind.Array)
-                        {
-                            foreach (JsonElement element in root.EnumerateArray())
-                            {
-                                var leaveRequest = new LeaveRequest
-                                {
-                                    Id = element.GetProperty("id").GetInt32(),
-                                    EmployeeID = element.GetProperty("employeeID").GetString(),
-                                    LegalName = element.GetProperty("legalName").GetString(),
-                                    Department = element.GetProperty("department").GetString(),
-                                    ApprovalStatus = element.GetProperty("approvalStatus").GetString(),
-                                    Reason = element.GetProperty("reason").GetString(),
-                                    Remarks = element.GetProperty("remarks").GetString(),
-                                    AppliedDate = element.GetProperty("appliedDate").GetDateTime(),
-                                    LeaveStartDate = element.GetProperty("leaveStartDate").GetDateTime(),
-                                    LeaveEndDate = element.GetProperty("leaveEndDate").GetDateTime()
-                                };
+                        // Clear the existing collection
+                        LeaveRequests.Clear();
 
-                                LeaveRequests.Add(leaveRequest);
+                        // Parse the JSON response
+                        using (JsonDocument document = JsonDocument.Parse(content))
+                        {
+                            JsonElement root = document.RootElement;
+                            if (root.ValueKind == JsonValueKind.Array)
+                            {
+                                foreach (JsonElement element in root.EnumerateArray())
+                                {
+                                    var leaveRequest = new LeaveRequest
+                                    {
+                                        Id = element.GetProperty("id").GetInt32(),
+                                        EmployeeID = element.GetProperty("employeeID").GetString(),
+                                        LegalName = element.GetProperty("legalName").GetString(),
+                                        Department = element.GetProperty("department").GetString(),
+                                        ApprovalStatus = element.GetProperty("approvalStatus").GetString(),
+                                        Reason = element.GetProperty("reason").GetString(),
+                                        Remarks = element.GetProperty("remarks").GetString(),
+                                        AppliedDate = element.GetProperty("appliedDate").GetDateTime(),
+                                        LeaveStartDate = element.GetProperty("leaveStartDate").GetDateTime(),
+                                        LeaveEndDate = element.GetProperty("leaveEndDate").GetDateTime()
+                                    };
+
+                                    LeaveRequests.Add(leaveRequest);
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    Message = "Failed to retrieve leave requests.";
+                    else
+                    {
+                        Message = "Failed to retrieve leave requests.";
+                    }
                 }
             }
-        }
-        catch (Exception ex)
-        {
-            Message = $"API server error: {ex.Message}";
-        }
+            catch (Exception ex)
+            {
+                Message = $"API server error: {ex.Message}";
+            }
 
-        finally
-        {
-            IsLoadingRequest = false;
-            _isLeaveRequestsEmpty = false;
+            finally
+            {
+                IsLoadingRequest = false;
+                _isLeaveRequestsEmpty = false;
+            }
         }
+        
     }
 }

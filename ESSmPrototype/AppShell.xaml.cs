@@ -40,6 +40,7 @@
             // Operations pages
             Routing.RegisterRoute(nameof(PendingApprovalPage), typeof(PendingApprovalPage));
             Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageAdmin), typeof(EmployeeLeaveDetailsPageAdmin));
+            Routing.RegisterRoute(nameof(EmployeeOvertimeDetailsPageAdmin), typeof(EmployeeOvertimeDetailsPageAdmin));
             Routing.RegisterRoute(nameof(EmployeeDetailsPage), typeof(EmployeeDetailsPage));
             Routing.RegisterRoute(nameof(EmployeeDetailsPageTab), typeof(EmployeeDetailsPageTab));
         }

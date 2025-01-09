@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
-             x:Class="ESSmPrototype.Views.Employees.EmployeeLeaveDetailsPageView">
-
-<ContentPage.BindingContext>
-    <local:EmployeeLeaveDetailsViewModel/>
-</ContentPage.BindingContext>
+             x:Class="ESSmPrototype.Views.Employees.EmployeeOvertimeDetailsPageAdmin">
+    
+    <ContentPage.BindingContext>
+        <local:PendingApprovalViewModel/>
+    </ContentPage.BindingContext>
 
 
     <Grid>
@@ -17,7 +17,7 @@
 
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="20" Margin="10,0,0,0">
-                <Label Text="Leave Details"
+                <Label Text="OT Details"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center"
                     Style="{StaticResource Headline}"
@@ -36,7 +36,7 @@
                 </HorizontalStackLayout>
                 <Label Text="------------------------------------------------------------------------------------"/>
                 <HorizontalStackLayout>
-                    <Label Text="Leave Approval Status: "/>
+                    <Label Text="Approval Status: "/>
                     <Label Text="{Binding ApprovalStatus}">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding ApprovalStatus}" Value="Approved">
@@ -48,24 +48,23 @@
                             <DataTrigger TargetType="Label" Binding="{Binding ApprovalStatus}" Value="Pending">
                                 <Setter Property="TextColor" Value="DarkOrange" />
                             </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding ApprovalStatus}" Value="Pending 3">
+                                <Setter Property="TextColor" Value="DarkOrange" />
+                            </DataTrigger>
+
                         </Label.Triggers>
                     </Label>
                 </HorizontalStackLayout>
-                <Label Text="{Binding AppliedDate, StringFormat='Applied at {0:dd MMMM yyyy}, {0:t}'}"/>
-                <Label Text="{Binding LeaveStartDate, StringFormat='Leave Starts at {0:dd MMMM yyyy}, {0:t}'}"/>
-                <Label Text="{Binding LeaveEndDate, StringFormat='Leave Ends at {0:dd MMMM yyyy}, {0:t}'}"/>
-                <Label Text="{Binding LeaveReason, StringFormat='Leave Reason: {0}'}"/>
+                <Label Text="{Binding OTMonth, StringFormat='Applied at {0:dd MMMM yyyy}'}"/>
+                <Label Text="{Binding OTStartTime, StringFormat='OT Starts at {0:t}'}"/>
+                <Label Text="{Binding OTEndTime, StringFormat='OT Ends at {0:t}'}"/>
+                <Label Text="{Binding OTReason, StringFormat='OT Reason: {0}'}"/>
                 <Label Text="Attachments (optional):"/>
-                <Label Text="{Binding LeaveComment, StringFormat='Comments: {0} '}"/>
+                <Label Text="{Binding Remarks, StringFormat='Remarks: {0} '}"/>
             </VerticalStackLayout>
         </ScrollView>
 
-        <StackLayout x:Name="ApprovalOptions" 
-                     Grid.Row="1" 
-                     Orientation="Horizontal" 
-                     HorizontalOptions="FillAndExpand" 
-                     VerticalOptions="End"
-                     IsVisible="Hidden">
+        <StackLayout x:Name="ApprovalOptions" Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
             <Button x:Name="AcceptButton"
                  Text="Approve"
                  BackgroundColor="Green"
@@ -83,7 +82,6 @@
                  Command="{Binding RejectCommand}"/>
         </StackLayout>
     </Grid>
-
 
 
 </ContentPage>

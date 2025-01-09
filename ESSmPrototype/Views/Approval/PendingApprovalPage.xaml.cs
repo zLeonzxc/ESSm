@@ -13,5 +13,11 @@ public partial class PendingApprovalPage : ContentPage
             ((ListView)sender).SelectedItem = null;
             await Navigation.PushAsync(new EmployeeLeaveDetailsPageAdmin(selectedLeaveRequest));
         }
+
+        else if (e.Item is OTRequest selectedOTRequest)
+        {
+            ((ListView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new EmployeeOvertimeDetailsPageAdmin(selectedOTRequest));
+        }
     }
 }

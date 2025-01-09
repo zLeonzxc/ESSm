@@ -11,7 +11,6 @@
         private string? _selectedLeaveStatus;
         private bool _isListVisible;
         private bool _isSearchBoxVisible;
-        private string? _message;
 
         public EmployeeLeaveListViewModel()
         {
@@ -146,18 +145,18 @@
             }
         }
 
-        public string? Message
-        {
-            get => _message ?? string.Empty;
-            set
-            {
-                if (_message != value)
-                {
-                    _message = value;
-                    OnPropertyChanged(nameof(Message));
-                }
-            }
-        }
+        //public string? Message
+        //{
+        //    get => _message ?? string.Empty;
+        //    set
+        //    {
+        //        if (_message != value)
+        //        {
+        //            _message = value;
+        //            OnPropertyChanged(nameof(Message));
+        //        }
+        //    }
+        //}
 
         // ItemsSource properties for the Pickers
         public ObservableCollection<string> Months { get; set; }

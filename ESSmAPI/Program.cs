@@ -27,6 +27,10 @@ builder.Services.AddDbContext<LeaveRequestContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
 });
+builder.Services.AddDbContext<OvertimeRequestContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbCon"));
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

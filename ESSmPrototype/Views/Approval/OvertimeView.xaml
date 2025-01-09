@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
-             xmlns:converters="clr-namespace:ESSmPrototype.Converters"
              xmlns:custom="clr-namespace:ESSmPrototype.Custom"
+             xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
              x:Class="ESSmPrototype.Views.Approval.OvertimeView">
-
-    <ContentView.BindingContext>
-        <local:PendingApprovalViewModel/>
-    </ContentView.BindingContext>
 
     <Frame Padding="0" HasShadow="False" BorderColor="Transparent">
         <Grid Padding="10">
@@ -18,42 +13,25 @@
             </Grid.ColumnDefinitions>
             <FlexLayout AlignContent="Start" Direction="Column" Grid.Column="0">
                 <Label Text="{Binding EmployeeID, StringFormat='Employee ID: {0}'}"/>
-                <Label Text="{Binding EmployeeName, StringFormat='Employee Name: {0}'}"/>
-                <Label Text="{Binding EmployeeDep, StringFormat='Department: {0}'}"/>
-                <Label Text="{Binding OTMonth, StringFormat='Month: {0:MM/yy}'}"/>
+                <Label Text="{Binding LegalName, StringFormat='Employee Name: {0}'}"/>
+                <Label Text="{Binding Department, StringFormat='Department: {0}'}"/>
+                <Label Text="{Binding AppliedDate, StringFormat='Month: {0:MMMM yyyy}'}"/>
                 <Label Text="{Binding TotalHours, StringFormat='Total Hours: {0} '}"/>
             </FlexLayout>
             <Image Grid.Column="1" WidthRequest="40" HeightRequest="40" Source="{Binding StatusImage}">
                 <Image.Triggers>
-                    <DataTrigger TargetType="Image" Binding="{Binding LeaveApprovalStatus}" Value="Approved">
+                    <DataTrigger TargetType="Image" Binding="{Binding ApprovalStatus}" Value="Approved">
                         <Setter Property="Source" Value="approvedleave.png"/>
                     </DataTrigger>
-                    <DataTrigger TargetType="Image" Binding="{Binding LeaveApprovalStatus}" Value="Pending 1">
+                    <DataTrigger TargetType="Image" Binding="{Binding ApprovalStatus}" Value="Pending">
                         <Setter Property="Source" Value="pendingleave.png"/>
                     </DataTrigger>
-                    <DataTrigger TargetType="Image" Binding="{Binding LeaveApprovalStatus}" Value="Pending 3">
-                        <Setter Property="Source" Value="pendingleave.png"/>
-                    </DataTrigger>
-                    <DataTrigger TargetType="Image" Binding="{Binding LeaveApprovalStatus}" Value="Rejected">
+                    <DataTrigger TargetType="Image" Binding="{Binding ApprovalStatus}" Value="Rejected">
                         <Setter Property="Source" Value="rejectedleave.png"/>
                     </DataTrigger>
                 </Image.Triggers>
             </Image>
         </Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup Name="CommonStates">
-                <VisualState Name="Normal">
-                    <VisualState.Setters>
-                        <Setter Property="BackgroundColor" Value="Transparent" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState Name="Selected">
-                    <VisualState.Setters>
-                        <Setter Property="BackgroundColor" Value="LightGray" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
     </Frame>
 
 </ContentView>

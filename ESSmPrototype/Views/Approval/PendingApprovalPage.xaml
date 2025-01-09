@@ -24,14 +24,14 @@
                 </custom:CViewCell>
             </DataTemplate>
         </ResourceDictionary>
-
+        
         <custom:ApprovalTypeTemplateSelector x:Key="ApprovalTypeTemplateSelector"
                                              LeaveTemplate="{StaticResource LeaveTemplate}"
                                              OvertimeTemplate="{StaticResource OvertimeTemplate}"/>
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <local:EmployeeLeaveDetailsViewModel/>
+        <local:PendingApprovalViewModel/>
     </ContentPage.BindingContext>
 
     <Grid>
@@ -66,29 +66,15 @@
                     <ListView.Triggers>
                         <DataTrigger TargetType="ListView" Binding="{Binding SelectedApprovalType}" Value="Leave">
                             <Setter Property="ItemTemplate" Value="{StaticResource LeaveTemplate}" />
+                            <Setter Property="ItemsSource" Value="{Binding LeaveRequests}" />
                         </DataTrigger>
                         <DataTrigger TargetType="ListView" Binding="{Binding SelectedApprovalType}" Value="Overtime">
                             <Setter Property="ItemTemplate" Value="{StaticResource OvertimeTemplate}" />
+                            <Setter Property="ItemsSource" Value="{Binding OTRequests}" />
                         </DataTrigger>
                     </ListView.Triggers>
 
                 </ListView>
-
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup Name="CommonStates">
-                        <VisualState Name="Normal">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="Transparent" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState Name="Selected">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="LightGray" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-
             </ScrollView>
         </StackLayout>
         <custom:LoadRequestOverlay IsVisible="{Binding IsLoadingRequest}"/>
