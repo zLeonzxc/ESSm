@@ -1,0 +1,35 @@
+@ESSmAPI_HostAddress = https://localhost:5122
+
+### Get all users
+GET {{ESSmAPI_HostAddress}}/api/users
+Accept: application/json
+
+###
+
+### Get a user by ID
+GET {{ESSmAPI_HostAddress}}/api/users/1
+Accept: application/json
+
+###
+
+### Add a new user
+POST {{ESSmAPI_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "username": "janedoe",
+  "password": "janedoe123",
+  "email": "janedoe@example.com"
+}
+
+###
+
+### Login user
+POST {{ESSmAPI_HostAddress}}/api/users/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password"
+}

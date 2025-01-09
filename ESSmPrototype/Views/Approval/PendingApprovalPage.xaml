@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ESSmPrototype.ViewModels"
+             xmlns:converters="clr-namespace:ESSmPrototype.Converters"
+             xmlns:custom="clr-namespace:ESSmPrototype.Custom"
+             xmlns:template="clr-namespace:ESSmPrototype.Views.Approval"
+             x:Class="ESSmPrototype.Views.Approval.PendingApprovalPage"
+             Title="Pending Approval">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToBooleanConverter x:Key="StringToBooleanConverter"/>
+
+            <DataTemplate x:Key="LeaveTemplate">
+                <custom:CViewCell SelectedBackgroundColor="Grey">
+                    <template:LeaveView/>
+                </custom:CViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="OvertimeTemplate">
+                <custom:CViewCell SelectedBackgroundColor="Grey">
+                    <template:OvertimeView/>
+                </custom:CViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+        
+        <custom:ApprovalTypeTemplateSelector x:Key="ApprovalTypeTemplateSelector"
+                                             LeaveTemplate="{StaticResource LeaveTemplate}"
+                                             OvertimeTemplate="{StaticResource OvertimeTemplate}"/>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <local:PendingApprovalViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <StackLayout Padding="15" MaximumHeightRequest="600" Margin="0,-70,0,0">
+            <Label Text="Approval Type:" 
+                   FontSize="Medium" 
+                   HorizontalOptions="Center" />
+
+            <!-- Dropdown -->
+            <Picker x:Name="ApprovalType"
+                    Title="Select type of approval"
+                    HorizontalOptions="Center" 
+                    HorizontalTextAlignment="Center"
+                    WidthRequest="200"
+                    SelectedItem="{Binding SelectedApprovalType}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Leave</x:String>
+                        <x:String>Overtime</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <ScrollView VerticalOptions="FillAndExpand">
+                <ListView x:Name="EmployeeMenu" 
+                          ItemTapped="OnItemTapped"
+                          RowHeight="110"
+                          ItemsSource="{Binding LeaveRequests}"
+                          ItemTemplate="{StaticResource LeaveTemplate}"
+                          IsVisible="{Binding ShowList}">
+
+                    <ListView.Triggers>
+                        <DataTrigger TargetType="ListView" Binding="{Binding SelectedApprovalType}" Value="Leave">
+                            <Setter Property="ItemTemplate" Value="{StaticResource LeaveTemplate}" />
+                            <Setter Property="ItemsSource" Value="{Binding LeaveRequests}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="ListView" Binding="{Binding SelectedApprovalType}" Value="Overtime">
+                            <Setter Property="ItemTemplate" Value="{StaticResource OvertimeTemplate}" />
+                            <Setter Property="ItemsSource" Value="{Binding OTRequests}" />
+                        </DataTrigger>
+                    </ListView.Triggers>
+
+                </ListView>
+            </ScrollView>
+        </StackLayout>
+        <custom:LoadRequestOverlay IsVisible="{Binding IsLoadingRequest}"/>
+        <custom:BottomNavBar/>
+    </Grid>
+</ContentPage>

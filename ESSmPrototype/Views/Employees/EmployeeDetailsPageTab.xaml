@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ESSmPrototype.ViewModels"
+             xmlns:custom="clr-namespace:ESSmPrototype.Custom"
+             x:Class="ESSmPrototype.Views.Employees.EmployeeDetailsPageTab"
+             Title="EmployeeDetailsPageTab">
+
+    <TabbedPage.BindingContext>
+        <vm:EmployeeDetailsPageViewModel/>
+    </TabbedPage.BindingContext>
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Back"  Clicked="OnBackButtonClicked" Order="Primary" Priority="0"/>
+    </TabbedPage.ToolbarItems>
+
+    <NavigationPage IconImageSource="user.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="User" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage IconImageSource="personal.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Personal" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="{Binding EmployeeID, StringFormat='Employee ID:  {0} '}"/>
+                        <Label Text="{Binding EmployeeLegalName, StringFormat='Legal Name:  {0} '}"/>
+                        <Label Text="{Binding EmployeeLoginID, StringFormat='Login ID:  {0} '}"/>
+                        <Label Text="{Binding Country, StringFormat='Country:  {0} '}"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage IconImageSource="family.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Family" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="Family Detail 1:"/>
+                        <Label Text="Family Detail 2:"/>
+                        <Label Text="Family Detail 3:"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage IconImageSource="banking.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Banking" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage IconImageSource="job.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Job History" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage IconImageSource="managers.png" BarBackgroundColor="DarkBlue" BarTextColor="White">
+        <x:Arguments>
+            <ContentPage Title="Employee Details">
+                <Grid>
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Managers" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="TBA"/>
+                    </StackLayout>
+                </Grid>
+            </ContentPage>
+        </x:Arguments>
+    </NavigationPage>
+
+</TabbedPage>
+
