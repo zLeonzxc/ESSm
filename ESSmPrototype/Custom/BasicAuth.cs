@@ -18,7 +18,7 @@
 
                 var content = new StringContent(JsonSerializer.Serialize(username), Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync("https://10.0.2.2:7087/api/Users/logout", content);
+                var response = await httpClient.PostAsync("https://10.0.2.2:8198/api/Users/logout", content);
 
                 if (!response.IsSuccessStatusCode)
                 {

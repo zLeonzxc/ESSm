@@ -35,7 +35,7 @@ namespace ESSmPrototype.ViewModels
 
                 using var httpClient = new HttpClient(handler);
 
-                var response = await httpClient.GetAsync($"https://10.0.2.2:7087/api/Companies/{companyCode}");
+                var response = await httpClient.GetAsync($"https://10.0.2.2:8198/api/Companies/{companyCode}");
 
                 if (response.IsSuccessStatusCode)
                 {
