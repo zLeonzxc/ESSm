@@ -102,6 +102,9 @@
 	  <Compile Update="Views\HRAdminPage.xaml.cs">
 	    <DependentUpon>HRAdminPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Payslip\PayslipMenu.xaml.cs">
+	    <DependentUpon>PayslipMenu.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\StartedPage.xaml.cs">
 	    <DependentUpon>StartedPage.xaml</DependentUpon>
 	  </Compile>
@@ -151,6 +154,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LogoutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Payslip\PayslipMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\StartedPage.xaml">
