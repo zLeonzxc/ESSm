@@ -14,14 +14,22 @@
                FontSize="24"
                HorizontalOptions="Center"
                Margin="0,0,0,20" />
-            <CollectionView ItemsSource="{Binding RecentPayslips}">
+            <CollectionView ItemsSource="{Binding Payslips}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="Gray" Padding="10" Margin="0,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:PayslipViewModel}}, Path=PayslipTappedCommand}" 
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            
                             <StackLayout>
-                                <Label Text="{Binding Month}" FontSize="18" />
-                                <Label Text="{Binding Year}" FontSize="14" />
-                                <Label Text="{Binding Amount}" FontSize="14" />
+                                <!-- Display the month name from the Period property -->
+                                <Label Text="{Binding Period, StringFormat='{}{0:MMMM}'}" FontSize="18" />
+                                <!-- Display the year from the Period property -->
+                                <Label Text="{Binding Period, StringFormat='{}{0:yyyy}'}" FontSize="14" />
+                                <!-- Display the NetPay property as the amount -->
+                                <Label Text="{Binding NetPay, StringFormat='Net Pay: {0:N2}'}" FontSize="14" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

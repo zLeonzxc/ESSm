@@ -1,0 +1,194 @@
+init
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Companies')
+BEGIN
+    CREATE TABLE Companies (
+        id INT PRIMARY KEY IDENTITY(1,1),
+		companyCode NVARCHAR(2) UNIQUE NOT NULL,
+        companyName NVARCHAR(50) NOT NULL,
+        -- Add more columns as needed
+    );
+    PRINT 'Companies Table created successfully.';
+END
+ELSE
+BEGIN
+    PRINT 'Companies Table already exists.';
+END
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Employees')
+BEGIN
+    CREATE TABLE Employees (
+        id INT IDENTITY(1,1) PRIMARY KEY,
+        employeeId NVARCHAR(20) UNIQUE NOT NULL,
+		legalName NVARCHAR(100) NOT NULL,
+		username NVARCHAR(50) NOT NULL,
+		email NVARCHAR(50) NOT NULL,
+		department NVARCHAR(20) NOT NULL,
+		country NVARCHAR(20) NOT NULL,
+    );
+    PRINT 'Employees Table created successfully.';
+END
+ELSE
+BEGIN
+    PRINT 'Employees Table already exists.';
+END
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Users')
+BEGIN
+    CREATE TABLE Users (
+        id INT PRIMARY KEY IDENTITY(1,1),
+		employeeId NVARCHAR(20) NOT NULL,
+        username NVARCHAR(20) NOT NULL,
+		pw VARBINARY(256) NOT NULL,
+		companyCode NVARCHAR(2),
+		isLoggedIn BIT,-- 0 = false / 1 = true
+		FOREIGN KEY (employeeId) REFERENCES Employees(employeeId),
+		FOREIGN KEY (companyCode) REFERENCES Companies (companyCode)
+        -- Add more columns as needed
+    );
+    PRINT 'Users Table created successfully.';
+END
+ELSE
+BEGIN
+    PRINT 'Users Table already exists.';
+END
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'UserDevice')
+BEGIN
+    CREATE TABLE UserDevice (
+        id INT PRIMARY KEY IDENTITY(1,1),
+		employeeID NVARCHAR(20) NOT NULL,
+        deviceManufacturer NVARCHAR(20) NOT NULL,
+		deviceModel NVARCHAR(20) NOT NULL,
+		deviceAppVersion NVARCHAR(20) NOT NULL,
+		devicePlatform NVARCHAR(20) NOT NULL,
+		deviceName NVARCHAR(20) NOT NULL,
+		deviceType NVARCHAR(20) NOT NULL,
+		FOREIGN KEY (employeeId) REFERENCES Employees (employeeId)
+    );
+    PRINT 'User Device Table created successfully.';
+END
+ELSE
+BEGIN
+    PRINT 'User Device Table already exists.';
+END
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'LeaveRequests')
+BEGIN
+	CREATE TABLE LeaveRequests (
+        id INT PRIMARY KEY IDENTITY(1,1),
+		employeeId NVARCHAR(20) NOT NULL,
+        legalName NVARCHAR(50) NOT NULL,
+		department NVARCHAR(10) NOT NULL,
+		approvalStatus NVARCHAR(10) NOT NULL,
+		reason NVARCHAR(100) NOT NULL,
+		remarks NVARCHAR(200),
+		appliedDate DATETIME NOT NULL,
+		leaveStartDate DATETIME NOT NULL,
+		leaveEndDate DATETIME NOT NULL,
+		FOREIGN KEY (employeeId) REFERENCES Employees(employeeId),
+	);
+	PRINT 'Leave Requests Table created successfully.';
+END
+ELSE
+BEGIN
+	PRINT 'Leave Requests Table already exists.';
+END
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'OvertimeRequests')
+BEGIN
+	CREATE TABLE OvertimeRequests (
+        id INT PRIMARY KEY IDENTITY(1,1),
+		employeeId NVARCHAR(20) NOT NULL,
+        legalName NVARCHAR(50) NOT NULL,
+		department NVARCHAR(10) NOT NULL,
+		reason NVARCHAR(100) NOT NULL,
+		remarks NVARCHAR(200),
+		appliedDate DATETIME NOT NULL,
+		OTStartTime TIME NOT NULL,
+		OTEndTime TIME NOT NULL,
+		totalHours DOUBLE PRECISION,
+		approvalStatus NVARCHAR(10) NOT NULL,
+		FOREIGN KEY (employeeId) REFERENCES Employees(employeeId),
+	);
+	PRINT 'Overtime Requests Table created successfully.';
+END
+ELSE
+BEGIN
+	PRINT 'Overtime Requests Table already exists.';
+END
+		
+/* INSERT VALUES SECTION */
+BEGIN
+IF EXISTS (SELECT 1 FROM Employees)
+	PRINT 'Employees Table has existing data';
+ELSE
+	INSERT INTO Employees (employeeId, legalName, username, email, department, country)
+	VALUES 
+	('MY000', 'admin', 'admin', 'admin@example.com', 'IT', 'MY'),
+	('MY001', 'John Smith', 'jsmith', 'jsmith@example.com', 'IT', 'MY'),
+	('MY002', 'Jane Doe', 'janedoe', 'janedoe@example.com', 'IT', 'MY'),
+	('MY003', 'Benjamin Tan', 'benjamin', 'benjamin@example.com', 'IT', 'MY'),
+	('MY004', 'Henry Tan', 'henrytan', 'henrytan@example.com', 'IT', 'MY'),
+	('MY005', 'David Cross', 'dcross', 'dcross@example.com', 'IT', 'MY'),
+	('MY006', 'Muhammad Ali', 'muhammadali', 'muhammadali@example.com', 'IT', 'MY'),
+	('MY007', 'Daniel Ahmad', 'danielahmad', 'danielahmad@example.com', 'IT', 'MY'),
+	('MY008', 'Siti Maisarah', 'smaisarah', 'smaisarah@example.com', 'IT', 'MY'),
+	('MY009', 'Tamil Murugan', 'tmurugan', 'tmurugan@example.com', 'IT', 'MY'),
+	('MY010', 'Rajesh Sarveen', 'rajveen', 'rajveen@example.com', 'IT', 'MY');
+
+IF EXISTS (SELECT 1 FROM Users)
+	PRINT 'Users Table has existing data';
+ELSE
+	INSERT INTO Users (employeeID, username, pw, isLoggedIn)
+	VALUES
+	('MY000', 'admin', CONVERT(VARBINARY(256), 'password'), 0),
+	('MY001', 'jsmith', CONVERT(VARBINARY(256), 'jsmith123'), 0)
+
+IF EXISTS (SELECT 1 FROM Companies)
+	PRINT 'Companies Table has existing data';
+ELSE
+	INSERT INTO Companies (companyCode, companyName)
+	VALUES
+	('', 'Unregistered'),
+	('AB', 'ABC'),
+	('XY', 'XYZ'),
+	('QW', 'QWE')
+
+IF EXISTS (SELECT 1 FROM LeaveRequests)
+	PRINT 'Leave Requests Table has existing data';
+ELSE
+	INSERT INTO LeaveRequests (employeeID, legalName, department, approvalStatus, reason, appliedDate, leaveStartDate, leaveEndDate, remarks)
+	VALUES 
+	('MY001', 'John Smith', 'IT', 'Pending', 'Medical Leave', '2023-01-01', '2023-01-10', '2023-01-15', ''),
+	('MY002', 'Jane Doe', 'IT', 'Pending', 'Annual Leave', '2023-02-01', '2023-02-10', '2023-02-15', ''),
+	('MY003', 'Benjamin Tan', 'IT', 'Pending', 'Maternity Leave', '2023-03-01', '2023-03-10', '2023-03-15', ''),
+	('MY004', 'Henry Tan', 'IT', 'Pending', 'Paternity Leave', '2023-04-01', '2023-04-10', '2023-04-15', ''),
+	('MY005', 'David Cross', 'IT', 'Pending', 'Sick Leave', '2023-05-01', '2023-05-10', '2023-05-15', ''),
+	('MY006', 'Muhammad Ali', 'IT', 'Pending', 'Unpaid Leave', '2023-06-01', '2023-06-10', '2023-06-15', ''),
+	('MY007', 'Daniel Ahmad', 'IT', 'Pending', 'Emergency Leave', '2023-07-01', '2023-07-10', '2023-07-15', ''),
+	('MY008', 'Siti Maisarah', 'IT', 'Pending', 'Marriage Leave', '2023-08-01', '2023-08-10', '2023-08-15', ''),
+	('MY009', 'Tamil Murugan', 'IT', 'Pending', 'Compassionate Leave', '2023-09-01', '2023-09-10', '2023-09-15', ''),
+	('MY010', 'Rajesh Sarveen', 'IT', 'Pending', 'Study Leave', '2023-10-01', '2023-10-10', '2023-10-15', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Medical Leave', '2023-03-20', '2023-04-01', '2023-04-06', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Annual Leave', '2023-05-01', '2023-05-07', '2023-05-12', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Medical Leave', '2023-06-01', '2023-06-05', '2023-06-08', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Medical Leave', '2023-07-01', '2023-07-10', '2023-07-12', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Sick Leave', '2023-08-01', '2023-08-05', '2023-08-07', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Unpaid Leave', '2023-09-01', '2023-09-26', '2023-09-27', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Emergency Leave', '2023-09-01', '2023-09-01', '2023-09-02', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Medical Leave', '2023-10-01', '2023-10-10', '2023-10-15', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Medical Leave', '2023-11-01', '2023-11-05', '2023-11-08', ''),
+	('MY001', 'John Smith', 'IT', 'Pending', 'Medical Leave', '2023-12-01', '2023-12-07', '2023-12-09', '');
+
+IF EXISTS (SELECT 1 FROM OvertimeRequests)
+	PRINT 'Overtime Requests Table has existing data';
+ELSE
+	INSERT INTO OvertimeRequests (employeeID, legalName, department, reason, remarks, appliedDate, OTStartTime, OTEndTime, ApprovalStatus, totalHours)
+	VALUES
+	('MY001', 'John Smith', 'IT', 'MBDE', '', '2024-10-26', '20:00:00', '00:00:00', 'Pending', '4.0'),
+	('MY001', 'John Smith', 'IT', 'MBDE', '', '2024-11-26', '22:00:00', '02:00:00', 'Pending', '4.0'),
+	('MY001', 'John Smith', 'IT', 'MBDE', '', '2024-12-26', '20:00:00', '02:00:00', 'Pending', '6.0'),
+	('MY001', 'John Smith', 'IT', 'MBDE', '', '2024-12-27', '20:00:00', '04:00:00', 'Pending', '8.0');
+
+
+END

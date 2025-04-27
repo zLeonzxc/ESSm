@@ -156,6 +156,9 @@
 	  <MauiXaml Update="Views\LogoutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Payslip\PayslipDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Payslip\PayslipMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

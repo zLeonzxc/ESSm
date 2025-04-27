@@ -1,4 +1,6 @@
-﻿namespace ESSmPrototype
+﻿using ESSmPrototype.Views.Payslip;
+
+namespace ESSmPrototype
 {
     public partial class AppShell : Shell
     {
@@ -35,6 +37,10 @@
             // Menu pages
             Routing.RegisterRoute(nameof(EmployeeLeaveList), typeof(EmployeeLeaveList));
             Routing.RegisterRoute(nameof(EmployeeLeaveDetailsPageView), typeof(EmployeeLeaveDetailsPageView));
+
+            // Payslip page
+            Routing.RegisterRoute(nameof(PayslipMenu), typeof(PayslipMenu));
+            Routing.RegisterRoute(nameof(PayslipDetailsPage), typeof(PayslipDetailsPage));
 
 
             // Operations pages
