@@ -20,6 +20,7 @@ global using Microsoft.Extensions.Logging;
 global using Microsoft.Maui.Controls;
 global using Microsoft.Maui.Devices;
 global using Microsoft.Maui.Storage;
+global using Microsoft.Maui.Graphics;
 
 // file imports
 global using ESSmPrototype.Models;
@@ -35,4 +36,9 @@ global using CommunityToolkit.Maui.Alerts;
 global using CommunityToolkit.Maui.Core.Platform;
 global using CommunityToolkit.Maui.Core;
 global using CommunityToolkit.Maui;
+global using CommunityToolkit.Maui.Views;
+
+// email
+global using MailKit.Net.Smtp;
+global using MimeKit;
 

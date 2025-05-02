@@ -1,3 +1,6 @@
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+
 namespace ESSmPrototype.Views.Payslip;
 
 public partial class PayslipDetailsPage : ContentPage
@@ -13,4 +16,7 @@ public partial class PayslipDetailsPage : ContentPage
 
         BindingContext = viewModel;
     }
+   
 }
+
+

@@ -3,7 +3,7 @@
     public class Payslip
     {
         // Company Information
-        public Image? CompanyLogo { get; set; }
+        public string? CompanyLogo { get; set; }
         public string? CompanyName { get; set; }
 
         // Employee Information
